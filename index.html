@@ -90,7 +90,7 @@
   <div id="loginPage" class="page">
     <section class="hero">
       <div class="hero-inner">
-        <img class="logo" src="assets/school-logo.jpg" alt="The Progress of Life School logo">
+        <img class="logo" src="school-logo.jpg" alt="The Progress of Life School logo">
         <h1>Teacher Portal</h1>
         <p>Secure access for teachers of The Progress of Life School. View your profile, assigned classes, subjects and the students connected to your teaching responsibilities.</p>
         <div class="pill">🔐 Secure teacher access &nbsp;•&nbsp; Faisalabad, Pakistan</div>
@@ -98,7 +98,7 @@
     </section>
     <section class="login-side">
       <div class="card">
-        <img class="mini-logo" src="assets/school-logo.jpg" alt="School logo">
+        <img class="mini-logo" src="school-logo.jpg" alt="School logo">
         <h2>Teacher Sign In</h2>
         <p class="sub">Use the email address and password provided for your teacher account.</p>
         <form id="loginForm">
@@ -122,7 +122,7 @@
           <div>The Progress of Life School<small>Teacher Portal</small></div>
         </div>
         <div class="teacher-mini">
-          <img id="topAvatar" class="avatar" src="assets/school-logo.jpg" alt="">
+          <img id="topAvatar" class="avatar" src="school-logo.jpg" alt="">
           <div id="topName"></div>
           <button id="logoutBtn" class="logout">Sign Out</button>
         </div>
@@ -315,7 +315,7 @@
         <section class="section">
           <h3>My Profile</h3>
           <div class="profile">
-            <img class="profile-photo" src="${teacherPhoto||"assets/school-logo.jpg"}" alt="Teacher photo">
+            <img class="profile-photo" src="${teacherPhoto||"school-logo.jpg"}" alt="Teacher photo">
             <div class="details">
               <div class="detail"><small>Name</small><b>${escapeHtml(t.name)}</b></div>
               <div class="detail"><small>Teacher ID</small><b>${escapeHtml(t.teacher_code)}</b></div>
@@ -345,7 +345,7 @@
           if(!list.length) html+=`<div class="muted" style="padding:10px">No active students found in this class.</div>`;
           else list.forEach(s=>{
             html+=`<div class="student">
-              <img src="${s._photo||"assets/school-logo.jpg"}" alt="">
+              <img src="${s._photo||"school-logo.jpg"}" alt="">
               <div><b>${escapeHtml(s.name)}</b><span>ID: ${escapeHtml(s.student_code)} • ${escapeHtml(s.gender||"—")} • ${escapeHtml(s.status||"—")}</span></div>
             </div>`;
           });
@@ -397,7 +397,7 @@
         rows.forEach(r=>{
           out += `<tr>
             <td><div style="display:flex;align-items:center;gap:10px">
-              <img src="${r._photo||"assets/school-logo.jpg"}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;background:#edf3fa">
+              <img src="${r._photo||"school-logo.jpg"}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;background:#edf3fa">
               <div><strong>${escapeHtml(r.name)}</strong><div class="fee-note">ID: ${escapeHtml(r.student_code)}</div></div>
             </div></td>
             <td class="fee-amount">PKR ${r.expected.toLocaleString()}</td>
