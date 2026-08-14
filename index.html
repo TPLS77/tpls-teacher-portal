@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Progress of Life School — Teacher Portal</title>
+  <meta name="description" content="The Progress of Life School Teacher Portal. Secure access for teachers to view their profile, assigned classes, subjects and students.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="/">
+  <link rel="icon" href="assets/school-logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#1767c8;--blue2:#0b4f9e;--gold:#f0b323;--ink:#14213d;--muted:#64748b;
+      --line:#dbe5f1;--bg:#f4f8fd;--white:#fff;--danger:#b42318;--success:#157347;
+      --shadow:0 24px 70px rgba(20,33,61,.15)
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+    button,input{font:inherit}.hidden{display:none!important}
+    .page{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr}
+    .hero{position:relative;overflow:hidden;background:linear-gradient(145deg,#062b55 0%,#0b4f9e 58%,#1767c8 100%);color:white;padding:70px clamp(30px,7vw,110px);display:flex;align-items:center}
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.18}
+    .hero:before{width:380px;height:380px;background:#f0b323;right:-160px;top:-140px}
+    .hero:after{width:520px;height:520px;border:70px solid white;left:-300px;bottom:-330px}
+    .hero-inner{position:relative;z-index:1;max-width:700px}
+    .logo{width:118px;height:118px;border-radius:28px;background:white;padding:9px;object-fit:contain;box-shadow:0 16px 40px rgba(0,0,0,.2);margin-bottom:30px}
+    h1{font-size:clamp(40px,5vw,68px);line-height:1.03;margin:0 0 22px;font-weight:800;letter-spacing:-2px}
+    .hero p{font-size:18px;line-height:1.8;color:#e7f0ff;max-width:650px;margin:0}
+    .pill{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 15px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(255,255,255,.09);font-size:13px}
+    .login-side{display:flex;align-items:center;justify-content:center;padding:40px;background:white}
+    .card{width:min(520px,100%);padding:44px;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);background:white}
+    .mini-logo{width:72px;height:72px;object-fit:contain;border-radius:18px;margin-bottom:18px}
+    h2{font-size:30px;margin:0 0 10px}.sub{color:var(--muted);line-height:1.6;margin:0 0 28px}
+    label{display:block;font-weight:700;font-size:14px;margin:18px 0 8px} input{width:100%;padding:15px 16px;border:1px solid #cbd8e8;border-radius:14px;outline:none;background:white;transition:.2s}
+    input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(23,103,200,.1)}
+    .btn{width:100%;border:0;border-radius:14px;padding:15px 18px;margin-top:22px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;font-weight:800;cursor:pointer;box-shadow:0 10px 25px rgba(23,103,200,.22);transition:.2s}
+    .btn:hover{transform:translateY(-1px)} .btn:disabled{opacity:.65;cursor:wait;transform:none}
+    .notice{margin-top:18px;padding:12px 14px;border-radius:12px;background:#f8fafc;color:var(--muted);font-size:13px;line-height:1.5}
+    .error{color:var(--danger);background:#fff1f0}.success{color:var(--success);background:#eefbf3}
+    .dashboard{min-height:100vh;background:var(--bg)} .top{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+    .top-in{max-width:1250px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}.brand img{width:48px;height:48px;object-fit:contain;border-radius:12px}.brand small{display:block;color:var(--muted);font-weight:500;margin-top:2px}
+    .teacher-mini{display:flex;align-items:center;gap:12px}.avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;background:#e8f0fb}.logout{border:1px solid var(--line);background:white;padding:10px 14px;border-radius:11px;font-weight:700;cursor:pointer;color:var(--ink)}
+    .wrap{max-width:1250px;margin:auto;padding:34px 24px 60px}.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:25px}.welcome h2{font-size:34px;margin:0 0 8px}.muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.stat,.section{background:white;border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 30px rgba(20,33,61,.05)}
+    .stat{padding:22px}.stat .num{font-size:32px;font-weight:800;margin-top:6px}.section{padding:24px;margin-top:22px}.section h3{margin:0 0 18px;font-size:20px}
+    .class-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.class-card{border:1px solid var(--line);border-radius:17px;padding:18px;background:linear-gradient(180deg,#fff,#f8fbff)}
+    .class-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.class-title{font-size:18px;font-weight:800}.tag{display:inline-block;background:#eaf3ff;color:var(--blue2);padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700;margin:4px 4px 0 0}
+    .students{margin-top:15px;display:grid;gap:9px}.student{display:flex;align-items:center;gap:11px;padding:10px;border-radius:12px;background:white;border:1px solid #e9eff6}.student img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#edf3fa}.student b{font-size:14px}.student span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .profile{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}.profile-photo{width:120px;height:120px;border-radius:24px;object-fit:cover;background:#eaf2fb;border:1px solid var(--line)}.details{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.detail{padding:14px;border-radius:13px;background:#f8fafc}.detail small{display:block;color:var(--muted);margin-bottom:4px}.detail b{font-size:14px}
+    .loading{padding:40px;text-align:center;color:var(--muted)} .footer{text-align:center;color:#8a99aa;font-size:12px;margin-top:35px}
+
+    .fee-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+    .month-input{width:auto;min-width:170px;padding:11px 13px}
+    .fee-table-wrap{overflow:auto}
+    .fee-table{width:100%;border-collapse:collapse;min-width:720px}
+    .fee-table th,.fee-table td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;white-space:nowrap}
+    .fee-table th{font-size:12px;color:var(--muted)}
+    .fee-badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800}
+    .fee-paid{background:#eaf8f1;color:#11854d}.fee-partial{background:#fff7df;color:#9a6a00}
+    .fee-unpaid{background:#eef3f8;color:#526173}.fee-pending{background:#fff0f1;color:#c92d3d}
+    .fee-amount{font-weight:800}.fee-note{font-size:12px;color:var(--muted);margin-top:4px}
+
+
+    .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .quick-card{border:1px solid var(--line);border-radius:18px;padding:20px;background:linear-gradient(135deg,#fff,#f5f9ff);cursor:pointer;transition:.2s;box-shadow:0 8px 24px rgba(20,33,61,.05)}
+    .quick-card:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(20,33,61,.09)}
+    .quick-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#eaf3ff;font-size:21px;margin-bottom:12px}
+    .quick-card h4{margin:0 0 6px;font-size:16px}.quick-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+    .request-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field-group label{margin-top:0}.field-group textarea{width:100%;min-height:120px;padding:14px;border:1px solid #cbd8e8;border-radius:14px;resize:vertical;outline:none;font:inherit}
+    .field-group select{width:100%;padding:14px;border:1px solid #cbd8e8;border-radius:14px;background:white;outline:none;font:inherit}
+    .field-group textarea:focus,.field-group select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(23,103,200,.1)}
+    .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}.small-btn{width:auto;margin-top:0;padding:12px 18px}
+    .rule-list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .rule-list li{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border:1px solid #e7eef7;border-radius:13px;background:#fbfdff}
+    .rule-num{width:28px;height:28px;flex:0 0 28px;border-radius:9px;background:#eaf3ff;color:var(--blue2);display:grid;place-items:center;font-weight:800;font-size:12px}
+    .request-msg{margin-top:12px;padding:11px 13px;border-radius:12px;font-size:13px;display:none}
+    .request-msg.show{display:block}.request-msg.ok{background:#eefbf3;color:var(--success)}.request-msg.err{background:#fff1f0;color:var(--danger)}
+    .badge-status{font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#f1f5f9;color:#64748b}
+    .top-actions{display:flex;align-items:center;gap:9px}
+    @media(max-width:900px){.quick-grid,.request-grid{grid-template-columns:1fr}}
+
+    @media(max-width:900px){.page{grid-template-columns:1fr}.hero{display:none}.login-side{min-height:100vh;padding:20px}.card{padding:30px 24px}.grid{grid-template-columns:1fr}.class-grid{grid-template-columns:1fr}.profile{grid-template-columns:1fr}.details{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div id="loginPage" class="page">
+    <section class="hero">
+      <div class="hero-inner">
+        <img class="logo" src="assets/school-logo.jpg" alt="The Progress of Life School logo">
+        <h1>Teacher Portal</h1>
+        <p>Secure access for teachers of The Progress of Life School. View your profile, assigned classes, subjects and the students connected to your teaching responsibilities.</p>
+        <div class="pill">🔐 Secure teacher access &nbsp;•&nbsp; Faisalabad, Pakistan</div>
+      </div>
+    </section>
+    <section class="login-side">
+      <div class="card">
+        <img class="mini-logo" src="assets/school-logo.jpg" alt="School logo">
+        <h2>Teacher Sign In</h2>
+        <p class="sub">Use the email address and password provided for your teacher account.</p>
+        <form id="loginForm">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" autocomplete="username" placeholder="teacher@school.com" required>
+          <label for="password">Password</label>
+          <input id="password" type="password" autocomplete="current-password" placeholder="Password" required>
+          <button id="loginBtn" class="btn" type="submit">Sign In</button>
+        </form>
+        <div id="loginMessage" class="notice">Teacher accounts are created/approved by the school administrator.</div>
+        <div class="notice">Forgot your password? Contact the school administrator for a password reset.</div>
+      </div>
+    </section>
+  </div>
+
+  <div id="dashboardPage" class="dashboard hidden">
+    <header class="top">
+      <div class="top-in">
+        <div class="brand">
+          <img src="assets/school-logo.jpg" alt="School logo">
+          <div>The Progress of Life School<small>Teacher Portal</small></div>
+        </div>
+        <div class="teacher-mini">
+          <img id="topAvatar" class="avatar" src="assets/school-logo.jpg" alt="">
+          <div id="topName"></div>
+          <button id="logoutBtn" class="logout">Sign Out</button>
+        </div>
+      </div>
+    </header>
+    <main class="wrap">
+      <div class="welcome">
+        <div><h2 id="welcomeName">Welcome</h2><div class="muted">Here is your teaching overview.</div></div>
+      </div>
+
+      <div class="quick-grid" style="margin-bottom:22px">
+        <div class="quick-card" data-scroll="teacherRequestSection">
+          <div class="quick-icon">📝</div><h4>Leave Application</h4>
+          <p>Submit a leave request directly to school administration.</p>
+        </div>
+        <div class="quick-card" data-scroll="suggestionSection">
+          <div class="quick-icon">💡</div><h4>Suggestion to Admin</h4>
+          <p>Share ideas, concerns or suggestions with the school administration.</p>
+        </div>
+        <div class="quick-card" data-scroll="rulesSection">
+          <div class="quick-icon">📘</div><h4>School Rules</h4>
+          <p>Quickly review important teacher responsibilities and expectations.</p>
+        </div>
+      </div>
+      <div id="content"><div class="loading">Loading your teacher profile…</div></div>
+
+
+      <section class="section">
+        <div class="fee-toolbar">
+          <div>
+            <h3 style="margin-bottom:5px">Student Fee Status</h3>
+            <div class="muted">View the fee status of students in your assigned classes. This is read-only.</div>
+          </div>
+          <input id="feeMonth" class="month-input" type="month" title="Select fee month">
+        </div>
+        <div id="feeStatusContent" class="loading">Loading fee status…</div>
+      </section>
+
+
+      <section id="teacherRequestSection" class="section">
+        <h3>📝 Leave Application</h3>
+        <div class="muted" style="margin-bottom:18px">Send a leave application to the school administration.</div>
+        <form id="leaveForm">
+          <div class="request-grid">
+            <div class="field-group"><label for="leaveType">Leave Type</label>
+              <select id="leaveType" required><option value="">Select leave type</option><option>Casual Leave</option><option>Sick Leave</option><option>Emergency Leave</option><option>Personal Leave</option><option>Other</option></select>
+            </div>
+            <div class="field-group"><label for="leaveReason">Short Reason</label><input id="leaveReason" placeholder="Reason for leave" required></div>
+            <div class="field-group"><label for="leaveFrom">From</label><input id="leaveFrom" type="date" required></div>
+            <div class="field-group"><label for="leaveTo">To</label><input id="leaveTo" type="date" required></div>
+          </div>
+          <div class="field-group" style="margin-top:16px"><label for="leaveDetails">Details / Message</label><textarea id="leaveDetails" placeholder="Add any details the administration should know…"></textarea></div>
+          <div class="form-actions"><button class="btn small-btn" type="submit" id="leaveBtn">Submit Leave Application</button></div>
+          <div id="leaveMsg" class="request-msg"></div>
+        </form>
+      </section>
+
+      <section id="suggestionSection" class="section">
+        <h3>💡 Suggestion to Administration</h3>
+        <div class="muted" style="margin-bottom:18px">Have an idea that can improve the school? Send it privately to administration.</div>
+        <form id="suggestionForm">
+          <div class="request-grid">
+            <div class="field-group"><label for="suggestionSubject">Subject</label><input id="suggestionSubject" placeholder="Suggestion subject" required></div>
+            <div class="field-group"><label for="suggestionCategory">Category</label>
+              <select id="suggestionCategory"><option>Teaching & Learning</option><option>Students</option><option>School Activities</option><option>Facilities</option><option>Staff</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="field-group" style="margin-top:16px"><label for="suggestionText">Your Suggestion</label><textarea id="suggestionText" placeholder="Write your suggestion here…" required></textarea></div>
+          <div class="form-actions"><button class="btn small-btn" type="submit" id="suggestionBtn">Send Suggestion</button></div>
+          <div id="suggestionMsg" class="request-msg"></div>
+        </form>
+      </section>
+
+      <section id="rulesSection" class="section">
+        <h3>📘 Teacher Rules & Expectations</h3>
+        <ul class="rule-list">
+          <li><span class="rule-num">1</span><div><b>Professional conduct</b><br><span class="muted">Treat students, parents and colleagues with respect, patience and professionalism.</span></div></li>
+          <li><span class="rule-num">2</span><div><b>Punctuality & attendance</b><br><span class="muted">Arrive on time, follow the school timetable and inform administration about unavoidable absence.</span></div></li>
+          <li><span class="rule-num">3</span><div><b>Student safeguarding</b><br><span class="muted">Protect student dignity, privacy and safety. Report serious concerns to administration promptly.</span></div></li>
+          <li><span class="rule-num">4</span><div><b>Academic responsibility</b><br><span class="muted">Prepare lessons, maintain appropriate records and support students according to their needs.</span></div></li>
+          <li><span class="rule-num">5</span><div><b>Confidentiality</b><br><span class="muted">Do not share student, family, financial or school information outside authorized channels.</span></div></li>
+          <li><span class="rule-num">6</span><div><b>Portal responsibility</b><br><span class="muted">Keep your password private and sign out when using a shared computer.</span></div></li>
+        </ul>
+        <div class="notice" style="margin-top:16px">These are the portal's initial general rules. Your school administration can later replace them with the official TPLS staff handbook/rules.</div>
+      </section>
+
+      <div class="footer">The Progress of Life School • Teacher Portal</div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script>
+    const cfg = window.TPLS_CONFIG;
+    const client = window.supabase.createClient(cfg.supabaseUrl, cfg.supabasePublishableKey);
+    const $ = (id) => document.getElementById(id);
+
+    function escapeHtml(value){
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+    }
+    function showMessage(text, type=""){
+      const el=$("loginMessage"); el.textContent=text; el.className="notice "+type;
+    }
+    function setLoginBusy(busy){
+      $("loginBtn").disabled=busy; $("loginBtn").textContent=busy ? "Signing In…" : "Sign In";
+    }
+    function initials(name){
+      return String(name||"Teacher").split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase();
+    }
+
+    async function signedPhoto(bucket, path){
+      if(!path) return null;
+      const {data,error}=await client.storage.from(bucket).createSignedUrl(path, 3600);
+      return error ? null : data?.signedUrl;
+    }
+
+    function currentMonth(){
+      const d=new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
+    }
+
+    function feeStatus(expected, paid, discount){
+      const due=Math.max(0, Number(expected||0)-Number(paid||0)-Number(discount||0));
+      if(Number(expected||0)>0 && due<=0) return {label:"Paid", cls:"fee-paid", due:0};
+      if(Number(paid||0)>0) return {label:"Partial", cls:"fee-partial", due};
+      return {label:"Unpaid", cls:"fee-unpaid", due};
+    }
+
+    async function loadTeacher(user){
+      const email=(user.email||"").toLowerCase().trim();
+      const {data:teacher,error:tErr}=await client.from("teachers")
+        .select("id,teacher_code,name,gender,phone,email,qualification,joining_date,status,photo_path")
+        .ilike("email",email).maybeSingle();
+      if(tErr) throw tErr;
+      if(!teacher) throw new Error("Your login email is not linked to a teacher profile. Please ask the school administrator to add this email to your teacher profile.");
+      if(teacher.status && teacher.status !== "Active") throw new Error("This teacher account is currently inactive. Please contact the school administrator.");
+
+      const {data:assignments,error:aErr}=await client.from("teacher_assignments")
+        .select("id,class_name,subject").eq("teacher_id",teacher.id).order("class_name").order("subject");
+      if(aErr) throw aErr;
+
+      const classes=[...new Set((assignments||[]).map(a=>a.class_name).filter(Boolean))];
+      let students=[];
+      if(classes.length){
+        const {data:s,error:sErr}=await client.from("students")
+          .select("id,student_code,name,gender,class_name,guardian_name,phone,monthly_fee,status,photo_path")
+          .in("class_name",classes).order("class_name").order("name");
+        if(sErr) throw sErr;
+        students=s||[];
+      }
+
+      let feePayments=[];
+      const studentIds=students.map(s=>s.id).filter(Boolean);
+      if(studentIds.length){
+        const {data:p,error:pErr}=await client.from("fee_payments")
+          .select("student_id,fee_month,paid_amount,discount,payment_date,receipt_number")
+          .in("student_id",studentIds);
+        if(pErr) throw pErr;
+        feePayments=p||[];
+      }
+
+      const teacherPhoto=await signedPhoto("teacher-photos",teacher.photo_path);
+      const studentPhotos=await Promise.all(students.map(s=>signedPhoto("student-photos",s.photo_path)));
+      students.forEach((s,i)=>s._photo=studentPhotos[i]);
+
+      renderTeacher(teacher,assignments||[],students,teacherPhoto,feePayments);
+    }
+
+    function renderTeacher(t,assignments,students,teacherPhoto,feePayments){
+      currentTeacherId=t.id;
+      $("loginPage").classList.add("hidden");
+      $("dashboardPage").classList.remove("hidden");
+      $("welcomeName").textContent=`Welcome, ${t.name}`;
+      $("topName").textContent=t.name;
+      if(teacherPhoto) $("topAvatar").src=teacherPhoto;
+
+      const classNames=[...new Set(assignments.map(a=>a.class_name).filter(Boolean))];
+      const subjectNames=[...new Set(assignments.map(a=>a.subject).filter(Boolean))];
+
+      const groups={};
+      classNames.forEach(c=>groups[c]=[]);
+      students.forEach(s=>{if(!groups[s.class_name])groups[s.class_name]=[];groups[s.class_name].push(s)});
+
+      let html=`
+        <div class="grid">
+          <div class="stat"><div class="muted">Assigned Classes</div><div class="num">${classNames.length}</div></div>
+          <div class="stat"><div class="muted">Assigned Subjects</div><div class="num">${subjectNames.length}</div></div>
+          <div class="stat"><div class="muted">Students Available</div><div class="num">${students.length}</div></div>
+        </div>
+        <section class="section">
+          <h3>My Profile</h3>
+          <div class="profile">
+            <img class="profile-photo" src="${teacherPhoto||"assets/school-logo.jpg"}" alt="Teacher photo">
+            <div class="details">
+              <div class="detail"><small>Name</small><b>${escapeHtml(t.name)}</b></div>
+              <div class="detail"><small>Teacher ID</small><b>${escapeHtml(t.teacher_code)}</b></div>
+              <div class="detail"><small>Gender</small><b>${escapeHtml(t.gender||"—")}</b></div>
+              <div class="detail"><small>Phone</small><b>${escapeHtml(t.phone||"—")}</b></div>
+              <div class="detail"><small>Email</small><b>${escapeHtml(t.email||"—")}</b></div>
+              <div class="detail"><small>Qualification</small><b>${escapeHtml(t.qualification||"—")}</b></div>
+              <div class="detail"><small>Joining Date</small><b>${escapeHtml(t.joining_date||"—")}</b></div>
+              <div class="detail"><small>Status</small><b>${escapeHtml(t.status||"—")}</b></div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <h3>My Classes & Students</h3>
+          <div class="class-grid">
+      `;
+
+      if(!classNames.length){
+        html+=`<div class="notice">No class/subject assignments have been added to your teacher profile yet. Please contact the administrator.</div>`;
+      } else {
+        classNames.forEach(className=>{
+          const subs=assignments.filter(a=>a.class_name===className).map(a=>a.subject).filter(Boolean);
+          const list=groups[className]||[];
+          html+=`<article class="class-card">
+            <div class="class-head"><div><div class="class-title">${escapeHtml(className)}</div>${subs.map(s=>`<span class="tag">${escapeHtml(s)}</span>`).join("")}</div><strong>${list.length} students</strong></div>
+            <div class="students">`;
+          if(!list.length) html+=`<div class="muted" style="padding:10px">No active students found in this class.</div>`;
+          else list.forEach(s=>{
+            html+=`<div class="student">
+              <img src="${s._photo||"assets/school-logo.jpg"}" alt="">
+              <div><b>${escapeHtml(s.name)}</b><span>ID: ${escapeHtml(s.student_code)} • ${escapeHtml(s.gender||"—")} • ${escapeHtml(s.status||"—")}</span></div>
+            </div>`;
+          });
+          html+=`</div></article>`;
+        });
+      }
+      html+=`</div></section>`;
+      $("content").innerHTML=html;
+
+      const feeMonthEl=$("feeMonth");
+      feeMonthEl.value=currentMonth();
+      feeMonthEl.onchange=()=>renderFeeStatus(students,feePayments,feeMonthEl.value);
+      renderFeeStatus(students,feePayments,feeMonthEl.value);
+    }
+
+    function renderFeeStatus(students,feePayments,month){
+      const monthKey=month || currentMonth();
+      const rows=students.map(s=>{
+        const payments=feePayments.filter(p=>p.student_id===s.id && String(p.fee_month||"").slice(0,7)===monthKey);
+        const paid=payments.reduce((sum,p)=>sum+Number(p.paid_amount||0),0);
+        const discount=payments.reduce((sum,p)=>sum+Number(p.discount||0),0);
+        const expected=Number(s.monthly_fee||0);
+        const state=feeStatus(expected,paid,discount);
+        const last=payments.slice().sort((a,b)=>String(b.payment_date||"").localeCompare(String(a.payment_date||"")))[0];
+        return {...s,expected,paid,discount,last,state};
+      });
+
+      const totalExpected=rows.reduce((a,r)=>a+r.expected,0);
+      const totalPaid=rows.reduce((a,r)=>a+r.paid,0);
+      const totalDue=rows.reduce((a,r)=>a+r.state.due,0);
+      const paidCount=rows.filter(r=>r.state.label==="Paid").length;
+      const partialCount=rows.filter(r=>r.state.label==="Partial").length;
+      const unpaidCount=rows.filter(r=>r.state.label==="Unpaid").length;
+
+      let out=`
+        <div class="grid" style="margin-bottom:18px">
+          <div class="stat"><div class="muted">Expected</div><div class="num">PKR ${totalExpected.toLocaleString()}</div></div>
+          <div class="stat"><div class="muted">Collected</div><div class="num">PKR ${totalPaid.toLocaleString()}</div></div>
+          <div class="stat"><div class="muted">Outstanding</div><div class="num">PKR ${totalDue.toLocaleString()}</div></div>
+        </div>
+        <div class="fee-note" style="margin-bottom:12px">${rows.length} students • ${paidCount} Paid • ${partialCount} Partial • ${unpaidCount} Unpaid</div>
+        <div class="fee-table-wrap"><table class="fee-table">
+          <thead><tr><th>Student</th><th>Expected</th><th>Paid</th><th>Outstanding</th><th>Status</th><th>Last Payment</th></tr></thead>
+          <tbody>
+      `;
+      if(!rows.length){
+        out += `<tr><td colspan="6" class="loading">No students are currently assigned to your classes.</td></tr>`;
+      } else {
+        rows.forEach(r=>{
+          out += `<tr>
+            <td><div style="display:flex;align-items:center;gap:10px">
+              <img src="${r._photo||"assets/school-logo.jpg"}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;background:#edf3fa">
+              <div><strong>${escapeHtml(r.name)}</strong><div class="fee-note">ID: ${escapeHtml(r.student_code)}</div></div>
+            </div></td>
+            <td class="fee-amount">PKR ${r.expected.toLocaleString()}</td>
+            <td>PKR ${r.paid.toLocaleString()}</td>
+            <td>PKR ${r.state.due.toLocaleString()}</td>
+            <td><span class="fee-badge ${r.state.cls}">${r.state.label}</span></td>
+            <td>${r.last ? escapeHtml(r.last.payment_date||"—") : "—"}</td>
+          </tr>`;
+        });
+      }
+      out += `</tbody></table></div>
+        <div class="notice">Fee information is view-only in the Teacher Portal. Payment collection, receipts, discounts and financial reports remain under Admin control.</div>`;
+      $("feeStatusContent").innerHTML=out;
+    }
+
+    $("loginForm").addEventListener("submit", async (e)=>{
+      e.preventDefault(); setLoginBusy(true); showMessage("Checking your teacher account…");
+      const email=$("email").value.trim(), password=$("password").value;
+      const {data,error}=await client.auth.signInWithPassword({email,password});
+      if(error){showMessage(error.message,"error");setLoginBusy(false);return;}
+      try{await loadTeacher(data.user);}catch(err){await client.auth.signOut();showMessage(err.message||"Your teacher profile could not be loaded.","error");setLoginBusy(false);}
+    });
+
+
+    let currentTeacherId=null;
+
+    function setRequestMsg(id,text,ok){
+      const el=$(id); el.textContent=text; el.className="request-msg show "+(ok?"ok":"err");
+    }
+    function setButtonBusy(id,busy,normal,busyText){
+      const b=$(id); b.disabled=busy; b.textContent=busy?busyText:normal;
+    }
+
+    async function submitTeacherRequest(payload,msgId,btnId,normalText,busyText){
+      try{
+        if(!currentTeacherId) throw new Error("Teacher profile is not loaded.");
+        const {error}=await client.from("teacher_requests").insert({...payload,teacher_id:currentTeacherId});
+        if(error) throw error;
+        setRequestMsg(msgId,"Your request has been submitted to the school administration.",true);
+        return true;
+      }catch(err){
+        setRequestMsg(msgId,err.message||"Could not submit the request.",false);
+        return false;
+      }finally{
+        setButtonBusy(btnId,false,normalText,busyText);
+      }
+    }
+
+    $("leaveForm").addEventListener("submit",async(e)=>{
+      e.preventDefault();
+      setRequestMsg("leaveMsg","",true);
+      setButtonBusy("leaveBtn",true,"Submit Leave Application","Submitting…");
+      const ok=await submitTeacherRequest({
+        request_type:"leave",
+        subject:$("leaveType").value+" — "+$("leaveReason").value,
+        message:$("leaveDetails").value,
+        leave_type:$("leaveType").value,
+        leave_from:$("leaveFrom").value,
+        leave_to:$("leaveTo").value
+      },"leaveMsg","leaveBtn","Submit Leave Application","Submitting…");
+      if(ok) $("leaveForm").reset();
+    });
+
+    $("suggestionForm").addEventListener("submit",async(e)=>{
+      e.preventDefault();
+      setRequestMsg("suggestionMsg","",true);
+      setButtonBusy("suggestionBtn",true,"Send Suggestion","Sending…");
+      const ok=await submitTeacherRequest({
+        request_type:"suggestion",
+        subject:$("suggestionSubject").value,
+        message:"Category: "+$("suggestionCategory").value+"\n\n"+$("suggestionText").value
+      },"suggestionMsg","suggestionBtn","Send Suggestion","Sending…");
+      if(ok) $("suggestionForm").reset();
+    });
+
+    document.querySelectorAll("[data-scroll]").forEach(card=>{
+      card.addEventListener("click",()=>$(card.dataset.scroll)?.scrollIntoView({behavior:"smooth",block:"start"}));
+    });
+
+
+    $("logoutBtn").addEventListener("click", async()=>{await client.auth.signOut();location.reload();});
+
+    client.auth.getSession().then(async({data})=>{
+      if(data.session){
+        try{await loadTeacher(data.session.user);}catch(err){await client.auth.signOut();showMessage(err.message||"Please sign in again.","error");}
+      }
+    });
+  </script>
+</body>
+</html>
