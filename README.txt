@@ -31,3 +31,17 @@ After deployment, add the deployed URL in Supabase Authentication URL/Redirect s
 - More polished dashboard cards and responsive layout.
 
 Run TPLS_TEACHER_REQUESTS_SETUP.sql once in Supabase SQL Editor before using the leave/suggestion forms. This creates only the new teacher_requests table and RLS policies.
+
+
+NEW FEATURES IN THIS VERSION
+- Lesson Plans for assigned class/subject
+- Tests & Student Results with automatic percentage and grade
+- Teacher Notifications (Admin sending will be added in the Admin Portal)
+
+IMPORTANT DATABASE STEP
+1. Open Supabase SQL Editor.
+2. Run TPLS_TEACHER_PORTAL_NEW_FEATURES_SETUP.sql once.
+3. Do not run the old SQL again unless needed.
+4. Then upload the portal files to the existing GitHub repository.
+
+The SQL adds only three new tables and does not alter the existing students, teachers, fees, receipts or authentication tables.
