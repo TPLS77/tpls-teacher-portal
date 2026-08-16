@@ -45,3 +45,6 @@ IMPORTANT DATABASE STEP
 4. Then upload the portal files to the existing GitHub repository.
 
 The SQL adds only three new tables and does not alter the existing students, teachers, fees, receipts or authentication tables.
+
+
+Notification attachments: this version displays files attached by the school admin. Run the updated admin SQL once to create the notification-attachments storage bucket.
