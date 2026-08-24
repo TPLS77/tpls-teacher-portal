@@ -87,7 +87,41 @@
     @media(max-width:900px){.quick-grid,.request-grid{grid-template-columns:1fr}}
 
     @media(max-width:900px){.page{grid-template-columns:1fr}.hero{display:none}.login-side{min-height:100vh;padding:20px}.card{padding:30px 24px}.grid{grid-template-columns:1fr}.class-grid{grid-template-columns:1fr}.profile{grid-template-columns:1fr}.details{grid-template-columns:1fr}}
+  
+.principal-card{margin-top:18px;padding:14px;border-radius:18px;background:linear-gradient(135deg,#f7fbff,#fff7df);border:1px solid #dfe8f4;display:flex;gap:14px;align-items:center}.principal-card img{width:76px;height:90px;border-radius:14px;object-fit:cover;object-position:center top;box-shadow:0 8px 20px rgba(20,64,120,.12)}.principal-card .ptitle{font-size:11px;font-weight:800;letter-spacing:.08em;color:#1767c8;text-transform:uppercase}.principal-card .pmsg{font-size:13px;line-height:1.55;color:#31445c;margin-top:4px}.principal-card .psign{font-size:11px;color:#6b778c;font-weight:700;margin-top:5px}.cloud-help{margin-top:10px;padding:10px 12px;border-radius:11px;background:#fff8e6;border:1px solid #efd58a;color:#725600;font-size:12px;line-height:1.5}
+
+/* TPLS ADVANCED VISUAL REFRESH — requested design update */
+:root{--blue:#2563eb;--blue2:#4f46e5;--violet:#7c3aed;--cyan:#06b6d4;--gold:#f59e0b;--ink:#10213f;--muted:#64748b;--line:#dbe5f3;--bg:#f4f7fc}
+body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent 28%),radial-gradient(circle at 95% 10%,rgba(124,58,237,.10),transparent 25%),var(--bg)}
+.top{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);box-shadow:0 8px 28px rgba(15,23,42,.06)}
+.brand img{box-shadow:0 8px 20px rgba(37,99,235,.15)}
+.logout{transition:.2s}.logout:hover{border-color:#a8c1ef;background:#f5f8ff;transform:translateY(-1px)}
+.welcome{padding:28px 30px;border-radius:26px;color:#fff;background:linear-gradient(135deg,#0f3c8a 0%,#2563eb 45%,#7c3aed 78%,#06b6d4 100%);box-shadow:0 22px 55px rgba(37,99,235,.22);position:relative;overflow:hidden}
+.welcome:before,.welcome:after{content:"";position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.14);pointer-events:none}.welcome:before{width:260px;height:260px;right:-100px;top:-130px}.welcome:after{width:180px;height:180px;left:-90px;bottom:-110px}.welcome>*{position:relative;z-index:1}.welcome h2{color:#fff}.welcome .muted{color:#e7efff}
+.quick-grid{margin-top:20px}.quick-card{border:1px solid rgba(148,163,184,.22);background:linear-gradient(145deg,#fff,#f6f9ff);box-shadow:0 12px 32px rgba(30,64,175,.08)}
+.quick-card:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(30,64,175,.14);border-color:#bfd2f6}.quick-icon{background:linear-gradient(135deg,#dbeafe,#ede9fe);box-shadow:inset 0 0 0 1px rgba(99,102,241,.08)}
+.stat,.section{border-color:rgba(148,163,184,.25);box-shadow:0 12px 34px rgba(15,23,42,.06)}
+.stat{position:relative;overflow:hidden}.stat:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#2563eb,#7c3aed)}
+.section h3{color:#14284b}.class-card{background:linear-gradient(145deg,#fff,#f7faff);box-shadow:0 8px 24px rgba(15,23,42,.04)}
+.detail{background:linear-gradient(145deg,#f8fbff,#f4f0ff);border:1px solid rgba(148,163,184,.16)}
+/* Collective duties dashboard */
+.collective-panel{margin-top:22px;padding:24px;border-radius:26px;background:linear-gradient(135deg,#0b2f67 0%,#1d4ed8 48%,#6d28d9 100%);color:#fff;box-shadow:0 22px 55px rgba(37,67,150,.20);position:relative;overflow:hidden}
+.collective-panel:after{content:"";position:absolute;width:320px;height:320px;border:55px solid rgba(255,255,255,.08);border-radius:50%;right:-150px;top:-190px}.collective-head{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.collective-head h3{color:#fff;margin:0 0 5px}.collective-head .muted{color:#dbeafe}.duty-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:18px}.duty-card{border:1px solid rgba(255,255,255,.18);border-radius:17px;padding:16px;background:rgba(255,255,255,.10);backdrop-filter:blur(8px);transition:.2s}.duty-card:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}.duty-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.16);font-size:19px;margin-bottom:10px}.duty-title{font-weight:800;font-size:14px}.duty-desc{font-size:11px;line-height:1.55;color:#e6efff;margin-top:5px;min-height:34px}.duty-status{display:inline-flex;margin-top:10px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.14);font-size:10px;font-weight:800}.duty-action{display:inline-block;margin-top:10px;color:#fff;text-decoration:none;font-size:11px;font-weight:800;cursor:pointer}.collective-empty{position:relative;z-index:1;color:#e6efff;padding:12px 0}
+@media(max-width:850px){.duty-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.duty-grid{grid-template-columns:1fr}.collective-panel{padding:19px}.welcome{padding:22px}}
+
+    .financial-action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}.financial-action{border:1px solid #dbe5f1;border-radius:18px;padding:18px;background:linear-gradient(135deg,#ffffff,#f4f7ff);box-shadow:0 10px 28px rgba(20,33,61,.08)}.financial-action h4{margin:0 0 6px;color:#102f62}.financial-action p{margin:0 0 12px;color:#64748b;font-size:12px;line-height:1.5}.financial-actions-row{display:flex;gap:9px;flex-wrap:wrap}.financial-modal{position:fixed;inset:0;background:rgba(8,30,66,.48);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}.financial-modal.show{display:flex}.financial-modal-card{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 90px rgba(5,20,50,.28);padding:24px}.financial-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.financial-modal-head h3{margin:0;color:#10213f}.financial-close{border:0;background:#eef3fb;border-radius:12px;width:38px;height:38px;cursor:pointer;font-size:20px}.financial-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.financial-form-grid .full{grid-column:1/-1}.financial-field label{display:block;font-size:12px;font-weight:800;color:#344054;margin-bottom:6px}.financial-field input,.financial-field select,.financial-field textarea{width:100%;padding:11px 12px;border:1px solid #d8e2ef;border-radius:12px;outline:none;background:#fff}.financial-field input:focus,.financial-field select:focus,.financial-field textarea:focus{border-color:#4f7eea;box-shadow:0 0 0 3px rgba(79,126,234,.12)}.financial-summary-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.financial-summary-strip .mini{padding:12px;border-radius:14px;background:#f6f8fc;border:1px solid #e5ebf3}.financial-summary-strip .mini small{display:block;color:#64748b;font-size:10px;font-weight:800}.financial-summary-strip .mini b{display:block;margin-top:4px;color:#10213f}.financial-helper{font-size:11px;color:#667085;margin-top:5px}.financial-permission{padding:11px 13px;border-radius:13px;background:linear-gradient(135deg,#eef7ff,#f5f0ff);border:1px solid #d9e5fa;color:#344054;font-size:12px;margin-top:12px}
+    @media(max-width:700px){.financial-action-grid,.financial-form-grid,.financial-summary-strip{grid-template-columns:1fr}.financial-form-grid .full{grid-column:auto}}
   </style>
+<style>
+/* TPLS PREMIUM FILTER + DUTY DESIGN */
+.toolbar{background:linear-gradient(135deg,rgba(248,251,255,.96),rgba(244,240,255,.96));border:1px solid #e2e8f5;border-radius:16px;padding:10px;box-shadow:0 8px 24px rgba(30,41,59,.05)}
+.toolbar input,.toolbar select{border:1px solid #d8e2f0!important;border-radius:12px!important;background:#fff!important;box-shadow:0 3px 10px rgba(15,23,42,.04)}
+.filter-btn{border-radius:11px!important;font-weight:800!important}
+.duty-card{background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.07))!important;box-shadow:0 12px 28px rgba(2,20,55,.15);border-color:rgba(255,255,255,.25)!important}
+.duty-card .duty-icon{background:linear-gradient(135deg,rgba(255,255,255,.25),rgba(255,255,255,.08))!important}
+
+
+</style>
 </head>
 <body>
   <div id="loginPage" class="page">
@@ -97,6 +131,11 @@
         <h1>Teacher Portal</h1>
         <p>Secure access for teachers of The Progress of Life School. View your profile, assigned classes, subjects and the students connected to your teaching responsibilities.</p>
         <div class="pill">🔐 Secure teacher access &nbsp;•&nbsp; Faisalabad, Pakistan</div>
+        <div class="quote-banner">
+          <div class="quote">“Education is not preparation for life; education is life itself.”</div>
+          <div class="source">— John Dewey</div>
+        </div>
+        <div class="principal-card"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">“Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.”</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
       </div>
     </section>
     <section class="login-side">
@@ -111,8 +150,15 @@
           <input id="password" type="password" autocomplete="current-password" placeholder="Password" required>
           <button id="loginBtn" class="btn" type="submit">Sign In</button>
         </form>
+        <a class="forgot-link" onclick="sendTeacherReset()">Forgot password?</a>
         <div id="loginMessage" class="notice">Teacher accounts are created/approved by the school administrator.</div>
-        <div class="notice">Forgot your password? Contact the school administrator for a password reset.</div>
+        <div id="recoveryCard" class="recovery-card hidden">
+          <strong>Set a new password</strong>
+          <div class="muted" style="font-size:12px;margin-top:5px">Choose a new password for your school account.</div>
+          <label for="newPassword">New Password</label>
+          <input id="newPassword" type="password" autocomplete="new-password" placeholder="At least 6 characters">
+          <button id="resetPasswordBtn" class="btn" type="button" onclick="completeTeacherReset()">Update Password</button>
+        </div>
       </div>
     </section>
   </div>
@@ -132,9 +178,16 @@
       </div>
     </header>
     <main class="wrap">
+      <div class="principal-card"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
       <div class="welcome">
-        <div><h2 id="welcomeName">Welcome</h2><div class="muted">Here is your teaching overview.</div></div>
+        <div><h2 id="welcomeName">Welcome</h2><div class="muted">Here is your teaching and collective-duty overview.</div></div>
       </div>
+
+      <section id="dutyGuide" class="duty-guide"><div class="duty-guide-head"><div><span class="eyebrow">RESPONSIBILITIES</span><h3>What Your Designation Means</h3><p>Your teaching access remains active. Additional responsibilities are shown below with their official duties.</p></div></div><div class="duty-guide-grid"><article><b>📚 Teacher</b><span>Teaching, lesson plans, attendance, assessment, results, student progress and reports.</span></article><article><b>💼 Financial Secretary</b><span>Fees, receipts, expenses, outstanding balances, salary/payment records and financial reports.</span></article><article><b>💰 Accountant</b><span>Financial records, verification, reconciliation, statements, balances and audit support.</span></article><article><b>🏫 High Section Coordinator</b><span>High-section teachers/students, lesson progress, schedules, attendance/results and section reporting.</span></article><article><b>🏫 Low Section Coordinator</b><span>Low-section teachers/students, lesson progress, schedules, attendance/results and section reporting.</span></article><article><b>⭐ Principal</b><span>School leadership, staff and academic oversight, welfare, administration, finances, reports, approvals and communication.</span></article><article><b>⚙️ Admin</b><span>Students, teachers, classes, fees, expenses, reports, requests, notifications and school records.</span></article><article><b>👑 Super Admin</b><span>Full system, users, settings, records, financial and administrative control.</span></article></div></section>
+      <section id="collectiveDutiesSection" class="collective-panel">
+        <div class="collective-head"><div><h3>◈ Collective Duties Dashboard</h3><div class="muted">All responsibilities assigned to you are shown together. Teaching remains your core staff access.</div></div><div id="collectiveDutyCount" class="duty-status">0 duties</div></div>
+        <div id="collectiveDutiesGrid" class="duty-grid"><div class="collective-empty">Loading your responsibilities…</div></div>
+      </section>
 
       <div class="quick-grid" style="margin-bottom:22px">
         <div class="quick-card" data-scroll="lessonPlanSection">
@@ -281,7 +334,11 @@
     </main>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <div id="financialFeeModal" class="financial-modal" aria-hidden="true"><div class="financial-modal-card"><div class="financial-modal-head"><div><h3>💳 Collect Student Fee</h3><div class="muted">Record the payment directly in the school cloud database.</div></div><button class="financial-close" type="button" onclick="closeFinancialModal('financialFeeModal')">×</button></div><form id="financialFeeForm"><div class="financial-form-grid"><div class="financial-field full"><label for="financialFeeStudent">Student *</label><select id="financialFeeStudent" required onchange="updateFinancialFeeExpected()"><option value="">Select student…</option></select></div><div class="financial-field"><label for="financialFeeMonth">Fee Month *</label><input id="financialFeeMonth" type="month" required></div><div class="financial-field"><label for="financialFeeDate">Payment Date *</label><input id="financialFeeDate" type="date" required></div><div class="financial-field"><label for="financialFeeExpected">Monthly Fee</label><input id="financialFeeExpected" type="number" readonly></div><div class="financial-field"><label for="financialFeeDiscount">Discount</label><input id="financialFeeDiscount" type="number" min="0" step="0.01" value="0"></div><div class="financial-field"><label for="financialFeePaid">Amount Paid *</label><input id="financialFeePaid" type="number" min="0" step="0.01" required></div><div class="financial-field"><label for="financialFeeBalance">Balance After Payment</label><input id="financialFeeBalance" type="number" readonly></div><div class="financial-field full"><label for="financialFeeNotes">Notes</label><textarea id="financialFeeNotes" rows="3" placeholder="Optional note"></textarea></div></div><div class="financial-helper">A unique receipt number is generated automatically. The receipt is stored as a payment record in Supabase and the PDF is generated only when needed.</div><div class="form-actions" style="margin-top:18px"><button class="btn" type="submit" id="financialFeeSaveBtn">Save Payment & Generate Receipt</button><button class="logout" type="button" onclick="closeFinancialModal('financialFeeModal')">Cancel</button></div></form></div></div>
+  <div id="financialExpenseModal" class="financial-modal" aria-hidden="true"><div class="financial-modal-card"><div class="financial-modal-head"><div><h3>💰 Add School Expense</h3><div class="muted">Record a legitimate school expense in the cloud financial ledger.</div></div><button class="financial-close" type="button" onclick="closeFinancialModal('financialExpenseModal')">×</button></div><form id="financialExpenseForm"><div class="financial-form-grid"><div class="financial-field"><label for="financialExpenseDate">Expense Date *</label><input id="financialExpenseDate" type="date" required></div><div class="financial-field"><label for="financialExpenseCategory">Category *</label><select id="financialExpenseCategory" required><option value="">Select category…</option><option>Utilities</option><option>Salaries</option><option>Supplies</option><option>Transport</option><option>Maintenance</option><option>Rent</option><option>Teaching Materials</option><option>Events</option><option>Other</option></select></div><div class="financial-field full"><label for="financialExpenseTitle">Description *</label><input id="financialExpenseTitle" required placeholder="e.g. Classroom supplies"></div><div class="financial-field"><label for="financialExpenseAmount">Amount (PKR) *</label><input id="financialExpenseAmount" type="number" min="0.01" step="0.01" required></div></div><div class="financial-helper">Expense records are saved in Supabase so the Admin and authorized financial staff see the same ledger.</div><div class="form-actions" style="margin-top:18px"><button class="btn" type="submit" id="financialExpenseSaveBtn">Save Expense</button><button class="logout" type="button" onclick="closeFinancialModal('financialExpenseModal')">Cancel</button></div></form></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="config.js"></script>
   <script>
     const cfg = window.TPLS_CONFIG;
@@ -312,6 +369,13 @@
       return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
     }
 
+    function money(value){ return "PKR " + Number(value||0).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:2}); }
+    function todayDate(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+    function isFinancialSecretary(designation){ return /financial secretary/i.test(String(designation||"")); }
+    let financialAllFees=[];
+    let financialAllExpenses=[];
+    let financialAllStudents=[];
+
     function feeStatus(expected, paid, discount){
       const due=Math.max(0, Number(expected||0)-Number(paid||0)-Number(discount||0));
       if(Number(expected||0)>0 && due<=0) return {label:"Paid", cls:"fee-paid", due:0};
@@ -319,14 +383,159 @@
       return {label:"Unpaid", cls:"fee-unpaid", due};
     }
 
+    function isFinancialRole(designation){
+      const d=String(designation||"").toLowerCase();
+      return /financial secretary|accountant/.test(d);
+    }
+    let teacherFinancialSnapshot={month:'',fees:[],expenses:[],students:[]};
+async function downloadTeacherFinancialPDF(){
+  try{
+    const jsPDF=window.jspdf?.jsPDF;if(!jsPDF)throw new Error('PDF library did not load.');
+    const logo=await signedPhoto("teacher-photos",teacherContext.teacher?.photo_path).catch(()=>null);
+    const doc=new jsPDF('l','mm','a4');
+    const pageW=doc.internal.pageSize.getWidth(), pageH=doc.internal.pageSize.getHeight();
+    const margin=12;
+    const schoolLogo=await (async()=>{try{const r=await fetch('school-logo.jpg',{cache:'no-store'});if(!r.ok)return null;const b=await r.blob();return await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=rej;f.readAsDataURL(b);});}catch(e){return null;}})();
+    if(schoolLogo){try{doc.addImage(schoolLogo,'JPEG',margin,10,22,22);}catch(e){}}
+    const d=teacherContext.teacher||{}, sm=teacherFinancialSnapshot.month||currentMonth();
+    doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text('THE PROGRESS OF LIFE SCHOOL',42,17);
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text('CHAK 8JB MEHBOOB TOWN, FAISALABAD',42,23);doc.text('PROGRESS FOR CHRISTIAN CHILDREN',42,28);
+    doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text('FINANCIAL REPORT',margin,42);
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text('Month: '+sm+' • Staff: '+String(d.name||'')+' • '+String(d.designation||'Teacher'),margin,48);
+    const collected=teacherFinancialSnapshot.fees.reduce((a,f)=>a+Number(f.paid_amount||0),0);
+    const discounts=teacherFinancialSnapshot.fees.reduce((a,f)=>a+Number(f.discount||0),0);
+    const exp=teacherFinancialSnapshot.expenses.reduce((a,e)=>a+Number(e.amount||0),0);
+    doc.setFont('helvetica','bold');doc.setFontSize(9);doc.text('Fees Collected: '+money(collected),margin,58);doc.text('Discounts: '+money(discounts),85,58);doc.text('Expenses: '+money(exp),150,58);doc.text('Net: '+money(collected-exp),margin,65);
+    let y=74;const cols=[['Receipt',32],['Student',65],['Class',38],['Date',35],['Paid',30]];const total=cols.reduce((a,c)=>a+c[1],0),scale=(pageW-24)/total,ws=cols.map(c=>c[1]*scale);
+    const draw=(vals,head)=>{
+      const lines=vals.map((v,i)=>doc.splitTextToSize(String(v??'—'),ws[i]-4)),rh=Math.max(7,...lines.map(x=>x.length*3.5+3));
+      if(y+rh>pageH-14){doc.addPage();y=18;}
+      let x=margin;doc.setFillColor(head?235:255,head?241:255,head?249:255);doc.rect(x,y,pageW-24,rh,head?'F':'S');
+      vals.forEach((v,i)=>{if(i)doc.line(x,y,x,y+rh);doc.setFont('helvetica',head?'bold':'normal');doc.setFontSize(head?7.5:7);doc.text(lines[i],x+2,y+3,{baseline:'top'});x+=ws[i];});
+      doc.line(margin,y+rh,pageW-margin,y+rh);y+=rh;
+    };
+    doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('Fee Payments',margin,y-3);draw(cols.map(c=>c[0]),true);
+    teacherFinancialSnapshot.fees.forEach(f=>draw([f.receipt_number||'—',f._studentName||'—',f._studentClass||'—',f.payment_date||'—',money(f.paid_amount)],false));
+    y+=8;doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('Expenses',margin,y);y+=4;
+    const ec=[['Date',42],['Description',125],['Amount',33]], ew=ec.map(c=>c[1]*((pageW-24)/ec.reduce((a,c)=>a+c[1],0)));
+    const drawE=(vals,head)=>{const lines=vals.map((v,i)=>doc.splitTextToSize(String(v??'—'),ew[i]-4)),rh=Math.max(7,...lines.map(x=>x.length*3.5+3));if(y+rh>pageH-14){doc.addPage();y=18;}let x=margin;doc.setFillColor(head?235:255,head?241:255,head?249:255);doc.rect(x,y,pageW-24,rh,head?'F':'S');vals.forEach((v,i)=>{if(i)doc.line(x,y,x,y+rh);doc.setFont('helvetica',head?'bold':'normal');doc.setFontSize(head?7.5:7);doc.text(lines[i],x+2,y+3,{baseline:'top'});x+=ew[i];});doc.line(margin,y+rh,pageW-margin,y+rh);y+=rh;};
+    drawE(ec.map(c=>c[0]),true);teacherFinancialSnapshot.expenses.forEach(e=>drawE([e.expense_date||'—',e.title||e.category||'Expense',money(e.amount)],false));
+    doc.save('TPLS_Teacher_Financial_Report_'+sm+'.pdf');
+  }catch(err){console.error(err);alert('Could not generate Financial PDF: '+(err.message||'PDF error'));}
+}
+
+async function loadFinancialDesk(){
+      const el=$("financialDeskContent");
+      const designation=teacherContext.teacher?.designation||"";
+      if(!el || !isFinancialRole(designation)) return;
+      try{
+        const [{data:students,error:se},{data:fees,error:fe},{data:expenses,error:ee}]=await Promise.all([
+          client.from("students").select("id,student_code,name,class_name,monthly_fee,status").order("class_name").order("name"),
+          client.from("fee_payments").select("id,student_id,fee_month,paid_amount,discount,payment_date,receipt_number,notes").order("payment_date",{ascending:false}).limit(2000),
+          client.from("expenses").select("id,expense_date,title,category,amount").order("expense_date",{ascending:false}).limit(2000)
+        ]);
+        if(se) throw se; if(fe) throw fe; if(ee) throw ee;
+        financialAllStudents=students||[]; financialAllFees=fees||[]; financialAllExpenses=expenses||[];
+        const sm=currentMonth();
+        const monthFees=financialAllFees.filter(f=>String(f.fee_month||"").slice(0,7)===sm);
+        const monthExpenses=financialAllExpenses.filter(e=>String(e.expense_date||"").slice(0,7)===sm);
+        const collected=monthFees.reduce((a,f)=>a+Number(f.paid_amount||0),0);
+        const discounts=monthFees.reduce((a,f)=>a+Number(f.discount||0),0);
+        const expenseTotal=monthExpenses.reduce((a,e)=>a+Number(e.amount||0),0);
+        const map={};financialAllStudents.forEach(st=>map[st.id]=st);
+        teacherFinancialSnapshot={month:sm,fees:monthFees.map(f=>({...f,_studentName:(map[f.student_id]||{}).name||'—',_studentClass:(map[f.student_id]||{}).class_name||'—'})),expenses:monthExpenses,students:financialAllStudents};
+        const rows=monthFees.slice(0,15).map(f=>{const st=map[f.student_id]||{};return `<tr><td>${escapeHtml(f.receipt_number||"—")}</td><td>${escapeHtml(st.name||"—")}</td><td>${escapeHtml(st.class_name||"—")}</td><td>${escapeHtml(f.payment_date||"—")}</td><td><b>${money(f.paid_amount)}</b></td></tr>`;}).join("");
+        const canOperate=isFinancialSecretary(designation);
+        el.innerHTML=`
+          <div class="financial-grid">
+            <div class="financial-card"><div class="label">Fees Collected — ${escapeHtml(sm)}</div><div class="value">${money(collected)}</div></div>
+            <div class="financial-card"><div class="label">Discounts</div><div class="value">${money(discounts)}</div></div>
+            <div class="financial-card"><div class="label">Expenses — ${escapeHtml(sm)}</div><div class="value">${money(expenseTotal)}</div></div>
+          </div>
+          ${canOperate ? `<div class="financial-action-grid"><div class="financial-action"><h4>💳 Fee Collection</h4><p>Collect fees from any active student, record discounts and generate the official receipt immediately.</p><div class="financial-actions-row"><button class="btn small-btn" type="button" onclick="openFinancialFeeModal()">+ Collect Fee</button></div></div><div class="financial-action"><h4>💰 Expense Entry</h4><p>Record school expenses with date, category, description and amount so the cloud financial ledger stays current.</p><div class="financial-actions-row"><button class="btn small-btn" type="button" onclick="openFinancialExpenseModal()">+ Add Expense</button></div></div></div>` : `<div class="financial-permission"><b>Accountant access:</b> You can review financial records and generate reports. Fee collection and expense entry are reserved for the Financial Secretary.</div>`}
+          <div class="section" style="margin-top:16px;padding:18px"><div class="section-head"><h3 style="margin-bottom:4px">Recent Fee Payments</h3><div class="muted">Live cloud records; no report file is stored.</div></div><div class="fee-table-wrap"><table class="fee-table"><thead><tr><th>Receipt</th><th>Student</th><th>Class</th><th>Date</th><th>Paid</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No payments for this month.</td></tr>'}</tbody></table></div></div>
+          <div class="form-actions"><button class="btn small-btn" type="button" onclick="printTeacherFinancialReport()">🖨 Print</button><button class="btn small-btn" type="button" onclick="downloadTeacherFinancialPDF()">⬇ Download PDF</button></div>`;
+      }catch(err){
+        console.error("Financial desk load failed:",err);
+        el.innerHTML=`<div class="notice error">Financial desk could not be loaded: ${escapeHtml(err.message||"Cloud data unavailable.")}<br><button class="btn small-btn" type="button" onclick="loadFinancialDesk()">Retry</button></div>`;
+      }
+    }
+
+    function closeFinancialModal(id){ const el=$(id); if(el){el.classList.remove('show');el.setAttribute('aria-hidden','true');} }
+    function openFinancialFeeModal(){
+      if(!isFinancialSecretary(teacherContext.teacher?.designation)){alert('Only the Financial Secretary can collect fees from this portal.');return;}
+      const sel=$("financialFeeStudent"); sel.innerHTML='<option value="">Select student…</option>'+financialAllStudents.filter(s=>String(s.status||'Active').toLowerCase()!=='inactive').map(s=>`<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)} — ${escapeHtml(s.class_name||'')} — ${money(s.monthly_fee)}</option>`).join('');
+      $("financialFeeMonth").value=currentMonth(); $("financialFeeDate").value=todayDate(); $("financialFeeExpected").value=''; $("financialFeeDiscount").value='0'; $("financialFeePaid").value=''; $("financialFeeBalance").value=''; $("financialFeeNotes").value=''; $("financialFeeModal").classList.add('show'); $("financialFeeModal").setAttribute('aria-hidden','false');
+    }
+    function updateFinancialFeeExpected(){
+      const st=financialAllStudents.find(x=>String(x.id)===$("financialFeeStudent").value); const expected=Number(st?.monthly_fee||0); $("financialFeeExpected").value=expected; updateFinancialFeeBalance();
+    }
+    function updateFinancialFeeBalance(){
+      const expected=Number($("financialFeeExpected")?.value||0), discount=Number($("financialFeeDiscount")?.value||0), paid=Number($("financialFeePaid")?.value||0); $("financialFeeBalance").value=Math.max(0,expected-discount-paid);
+    }
+    async function saveFinancialFee(){
+      if(!isFinancialSecretary(teacherContext.teacher?.designation)) throw new Error('Only the Financial Secretary can collect fees.');
+      const studentId=$("financialFeeStudent").value, month=$("financialFeeMonth").value, date=$("financialFeeDate").value, paid=Number($("financialFeePaid").value||0), discount=Number($("financialFeeDiscount").value||0), expected=Number($("financialFeeExpected").value||0);
+      if(!studentId||!month||!date) throw new Error('Please complete the student, month and payment date.');
+      if(paid<=0) throw new Error('Amount paid must be greater than zero.');
+      if(discount<0||paid<0) throw new Error('Amounts cannot be negative.');
+      const student=financialAllStudents.find(s=>String(s.id)===String(studentId)); if(!student) throw new Error('Student not found.');
+      const receipt='TPLS-FEE-'+date.replaceAll('-','')+'-'+String(Date.now()).slice(-7);
+      const row={receipt_number:receipt,student_id:studentId,fee_month:month+'-01',paid_amount:paid,discount,payment_date:date,notes:$("financialFeeNotes").value.trim()||null};
+      const {data,error}=await client.from('fee_payments').insert(row).select('id,receipt_number,student_id,fee_month,paid_amount,discount,payment_date,notes').single();
+      if(error) throw error;
+      financialAllFees.unshift(data); teacherFinancialSnapshot.fees.unshift({...data,_studentName:student.name,_studentClass:student.class_name});
+      closeFinancialModal('financialFeeModal'); await loadFinancialDesk(); await downloadFinancialReceiptPDF(data,student,expected);
+      alert('Fee payment saved successfully. Receipt '+receipt+' has been generated.');
+    }
+    async function downloadFinancialReceiptPDF(payment,student,expected){
+      const jsPDF=window.jspdf?.jsPDF; if(!jsPDF) throw new Error('PDF library did not load.');
+      const doc=new jsPDF('p','mm','a4'); const logo=await localImageData('school-logo.jpg'); if(logo){try{doc.addImage(logo,'JPEG',18,12,24,24);}catch(e){}}
+      doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text('THE PROGRESS OF LIFE SCHOOL',48,19);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('CHAK 8JB MEHBOOB TOWN, FAISALABAD',48,25);doc.text('PROGRESS FOR CHRISTIAN CHILDREN',48,30);doc.setDrawColor(37,99,235);doc.line(18,40,192,40);
+      doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text('FEE RECEIPT',18,52);doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text('Receipt No: '+payment.receipt_number,18,61);doc.text('Payment Date: '+payment.payment_date,130,61);doc.text('Student: '+String(student.name||''),18,72);doc.text('Student ID: '+String(student.student_code||''),18,79);doc.text('Class: '+String(student.class_name||''),18,86);doc.text('Fee Month: '+String(payment.fee_month||'').slice(0,7),130,79);doc.text('Monthly Fee: '+money(expected),130,86);doc.text('Discount: '+money(payment.discount),18,100);doc.text('Amount Paid: '+money(payment.paid_amount),18,109);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text('Balance: '+money(Math.max(0,Number(expected||0)-Number(payment.discount||0)-Number(payment.paid_amount||0))),130,109);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('Received by: '+String(teacherContext.teacher?.name||'Financial Secretary'),18,126);doc.text('Designation: '+String(teacherContext.teacher?.designation||'Financial Secretary'),18,133);doc.setDrawColor(190);doc.line(18,155,82,155);doc.line(128,155,192,155);doc.text('Parent / Guardian',18,161);doc.text('Authorized Signature',128,161);doc.setFontSize(8);doc.setTextColor(100);doc.text('Generated on demand from the school cloud record. No PDF file is stored in Supabase.',18,278);doc.save('TPLS_Fee_Receipt_'+payment.receipt_number+'.pdf');
+    }
+    async function localImageData(src){try{const r=await fetch(src,{cache:'no-store'});if(!r.ok)return null;const b=await r.blob();return await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=rej;f.readAsDataURL(b);});}catch(e){return null;}}
+    function openFinancialExpenseModal(){
+      if(!isFinancialSecretary(teacherContext.teacher?.designation)){alert('Only the Financial Secretary can add expenses from this portal.');return;}
+      $("financialExpenseDate").value=todayDate(); $("financialExpenseCategory").value=''; $("financialExpenseTitle").value=''; $("financialExpenseAmount").value=''; $("financialExpenseModal").classList.add('show'); $("financialExpenseModal").setAttribute('aria-hidden','false');
+    }
+    async function saveFinancialExpense(){
+      if(!isFinancialSecretary(teacherContext.teacher?.designation)) throw new Error('Only the Financial Secretary can add expenses.');
+      const date=$("financialExpenseDate").value, category=$("financialExpenseCategory").value, title=$("financialExpenseTitle").value.trim(), amount=Number($("financialExpenseAmount").value||0);
+      if(!date||!category||!title||amount<=0) throw new Error('Please complete the expense date, category, description and amount.');
+      const {data,error}=await client.from('expenses').insert({expense_date:date,title,category,amount}).select('id,expense_date,title,category,amount').single(); if(error) throw error;
+      financialAllExpenses.unshift(data); closeFinancialModal('financialExpenseModal'); await loadFinancialDesk(); alert('Expense saved successfully in the school cloud ledger.');
+    }
+    $("financialFeeDiscount")?.addEventListener('input',updateFinancialFeeBalance); $("financialFeePaid")?.addEventListener('input',updateFinancialFeeBalance);
+    $("financialFeeForm")?.addEventListener('submit',async e=>{e.preventDefault();const b=$("financialFeeSaveBtn");b.disabled=true;b.textContent='Saving…';try{await saveFinancialFee();}catch(err){console.error(err);alert(err.message||'Could not save fee payment.');}finally{b.disabled=false;b.textContent='Save Payment & Generate Receipt';}});
+    $("financialExpenseForm")?.addEventListener('submit',async e=>{e.preventDefault();const b=$("financialExpenseSaveBtn");b.disabled=true;b.textContent='Saving…';try{await saveFinancialExpense();}catch(err){console.error(err);alert(err.message||'Could not save expense.');}finally{b.disabled=false;b.textContent='Save Expense';}});
+
+function printTeacherFinancialReport(){
+      const w=window.open("","_blank"); if(!w) return;
+      const d=teacherContext.teacher||{};
+      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}.school-head{display:flex;align-items:center;gap:16px;border-bottom:2px solid #2563eb;padding-bottom:12px;margin-bottom:18px}.school-head img{width:72px;height:72px;object-fit:contain}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}
+.duty-guide{margin:0 0 20px;padding:22px;border-radius:24px;background:linear-gradient(135deg,#ffffff,#f5f3ff);border:1px solid #dbe4f2;box-shadow:0 16px 40px rgba(37,56,100,.08)}.duty-guide-head h3{margin:4px 0 5px;font-size:20px;color:#10213f}.duty-guide-head p{margin:0;color:#64748b;font-size:13px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.14em;color:#4f46e5}.duty-guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}.duty-guide-grid article{padding:15px;border-radius:16px;background:#fff;border:1px solid #e4eaf4;box-shadow:0 7px 18px rgba(15,23,42,.05);min-height:110px}.duty-guide-grid b{display:block;font-size:13px;color:#173b78;margin-bottom:7px}.duty-guide-grid span{display:block;font-size:11px;line-height:1.55;color:#64748b}@media(max-width:1000px){.duty-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.duty-guide-grid{grid-template-columns:1fr}}
+</style></head><body><div class="school-head"><img src="school-logo.jpg"><div><h1>The Progress of Life School</h1><div>CHAK 8JB MEHBOOB TOWN, FAISALABAD</div><div>PROGRESS FOR CHRISTIAN CHILDREN</div></div></div><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script></body></html>`);
+      w.document.close();
+    }
+
     async function loadTeacher(user){
       const email=(user.email||"").toLowerCase().trim();
-      const {data:teacher,error:tErr}=await client.from("teachers")
-        .select("id,teacher_code,name,gender,phone,email,qualification,joining_date,status,photo_path")
-        .ilike("email",email).maybeSingle();
+      // Use an array instead of maybeSingle(): an accidental duplicate teacher
+      // email must not prevent a legitimate teacher from signing in. Prefer an
+      // active profile, then the newest profile. The Admin portal can clean up
+      // duplicates later without making the login itself fail.
+      const {data:teacherRows,error:tErr}=await client.from("teachers")
+        .select("id,teacher_code,name,gender,phone,email,qualification,joining_date,status,designation,photo_path,created_at")
+        .ilike("email",email)
+        .order("created_at",{ascending:false})
+        .limit(20);
       if(tErr) throw tErr;
-      if(!teacher) throw new Error("Your login email is not linked to a teacher profile. Please ask the school administrator to add this email to your teacher profile.");
-      if(teacher.status && teacher.status !== "Active") throw new Error("This teacher account is currently inactive. Please contact the school administrator.");
+      const rows=teacherRows||[];
+      if(!rows.length) throw new Error("Your login email is not linked to a teacher profile. Please ask the school administrator to add this email to your teacher profile.");
+      const activeRows=rows.filter(r=>!r.status || String(r.status).toLowerCase()==="active");
+      const teacher=(activeRows[0]||rows[0]);
+      if(teacher.status && String(teacher.status).toLowerCase() !== "active") throw new Error("This teacher account is currently inactive. Please contact the school administrator.");
 
       const {data:assignments,error:aErr}=await client.from("teacher_assignments")
         .select("id,class_name,subject").eq("teacher_id",teacher.id).order("class_name").order("subject");
@@ -357,11 +566,45 @@
       students.forEach((s,i)=>s._photo=studentPhotos[i]);
 
       renderTeacher(teacher,assignments||[],students,teacherPhoto,feePayments);
+      await loadFinancialDesk();
     }
+
+    function renderCollectiveDuties(t,assignments,students){
+      const grid=$("collectiveDutiesGrid"),count=$("collectiveDutyCount");
+      if(!grid||!count)return;
+      const raw=String(t?.designation||"Teacher");
+      const roles=[...new Set(raw.split(/\s*\+\s*/).map(x=>x.trim()).filter(Boolean))];
+      const normalized=roles.map(r=>{
+        const k=r.toLowerCase();
+        if(k==='coordinator of higher section'||k==='high section coordinator')return 'High Section Coordinator';
+        if(k==='coordinator of lower section'||k==='low section coordinator')return 'Low Section Coordinator';
+        if(k==='administrator')return 'Admin';
+        return r;
+      });
+      normalized.splice(0,normalized.length,...[...new Set(normalized)]);
+      if(!normalized.some(r=>r.toLowerCase()==='teacher')) normalized.unshift('Teacher');
+      const classCount=new Set((assignments||[]).map(a=>a.class_name).filter(Boolean)).size;
+      const subjectCount=new Set((assignments||[]).map(a=>a.subject).filter(Boolean)).size;
+      const duties={
+        'Teacher':{icon:'📚',title:'Teacher',desc:`Teach assigned subjects/classes, prepare lesson plans, maintain attendance, assess students, enter results, monitor student progress, and submit requests and reports. You currently have ${classCount} class${classCount===1?'':'es'} and ${subjectCount} subject${subjectCount===1?'':'s'}.`,target:'content',label:'Open teaching overview'},
+        'Financial Secretary':{icon:'💼',title:'Financial Secretary',desc:'Record fee collections, maintain receipts, record expenses, monitor outstanding fees, prepare financial reports, maintain salary/payment records, and provide financial information to Admin.',target:'financialDeskSection',label:'Open financial desk'},
+        'Accountant':{icon:'💰',title:'Accountant',desc:'Maintain financial records, verify income and expenses, reconcile payments, prepare financial statements and reports, monitor balances, and support financial audits/checking.',target:'financialDeskSection',label:'Open financial desk'},
+        'High Section Coordinator':{icon:'🏫',title:'High Section Coordinator',desc:'Coordinate teachers and students in the high section, monitor lesson progress, coordinate schedules, follow up on attendance/results, support teachers, and report section issues to Admin.',target:'content',label:'Open teaching overview'},
+        'Low Section Coordinator':{icon:'🏫',title:'Low Section Coordinator',desc:'Coordinate teachers and students in the low section, monitor lesson progress, coordinate schedules, follow up on attendance/results, support teachers, and report section issues to Admin.',target:'content',label:'Open teaching overview'},
+        'Principal':{icon:'⭐',title:'Principal',desc:'Provide overall school leadership and supervision, oversee staff and academics, support student welfare, supervise administration and finances, review reports, approve requests, monitor school performance, and communicate with staff and parents.',target:'content',label:'Open school overview'},
+        'Admin':{icon:'⚙️',title:'Admin',desc:'Manage students, teachers, classes, fees, expenses, reports, requests, notifications, and overall school records.',target:'content',label:'Open school overview'},
+        'Super Admin':{icon:'👑',title:'Super Admin',desc:'Full access to school systems, users, settings, records, financial information, and administrative controls.',target:'content',label:'Open school overview'}
+      };
+      const fallback={icon:'✓',title:'Additional Responsibility',desc:'This responsibility is active alongside your teaching duties.',target:'content',label:'Open teaching overview'};
+      count.textContent=`${normalized.length} dut${normalized.length===1?'y':'ies'}`;
+      grid.innerHTML=normalized.map(role=>{const d=duties[role]||fallback;return `<article class="duty-card"><div class="duty-icon">${d.icon}</div><div class="duty-title">${escapeHtml(d.title)}</div><div class="duty-desc">${escapeHtml(d.desc)}</div><span class="duty-status">ACTIVE</span><div><a class="duty-action" onclick="scrollToDuty('${d.target}')">${escapeHtml(d.label)} →</a></div></article>`}).join('');
+    }
+    function scrollToDuty(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});}
 
     function renderTeacher(t,assignments,students,teacherPhoto,feePayments){
       currentTeacherId=t.id;
       teacherContext={teacher:t,assignments,students};
+      renderCollectiveDuties(t,assignments,students);
       $("loginPage").classList.add("hidden");
       $("dashboardPage").classList.remove("hidden");
       $("welcomeName").textContent=`Welcome, ${t.name}`;
@@ -375,7 +618,13 @@
       classNames.forEach(c=>groups[c]=[]);
       students.forEach(s=>{if(!groups[s.class_name])groups[s.class_name]=[];groups[s.class_name].push(s)});
 
+      const financialAccess=isFinancialRole(t.designation);
       let html=`
+        <div class="notice" style="margin-bottom:16px;background:linear-gradient(135deg,#eef6ff,#f5f0ff);border:1px solid #dbe7ff"><strong>${escapeHtml(t.designation||"Teaching Staff")}</strong> · Teaching access is always included. Your administrative designation does not remove your teaching classes, students, results, lesson plans, notifications or requests.</div>
+        ${financialAccess ? `<section class="section" id="financialDeskSection">
+          <div class="section-head"><h3>💼 Financial Desk</h3><div class="muted">Your financial responsibility is active in the same teacher login.</div></div>
+          <div id="financialDeskContent"><div class="loading">Loading financial information…</div></div>
+        </section>` : ""}
         <div class="grid">
           <div class="stat"><div class="muted">Assigned Classes</div><div class="num">${classNames.length}</div></div>
           <div class="stat"><div class="muted">Assigned Subjects</div><div class="num">${subjectNames.length}</div></div>
@@ -388,6 +637,7 @@
             <div class="details">
               <div class="detail"><small>Name</small><b>${escapeHtml(t.name)}</b></div>
               <div class="detail"><small>Teacher ID</small><b>${escapeHtml(t.teacher_code)}</b></div>
+              <div class="detail"><small>Designation</small><b>${escapeHtml(t.designation||"Teaching Staff")}</b></div>
               <div class="detail"><small>Gender</small><b>${escapeHtml(t.gender||"—")}</b></div>
               <div class="detail"><small>Phone</small><b>${escapeHtml(t.phone||"—")}</b></div>
               <div class="detail"><small>Email</small><b>${escapeHtml(t.email||"—")}</b></div>
@@ -479,7 +729,7 @@
         });
       }
       out += `</tbody></table></div>
-        <div class="notice">Fee information is view-only in the Teacher Portal. Payment collection, receipts, discounts and financial reports remain under Admin control.</div>`;
+        <div class="notice">Fee information is view-only for ordinary teachers. Financial Secretaries can collect fees from the Financial Desk; all saved payments are cloud records shared with Admin.</div>`;
       $("feeStatusContent").innerHTML=out;
     }
 
@@ -605,12 +855,46 @@
     }
     function initResultOnly(){fillSelect("resultClass",assignedClasses(),"Select class");refreshResultSubjects();fillSelect("resultStudent",[],"Select student")}
 
+    async function sendTeacherReset(){
+      const email=$("email").value.trim();
+      if(!email){showMessage("Enter your school email first, then click Forgot password.","error");$("email").focus();return;}
+      try{
+        const redirectTo=window.location.origin+window.location.pathname;
+        const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo});
+        if(error) throw error;
+        showMessage("Password reset link sent. Check your email and open the link on this portal.","success");
+      }catch(err){showMessage(err.message||"Could not send the password reset email.","error");}
+    }
+    async function completeTeacherReset(){
+      const pass=$("newPassword").value;
+      if(!pass || pass.length<6){showMessage("Password must be at least 6 characters.","error");return;}
+      const btn=$("resetPasswordBtn");btn.disabled=true;
+      try{
+        const {error}=await client.auth.updateUser({password:pass});
+        if(error) throw error;
+        $("recoveryCard").classList.add("hidden");
+        showMessage("Password updated successfully. You can now sign in with your new password.","success");
+        await client.auth.signOut();
+      }catch(err){showMessage(err.message||"Could not update your password.","error");}
+      finally{btn.disabled=false;}
+    }
+    client.auth.onAuthStateChange(async(event)=>{
+      if(event==="PASSWORD_RECOVERY") $("recoveryCard")?.classList.remove("hidden");
+    });
+    window.sendTeacherReset=sendTeacherReset;
+    window.completeTeacherReset=completeTeacherReset;
+
     $("loginForm").addEventListener("submit", async (e)=>{
       e.preventDefault(); setLoginBusy(true); showMessage("Checking your teacher account…");
       const email=$("email").value.trim(), password=$("password").value;
       const {data,error}=await client.auth.signInWithPassword({email,password});
       if(error){showMessage(error.message,"error");setLoginBusy(false);return;}
-      try{await loadTeacher(data.user);}catch(err){await client.auth.signOut();showMessage(err.message||"Your teacher profile could not be loaded.","error");setLoginBusy(false);}
+      try{await loadTeacher(data.user);}catch(err){
+        console.error("TPLS Teacher Portal cloud load failed:",err);
+        const msg=err.message||"Your teacher profile could not be loaded.";
+        showMessage(msg,"error");
+        setLoginBusy(false);
+      }
     });
 
 
