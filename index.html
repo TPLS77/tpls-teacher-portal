@@ -108,21 +108,27 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 .collective-panel{margin-top:22px;padding:24px;border-radius:26px;background:linear-gradient(135deg,#0b2f67 0%,#1d4ed8 48%,#6d28d9 100%);color:#fff;box-shadow:0 22px 55px rgba(37,67,150,.20);position:relative;overflow:hidden}
 .collective-panel:after{content:"";position:absolute;width:320px;height:320px;border:55px solid rgba(255,255,255,.08);border-radius:50%;right:-150px;top:-190px}.collective-head{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.collective-head h3{color:#fff;margin:0 0 5px}.collective-head .muted{color:#dbeafe}.duty-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:18px}.duty-card{border:1px solid rgba(255,255,255,.18);border-radius:17px;padding:16px;background:rgba(255,255,255,.10);backdrop-filter:blur(8px);transition:.2s}.duty-card:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}.duty-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.16);font-size:19px;margin-bottom:10px}.duty-title{font-weight:800;font-size:14px}.duty-desc{font-size:11px;line-height:1.55;color:#e6efff;margin-top:5px;min-height:34px}.duty-status{display:inline-flex;margin-top:10px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.14);font-size:10px;font-weight:800}.duty-action{display:inline-block;margin-top:10px;color:#fff;text-decoration:none;font-size:11px;font-weight:800;cursor:pointer}.collective-empty{position:relative;z-index:1;color:#e6efff;padding:12px 0}
 @media(max-width:850px){.duty-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.duty-grid{grid-template-columns:1fr}.collective-panel{padding:19px}.welcome{padding:22px}}
-
-    .financial-action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}.financial-action{border:1px solid #dbe5f1;border-radius:18px;padding:18px;background:linear-gradient(135deg,#ffffff,#f4f7ff);box-shadow:0 10px 28px rgba(20,33,61,.08)}.financial-action h4{margin:0 0 6px;color:#102f62}.financial-action p{margin:0 0 12px;color:#64748b;font-size:12px;line-height:1.5}.financial-actions-row{display:flex;gap:9px;flex-wrap:wrap}.financial-modal{position:fixed;inset:0;background:rgba(8,30,66,.48);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}.financial-modal.show{display:flex}.financial-modal-card{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 90px rgba(5,20,50,.28);padding:24px}.financial-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.financial-modal-head h3{margin:0;color:#10213f}.financial-close{border:0;background:#eef3fb;border-radius:12px;width:38px;height:38px;cursor:pointer;font-size:20px}.financial-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.financial-form-grid .full{grid-column:1/-1}.financial-field label{display:block;font-size:12px;font-weight:800;color:#344054;margin-bottom:6px}.financial-field input,.financial-field select,.financial-field textarea{width:100%;padding:11px 12px;border:1px solid #d8e2ef;border-radius:12px;outline:none;background:#fff}.financial-field input:focus,.financial-field select:focus,.financial-field textarea:focus{border-color:#4f7eea;box-shadow:0 0 0 3px rgba(79,126,234,.12)}.financial-summary-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.financial-summary-strip .mini{padding:12px;border-radius:14px;background:#f6f8fc;border:1px solid #e5ebf3}.financial-summary-strip .mini small{display:block;color:#64748b;font-size:10px;font-weight:800}.financial-summary-strip .mini b{display:block;margin-top:4px;color:#10213f}.financial-helper{font-size:11px;color:#667085;margin-top:5px}.financial-permission{padding:11px 13px;border-radius:13px;background:linear-gradient(135deg,#eef7ff,#f5f0ff);border:1px solid #d9e5fa;color:#344054;font-size:12px;margin-top:12px}
-    @media(max-width:700px){.financial-action-grid,.financial-form-grid,.financial-summary-strip{grid-template-columns:1fr}.financial-form-grid .full{grid-column:auto}}
-  </style>
-<style>
-/* TPLS PREMIUM FILTER + DUTY DESIGN */
-.toolbar{background:linear-gradient(135deg,rgba(248,251,255,.96),rgba(244,240,255,.96));border:1px solid #e2e8f5;border-radius:16px;padding:10px;box-shadow:0 8px 24px rgba(30,41,59,.05)}
-.toolbar input,.toolbar select{border:1px solid #d8e2f0!important;border-radius:12px!important;background:#fff!important;box-shadow:0 3px 10px rgba(15,23,42,.04)}
-.filter-btn{border-radius:11px!important;font-weight:800!important}
-.duty-card{background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.07))!important;box-shadow:0 12px 28px rgba(2,20,55,.15);border-color:rgba(255,255,255,.25)!important}
-.duty-card .duty-icon{background:linear-gradient(135deg,rgba(255,255,255,.25),rgba(255,255,255,.08))!important}
-
-
 </style>
-</head>
+
+<style id="tpls-pdf-tools-style">
+.tpls-pdf-btn{border:1px solid #d8e2f0!important;background:#fff!important;color:#164b8a!important;border-radius:10px!important;padding:8px 12px!important;font-weight:800!important;cursor:pointer!important;box-shadow:0 3px 10px rgba(15,23,42,.06)!important}
+.tpls-pdf-btn:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(15,23,42,.10)!important}
+.tpls-pdf-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tpls-pdf-hide{display:none!important}
+.tpls-pdf-sheet{font-family:Arial,Helvetica,sans-serif;background:#fff;color:#172033;padding:24px;width:760px;box-sizing:border-box}
+.tpls-pdf-head{display:flex;align-items:center;gap:18px;border-bottom:2px solid #164b8a;padding-bottom:14px;margin-bottom:18px}
+.tpls-pdf-head img{width:76px;height:76px;object-fit:contain}
+.tpls-pdf-school{font-size:20px;font-weight:800;color:#123d73;margin:0}
+.tpls-pdf-sub{font-size:11px;color:#52627a;margin-top:4px}
+.tpls-pdf-title{font-size:18px;font-weight:800;margin:8px 0 14px;color:#162d50}
+.tpls-pdf-meta{font-size:10px;color:#667085;margin-bottom:12px}
+.tpls-pdf-sheet table{width:100%!important;border-collapse:collapse!important;font-size:10px!important}
+.tpls-pdf-sheet th{background:#edf4ff!important;color:#123d73!important;font-weight:800!important}
+.tpls-pdf-sheet th,.tpls-pdf-sheet td{border:1px solid #d7e0eb!important;padding:7px!important;vertical-align:top!important}
+.tpls-pdf-sheet input,.tpls-pdf-sheet select,.tpls-pdf-sheet textarea{border:1px solid #cbd5e1!important;background:#fff!important;padding:7px!important;box-sizing:border-box!important}
+.tpls-pdf-foot{margin-top:18px;padding-top:10px;border-top:1px solid #d7e0eb;font-size:9px;color:#667085}
+</style>
+<style id="tpls-template-pdf-css">.pdf-template-extra{margin-top:12px}.pdf-box{border:1px solid #c7d3e1;border-radius:4px;margin:8px 0;min-height:44px}.pdf-label{background:#eef4fb;color:#163f73;font-weight:700;font-size:10px;padding:5px 7px;border-bottom:1px solid #c7d3e1}.pdf-value{padding:8px;font-size:10px;min-height:24px;white-space:pre-wrap}.pdf-line{display:flex;gap:8px;align-items:flex-end;font-size:10px;font-weight:700;margin:12px 0}.pdf-line .line{border-bottom:1px solid #7a8798;flex:1;height:14px}.pdf-signrow{display:grid;grid-template-columns:1fr 1fr;gap:18px}.pdf-checks{border:1px solid #d4deea;padding:8px;margin:8px 0;font-size:10px}.pdf-note{border:1px solid #d4deea;padding:10px;margin:8px 0;font-size:10px;line-height:1.5;background:#fafcff}</style></head>
 <body>
   <div id="loginPage" class="page">
     <section class="hero">
@@ -183,7 +189,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         <div><h2 id="welcomeName">Welcome</h2><div class="muted">Here is your teaching and collective-duty overview.</div></div>
       </div>
 
-      <section id="dutyGuide" class="duty-guide"><div class="duty-guide-head"><div><span class="eyebrow">RESPONSIBILITIES</span><h3>What Your Designation Means</h3><p>Your teaching access remains active. Additional responsibilities are shown below with their official duties.</p></div></div><div class="duty-guide-grid"><article><b>📚 Teacher</b><span>Teaching, lesson plans, attendance, assessment, results, student progress and reports.</span></article><article><b>💼 Financial Secretary</b><span>Fees, receipts, expenses, outstanding balances, salary/payment records and financial reports.</span></article><article><b>💰 Accountant</b><span>Financial records, verification, reconciliation, statements, balances and audit support.</span></article><article><b>🏫 High Section Coordinator</b><span>High-section teachers/students, lesson progress, schedules, attendance/results and section reporting.</span></article><article><b>🏫 Low Section Coordinator</b><span>Low-section teachers/students, lesson progress, schedules, attendance/results and section reporting.</span></article><article><b>⭐ Principal</b><span>School leadership, staff and academic oversight, welfare, administration, finances, reports, approvals and communication.</span></article><article><b>⚙️ Admin</b><span>Students, teachers, classes, fees, expenses, reports, requests, notifications and school records.</span></article><article><b>👑 Super Admin</b><span>Full system, users, settings, records, financial and administrative control.</span></article></div></section>
       <section id="collectiveDutiesSection" class="collective-panel">
         <div class="collective-head"><div><h3>◈ Collective Duties Dashboard</h3><div class="muted">All responsibilities assigned to you are shown together. Teaching remains your core staff access.</div></div><div id="collectiveDutyCount" class="duty-status">0 duties</div></div>
         <div id="collectiveDutiesGrid" class="duty-grid"><div class="collective-empty">Loading your responsibilities…</div></div>
@@ -334,15 +339,24 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     </main>
   </div>
 
-
-  <div id="financialFeeModal" class="financial-modal" aria-hidden="true"><div class="financial-modal-card"><div class="financial-modal-head"><div><h3>💳 Collect Student Fee</h3><div class="muted">Record the payment directly in the school cloud database.</div></div><button class="financial-close" type="button" onclick="closeFinancialModal('financialFeeModal')">×</button></div><form id="financialFeeForm"><div class="financial-form-grid"><div class="financial-field full"><label for="financialFeeStudent">Student *</label><select id="financialFeeStudent" required onchange="updateFinancialFeeExpected()"><option value="">Select student…</option></select></div><div class="financial-field"><label for="financialFeeMonth">Fee Month *</label><input id="financialFeeMonth" type="month" required></div><div class="financial-field"><label for="financialFeeDate">Payment Date *</label><input id="financialFeeDate" type="date" required></div><div class="financial-field"><label for="financialFeeExpected">Monthly Fee</label><input id="financialFeeExpected" type="number" readonly></div><div class="financial-field"><label for="financialFeeDiscount">Discount</label><input id="financialFeeDiscount" type="number" min="0" step="0.01" value="0"></div><div class="financial-field"><label for="financialFeePaid">Amount Paid *</label><input id="financialFeePaid" type="number" min="0" step="0.01" required></div><div class="financial-field"><label for="financialFeeBalance">Balance After Payment</label><input id="financialFeeBalance" type="number" readonly></div><div class="financial-field full"><label for="financialFeeNotes">Notes</label><textarea id="financialFeeNotes" rows="3" placeholder="Optional note"></textarea></div></div><div class="financial-helper">A unique receipt number is generated automatically. The receipt is stored as a payment record in Supabase and the PDF is generated only when needed.</div><div class="form-actions" style="margin-top:18px"><button class="btn" type="submit" id="financialFeeSaveBtn">Save Payment & Generate Receipt</button><button class="logout" type="button" onclick="closeFinancialModal('financialFeeModal')">Cancel</button></div></form></div></div>
-  <div id="financialExpenseModal" class="financial-modal" aria-hidden="true"><div class="financial-modal-card"><div class="financial-modal-head"><div><h3>💰 Add School Expense</h3><div class="muted">Record a legitimate school expense in the cloud financial ledger.</div></div><button class="financial-close" type="button" onclick="closeFinancialModal('financialExpenseModal')">×</button></div><form id="financialExpenseForm"><div class="financial-form-grid"><div class="financial-field"><label for="financialExpenseDate">Expense Date *</label><input id="financialExpenseDate" type="date" required></div><div class="financial-field"><label for="financialExpenseCategory">Category *</label><select id="financialExpenseCategory" required><option value="">Select category…</option><option>Utilities</option><option>Salaries</option><option>Supplies</option><option>Transport</option><option>Maintenance</option><option>Rent</option><option>Teaching Materials</option><option>Events</option><option>Other</option></select></div><div class="financial-field full"><label for="financialExpenseTitle">Description *</label><input id="financialExpenseTitle" required placeholder="e.g. Classroom supplies"></div><div class="financial-field"><label for="financialExpenseAmount">Amount (PKR) *</label><input id="financialExpenseAmount" type="number" min="0.01" step="0.01" required></div></div><div class="financial-helper">Expense records are saved in Supabase so the Admin and authorized financial staff see the same ledger.</div><div class="form-actions" style="margin-top:18px"><button class="btn" type="submit" id="financialExpenseSaveBtn">Save Expense</button><button class="logout" type="button" onclick="closeFinancialModal('financialExpenseModal')">Cancel</button></div></form></div></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script>
-    const cfg = window.TPLS_CONFIG;
-    const client = window.supabase.createClient(cfg.supabaseUrl, cfg.supabasePublishableKey);
+    const cfg = window.TPLS_CONFIG || {
+      supabaseUrl: "https://znjtsykmpuhprikbscut.supabase.co",
+      supabasePublishableKey: "sb_publishable_H0crIBF0FeRnPiZQa6i43A_KrZEyxbZ"
+    };
+    let client;
+    try {
+      if(!window.supabase) throw new Error("Supabase library did not load. Check your internet connection.");
+      client = window.supabase.createClient(cfg.supabaseUrl, cfg.supabasePublishableKey);
+    } catch(initErr) {
+      console.error("TPLS Teacher Portal initialization failed:", initErr);
+      document.addEventListener("DOMContentLoaded",()=>{
+        const msg=document.getElementById("loginMessage");
+        if(msg){msg.textContent=initErr.message||"Teacher Portal could not start.";msg.className="notice error";}
+      });
+    }
     const $ = (id) => document.getElementById(id);
 
     function escapeHtml(value){
@@ -369,13 +383,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
     }
 
-    function money(value){ return "PKR " + Number(value||0).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:2}); }
-    function todayDate(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
-    function isFinancialSecretary(designation){ return /financial secretary/i.test(String(designation||"")); }
-    let financialAllFees=[];
-    let financialAllExpenses=[];
-    let financialAllStudents=[];
-
     function feeStatus(expected, paid, discount){
       const due=Math.max(0, Number(expected||0)-Number(paid||0)-Number(discount||0));
       if(Number(expected||0)>0 && due<=0) return {label:"Paid", cls:"fee-paid", due:0};
@@ -387,135 +394,48 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const d=String(designation||"").toLowerCase();
       return /financial secretary|accountant/.test(d);
     }
-    let teacherFinancialSnapshot={month:'',fees:[],expenses:[],students:[]};
-async function downloadTeacherFinancialPDF(){
-  try{
-    const jsPDF=window.jspdf?.jsPDF;if(!jsPDF)throw new Error('PDF library did not load.');
-    const logo=await signedPhoto("teacher-photos",teacherContext.teacher?.photo_path).catch(()=>null);
-    const doc=new jsPDF('l','mm','a4');
-    const pageW=doc.internal.pageSize.getWidth(), pageH=doc.internal.pageSize.getHeight();
-    const margin=12;
-    const schoolLogo=await (async()=>{try{const r=await fetch('school-logo.jpg',{cache:'no-store'});if(!r.ok)return null;const b=await r.blob();return await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=rej;f.readAsDataURL(b);});}catch(e){return null;}})();
-    if(schoolLogo){try{doc.addImage(schoolLogo,'JPEG',margin,10,22,22);}catch(e){}}
-    const d=teacherContext.teacher||{}, sm=teacherFinancialSnapshot.month||currentMonth();
-    doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text('THE PROGRESS OF LIFE SCHOOL',42,17);
-    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text('CHAK 8JB MEHBOOB TOWN, FAISALABAD',42,23);doc.text('PROGRESS FOR CHRISTIAN CHILDREN',42,28);
-    doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text('FINANCIAL REPORT',margin,42);
-    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text('Month: '+sm+' • Staff: '+String(d.name||'')+' • '+String(d.designation||'Teacher'),margin,48);
-    const collected=teacherFinancialSnapshot.fees.reduce((a,f)=>a+Number(f.paid_amount||0),0);
-    const discounts=teacherFinancialSnapshot.fees.reduce((a,f)=>a+Number(f.discount||0),0);
-    const exp=teacherFinancialSnapshot.expenses.reduce((a,e)=>a+Number(e.amount||0),0);
-    doc.setFont('helvetica','bold');doc.setFontSize(9);doc.text('Fees Collected: '+money(collected),margin,58);doc.text('Discounts: '+money(discounts),85,58);doc.text('Expenses: '+money(exp),150,58);doc.text('Net: '+money(collected-exp),margin,65);
-    let y=74;const cols=[['Receipt',32],['Student',65],['Class',38],['Date',35],['Paid',30]];const total=cols.reduce((a,c)=>a+c[1],0),scale=(pageW-24)/total,ws=cols.map(c=>c[1]*scale);
-    const draw=(vals,head)=>{
-      const lines=vals.map((v,i)=>doc.splitTextToSize(String(v??'—'),ws[i]-4)),rh=Math.max(7,...lines.map(x=>x.length*3.5+3));
-      if(y+rh>pageH-14){doc.addPage();y=18;}
-      let x=margin;doc.setFillColor(head?235:255,head?241:255,head?249:255);doc.rect(x,y,pageW-24,rh,head?'F':'S');
-      vals.forEach((v,i)=>{if(i)doc.line(x,y,x,y+rh);doc.setFont('helvetica',head?'bold':'normal');doc.setFontSize(head?7.5:7);doc.text(lines[i],x+2,y+3,{baseline:'top'});x+=ws[i];});
-      doc.line(margin,y+rh,pageW-margin,y+rh);y+=rh;
-    };
-    doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('Fee Payments',margin,y-3);draw(cols.map(c=>c[0]),true);
-    teacherFinancialSnapshot.fees.forEach(f=>draw([f.receipt_number||'—',f._studentName||'—',f._studentClass||'—',f.payment_date||'—',money(f.paid_amount)],false));
-    y+=8;doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('Expenses',margin,y);y+=4;
-    const ec=[['Date',42],['Description',125],['Amount',33]], ew=ec.map(c=>c[1]*((pageW-24)/ec.reduce((a,c)=>a+c[1],0)));
-    const drawE=(vals,head)=>{const lines=vals.map((v,i)=>doc.splitTextToSize(String(v??'—'),ew[i]-4)),rh=Math.max(7,...lines.map(x=>x.length*3.5+3));if(y+rh>pageH-14){doc.addPage();y=18;}let x=margin;doc.setFillColor(head?235:255,head?241:255,head?249:255);doc.rect(x,y,pageW-24,rh,head?'F':'S');vals.forEach((v,i)=>{if(i)doc.line(x,y,x,y+rh);doc.setFont('helvetica',head?'bold':'normal');doc.setFontSize(head?7.5:7);doc.text(lines[i],x+2,y+3,{baseline:'top'});x+=ew[i];});doc.line(margin,y+rh,pageW-margin,y+rh);y+=rh;};
-    drawE(ec.map(c=>c[0]),true);teacherFinancialSnapshot.expenses.forEach(e=>drawE([e.expense_date||'—',e.title||e.category||'Expense',money(e.amount)],false));
-    doc.save('TPLS_Teacher_Financial_Report_'+sm+'.pdf');
-  }catch(err){console.error(err);alert('Could not generate Financial PDF: '+(err.message||'PDF error'));}
-}
-
-async function loadFinancialDesk(){
+    async function loadFinancialDesk(){
       const el=$("financialDeskContent");
-      const designation=teacherContext.teacher?.designation||"";
-      if(!el || !isFinancialRole(designation)) return;
+      if(!el || !isFinancialRole(teacherContext.teacher?.designation)) return;
       try{
         const [{data:students,error:se},{data:fees,error:fe},{data:expenses,error:ee}]=await Promise.all([
           client.from("students").select("id,student_code,name,class_name,monthly_fee,status").order("class_name").order("name"),
-          client.from("fee_payments").select("id,student_id,fee_month,paid_amount,discount,payment_date,receipt_number,notes").order("payment_date",{ascending:false}).limit(2000),
-          client.from("expenses").select("id,expense_date,title,category,amount").order("expense_date",{ascending:false}).limit(2000)
+          client.from("fee_payments").select("student_id,fee_month,paid_amount,discount,payment_date,receipt_number").order("payment_date",{ascending:false}).limit(500),
+          client.from("expenses").select("expense_date,title,category,amount").order("expense_date",{ascending:false}).limit(500)
         ]);
         if(se) throw se; if(fe) throw fe; if(ee) throw ee;
-        financialAllStudents=students||[]; financialAllFees=fees||[]; financialAllExpenses=expenses||[];
         const sm=currentMonth();
-        const monthFees=financialAllFees.filter(f=>String(f.fee_month||"").slice(0,7)===sm);
-        const monthExpenses=financialAllExpenses.filter(e=>String(e.expense_date||"").slice(0,7)===sm);
+        const monthFees=(fees||[]).filter(f=>String(f.fee_month||"").slice(0,7)===sm);
+        const monthExpenses=(expenses||[]).filter(e=>String(e.expense_date||"").slice(0,7)===sm);
         const collected=monthFees.reduce((a,f)=>a+Number(f.paid_amount||0),0);
         const discounts=monthFees.reduce((a,f)=>a+Number(f.discount||0),0);
         const expenseTotal=monthExpenses.reduce((a,e)=>a+Number(e.amount||0),0);
-        const map={};financialAllStudents.forEach(st=>map[st.id]=st);
-        teacherFinancialSnapshot={month:sm,fees:monthFees.map(f=>({...f,_studentName:(map[f.student_id]||{}).name||'—',_studentClass:(map[f.student_id]||{}).class_name||'—'})),expenses:monthExpenses,students:financialAllStudents};
-        const rows=monthFees.slice(0,15).map(f=>{const st=map[f.student_id]||{};return `<tr><td>${escapeHtml(f.receipt_number||"—")}</td><td>${escapeHtml(st.name||"—")}</td><td>${escapeHtml(st.class_name||"—")}</td><td>${escapeHtml(f.payment_date||"—")}</td><td><b>${money(f.paid_amount)}</b></td></tr>`;}).join("");
-        const canOperate=isFinancialSecretary(designation);
+        const map={};(students||[]).forEach(st=>map[st.id]=st);
+        const rows=monthFees.slice(0,12).map(f=>{
+          const st=map[f.student_id]||{};
+          return `<tr><td>${escapeHtml(f.receipt_number||"—")}</td><td>${escapeHtml(st.name||"—")}</td><td>${escapeHtml(st.class_name||"—")}</td><td>${escapeHtml(f.payment_date||"—")}</td><td><b>${money(f.paid_amount)}</b></td></tr>`;
+        }).join("");
         el.innerHTML=`
           <div class="financial-grid">
             <div class="financial-card"><div class="label">Fees Collected — ${escapeHtml(sm)}</div><div class="value">${money(collected)}</div></div>
             <div class="financial-card"><div class="label">Discounts</div><div class="value">${money(discounts)}</div></div>
             <div class="financial-card"><div class="label">Expenses — ${escapeHtml(sm)}</div><div class="value">${money(expenseTotal)}</div></div>
           </div>
-          ${canOperate ? `<div class="financial-action-grid"><div class="financial-action"><h4>💳 Fee Collection</h4><p>Collect fees from any active student, record discounts and generate the official receipt immediately.</p><div class="financial-actions-row"><button class="btn small-btn" type="button" onclick="openFinancialFeeModal()">+ Collect Fee</button></div></div><div class="financial-action"><h4>💰 Expense Entry</h4><p>Record school expenses with date, category, description and amount so the cloud financial ledger stays current.</p><div class="financial-actions-row"><button class="btn small-btn" type="button" onclick="openFinancialExpenseModal()">+ Add Expense</button></div></div></div>` : `<div class="financial-permission"><b>Accountant access:</b> You can review financial records and generate reports. Fee collection and expense entry are reserved for the Financial Secretary.</div>`}
-          <div class="section" style="margin-top:16px;padding:18px"><div class="section-head"><h3 style="margin-bottom:4px">Recent Fee Payments</h3><div class="muted">Live cloud records; no report file is stored.</div></div><div class="fee-table-wrap"><table class="fee-table"><thead><tr><th>Receipt</th><th>Student</th><th>Class</th><th>Date</th><th>Paid</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No payments for this month.</td></tr>'}</tbody></table></div></div>
-          <div class="form-actions"><button class="btn small-btn" type="button" onclick="printTeacherFinancialReport()">🖨 Print</button><button class="btn small-btn" type="button" onclick="downloadTeacherFinancialPDF()">⬇ Download PDF</button></div>`;
+          <div class="section" style="margin-top:16px;padding:18px">
+            <div class="section-head"><h3 style="margin-bottom:4px">Recent Fee Payments</h3><div class="muted">Live cloud records; no report file is stored.</div></div>
+            <div class="fee-table-wrap"><table class="fee-table"><thead><tr><th>Receipt</th><th>Student</th><th>Class</th><th>Date</th><th>Paid</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No payments for this month.</td></tr>'}</tbody></table></div>
+          </div>
+          <div class="financial-note">Financial Secretary and Accountant access is additive: you remain full teaching staff while this financial desk is available in the same login. Reports and print views are generated on demand in the browser and are not uploaded as files to Supabase.</div>
+          <div class="form-actions"><button class="btn small-btn" type="button" onclick="printTeacherFinancialReport()">🖨 Print Financial Summary</button></div>`;
       }catch(err){
         console.error("Financial desk load failed:",err);
         el.innerHTML=`<div class="notice error">Financial desk could not be loaded: ${escapeHtml(err.message||"Cloud data unavailable.")}<br><button class="btn small-btn" type="button" onclick="loadFinancialDesk()">Retry</button></div>`;
       }
     }
-
-    function closeFinancialModal(id){ const el=$(id); if(el){el.classList.remove('show');el.setAttribute('aria-hidden','true');} }
-    function openFinancialFeeModal(){
-      if(!isFinancialSecretary(teacherContext.teacher?.designation)){alert('Only the Financial Secretary can collect fees from this portal.');return;}
-      const sel=$("financialFeeStudent"); sel.innerHTML='<option value="">Select student…</option>'+financialAllStudents.filter(s=>String(s.status||'Active').toLowerCase()!=='inactive').map(s=>`<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)} — ${escapeHtml(s.class_name||'')} — ${money(s.monthly_fee)}</option>`).join('');
-      $("financialFeeMonth").value=currentMonth(); $("financialFeeDate").value=todayDate(); $("financialFeeExpected").value=''; $("financialFeeDiscount").value='0'; $("financialFeePaid").value=''; $("financialFeeBalance").value=''; $("financialFeeNotes").value=''; $("financialFeeModal").classList.add('show'); $("financialFeeModal").setAttribute('aria-hidden','false');
-    }
-    function updateFinancialFeeExpected(){
-      const st=financialAllStudents.find(x=>String(x.id)===$("financialFeeStudent").value); const expected=Number(st?.monthly_fee||0); $("financialFeeExpected").value=expected; updateFinancialFeeBalance();
-    }
-    function updateFinancialFeeBalance(){
-      const expected=Number($("financialFeeExpected")?.value||0), discount=Number($("financialFeeDiscount")?.value||0), paid=Number($("financialFeePaid")?.value||0); $("financialFeeBalance").value=Math.max(0,expected-discount-paid);
-    }
-    async function saveFinancialFee(){
-      if(!isFinancialSecretary(teacherContext.teacher?.designation)) throw new Error('Only the Financial Secretary can collect fees.');
-      const studentId=$("financialFeeStudent").value, month=$("financialFeeMonth").value, date=$("financialFeeDate").value, paid=Number($("financialFeePaid").value||0), discount=Number($("financialFeeDiscount").value||0), expected=Number($("financialFeeExpected").value||0);
-      if(!studentId||!month||!date) throw new Error('Please complete the student, month and payment date.');
-      if(paid<=0) throw new Error('Amount paid must be greater than zero.');
-      if(discount<0||paid<0) throw new Error('Amounts cannot be negative.');
-      const student=financialAllStudents.find(s=>String(s.id)===String(studentId)); if(!student) throw new Error('Student not found.');
-      const receipt='TPLS-FEE-'+date.replaceAll('-','')+'-'+String(Date.now()).slice(-7);
-      const row={receipt_number:receipt,student_id:studentId,fee_month:month+'-01',paid_amount:paid,discount,payment_date:date,notes:$("financialFeeNotes").value.trim()||null};
-      const {data,error}=await client.from('fee_payments').insert(row).select('id,receipt_number,student_id,fee_month,paid_amount,discount,payment_date,notes').single();
-      if(error) throw error;
-      financialAllFees.unshift(data); teacherFinancialSnapshot.fees.unshift({...data,_studentName:student.name,_studentClass:student.class_name});
-      closeFinancialModal('financialFeeModal'); await loadFinancialDesk(); await downloadFinancialReceiptPDF(data,student,expected);
-      alert('Fee payment saved successfully. Receipt '+receipt+' has been generated.');
-    }
-    async function downloadFinancialReceiptPDF(payment,student,expected){
-      const jsPDF=window.jspdf?.jsPDF; if(!jsPDF) throw new Error('PDF library did not load.');
-      const doc=new jsPDF('p','mm','a4'); const logo=await localImageData('school-logo.jpg'); if(logo){try{doc.addImage(logo,'JPEG',18,12,24,24);}catch(e){}}
-      doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text('THE PROGRESS OF LIFE SCHOOL',48,19);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('CHAK 8JB MEHBOOB TOWN, FAISALABAD',48,25);doc.text('PROGRESS FOR CHRISTIAN CHILDREN',48,30);doc.setDrawColor(37,99,235);doc.line(18,40,192,40);
-      doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text('FEE RECEIPT',18,52);doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text('Receipt No: '+payment.receipt_number,18,61);doc.text('Payment Date: '+payment.payment_date,130,61);doc.text('Student: '+String(student.name||''),18,72);doc.text('Student ID: '+String(student.student_code||''),18,79);doc.text('Class: '+String(student.class_name||''),18,86);doc.text('Fee Month: '+String(payment.fee_month||'').slice(0,7),130,79);doc.text('Monthly Fee: '+money(expected),130,86);doc.text('Discount: '+money(payment.discount),18,100);doc.text('Amount Paid: '+money(payment.paid_amount),18,109);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text('Balance: '+money(Math.max(0,Number(expected||0)-Number(payment.discount||0)-Number(payment.paid_amount||0))),130,109);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('Received by: '+String(teacherContext.teacher?.name||'Financial Secretary'),18,126);doc.text('Designation: '+String(teacherContext.teacher?.designation||'Financial Secretary'),18,133);doc.setDrawColor(190);doc.line(18,155,82,155);doc.line(128,155,192,155);doc.text('Parent / Guardian',18,161);doc.text('Authorized Signature',128,161);doc.setFontSize(8);doc.setTextColor(100);doc.text('Generated on demand from the school cloud record. No PDF file is stored in Supabase.',18,278);doc.save('TPLS_Fee_Receipt_'+payment.receipt_number+'.pdf');
-    }
-    async function localImageData(src){try{const r=await fetch(src,{cache:'no-store'});if(!r.ok)return null;const b=await r.blob();return await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=rej;f.readAsDataURL(b);});}catch(e){return null;}}
-    function openFinancialExpenseModal(){
-      if(!isFinancialSecretary(teacherContext.teacher?.designation)){alert('Only the Financial Secretary can add expenses from this portal.');return;}
-      $("financialExpenseDate").value=todayDate(); $("financialExpenseCategory").value=''; $("financialExpenseTitle").value=''; $("financialExpenseAmount").value=''; $("financialExpenseModal").classList.add('show'); $("financialExpenseModal").setAttribute('aria-hidden','false');
-    }
-    async function saveFinancialExpense(){
-      if(!isFinancialSecretary(teacherContext.teacher?.designation)) throw new Error('Only the Financial Secretary can add expenses.');
-      const date=$("financialExpenseDate").value, category=$("financialExpenseCategory").value, title=$("financialExpenseTitle").value.trim(), amount=Number($("financialExpenseAmount").value||0);
-      if(!date||!category||!title||amount<=0) throw new Error('Please complete the expense date, category, description and amount.');
-      const {data,error}=await client.from('expenses').insert({expense_date:date,title,category,amount}).select('id,expense_date,title,category,amount').single(); if(error) throw error;
-      financialAllExpenses.unshift(data); closeFinancialModal('financialExpenseModal'); await loadFinancialDesk(); alert('Expense saved successfully in the school cloud ledger.');
-    }
-    $("financialFeeDiscount")?.addEventListener('input',updateFinancialFeeBalance); $("financialFeePaid")?.addEventListener('input',updateFinancialFeeBalance);
-    $("financialFeeForm")?.addEventListener('submit',async e=>{e.preventDefault();const b=$("financialFeeSaveBtn");b.disabled=true;b.textContent='Saving…';try{await saveFinancialFee();}catch(err){console.error(err);alert(err.message||'Could not save fee payment.');}finally{b.disabled=false;b.textContent='Save Payment & Generate Receipt';}});
-    $("financialExpenseForm")?.addEventListener('submit',async e=>{e.preventDefault();const b=$("financialExpenseSaveBtn");b.disabled=true;b.textContent='Saving…';try{await saveFinancialExpense();}catch(err){console.error(err);alert(err.message||'Could not save expense.');}finally{b.disabled=false;b.textContent='Save Expense';}});
-
-function printTeacherFinancialReport(){
+    function printTeacherFinancialReport(){
       const w=window.open("","_blank"); if(!w) return;
       const d=teacherContext.teacher||{};
-      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}.school-head{display:flex;align-items:center;gap:16px;border-bottom:2px solid #2563eb;padding-bottom:12px;margin-bottom:18px}.school-head img{width:72px;height:72px;object-fit:contain}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}
-.duty-guide{margin:0 0 20px;padding:22px;border-radius:24px;background:linear-gradient(135deg,#ffffff,#f5f3ff);border:1px solid #dbe4f2;box-shadow:0 16px 40px rgba(37,56,100,.08)}.duty-guide-head h3{margin:4px 0 5px;font-size:20px;color:#10213f}.duty-guide-head p{margin:0;color:#64748b;font-size:13px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.14em;color:#4f46e5}.duty-guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}.duty-guide-grid article{padding:15px;border-radius:16px;background:#fff;border:1px solid #e4eaf4;box-shadow:0 7px 18px rgba(15,23,42,.05);min-height:110px}.duty-guide-grid b{display:block;font-size:13px;color:#173b78;margin-bottom:7px}.duty-guide-grid span{display:block;font-size:11px;line-height:1.55;color:#64748b}@media(max-width:1000px){.duty-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.duty-guide-grid{grid-template-columns:1fr}}
-</style></head><body><div class="school-head"><img src="school-logo.jpg"><div><h1>The Progress of Life School</h1><div>CHAK 8JB MEHBOOB TOWN, FAISALABAD</div><div>PROGRESS FOR CHRISTIAN CHILDREN</div></div></div><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script></body></html>`);
+      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}</style></head><body><img src="${location.origin}${location.pathname.replace(/\/[^/]*$/,"")}/school-logo.jpg"><h1>The Progress of Life School</h1><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script></body></html>`);
       w.document.close();
     }
 
@@ -574,30 +494,26 @@ function printTeacherFinancialReport(){
       if(!grid||!count)return;
       const raw=String(t?.designation||"Teacher");
       const roles=[...new Set(raw.split(/\s*\+\s*/).map(x=>x.trim()).filter(Boolean))];
-      const normalized=roles.map(r=>{
-        const k=r.toLowerCase();
-        if(k==='coordinator of higher section'||k==='high section coordinator')return 'High Section Coordinator';
-        if(k==='coordinator of lower section'||k==='low section coordinator')return 'Low Section Coordinator';
-        if(k==='administrator')return 'Admin';
-        return r;
-      });
-      normalized.splice(0,normalized.length,...[...new Set(normalized)]);
-      if(!normalized.some(r=>r.toLowerCase()==='teacher')) normalized.unshift('Teacher');
+      if(!roles.some(r=>r.toLowerCase()==="teacher")) roles.unshift("Teacher");
       const classCount=new Set((assignments||[]).map(a=>a.class_name).filter(Boolean)).size;
       const subjectCount=new Set((assignments||[]).map(a=>a.subject).filter(Boolean)).size;
-      const duties={
-        'Teacher':{icon:'📚',title:'Teacher',desc:`Teach assigned subjects/classes, prepare lesson plans, maintain attendance, assess students, enter results, monitor student progress, and submit requests and reports. You currently have ${classCount} class${classCount===1?'':'es'} and ${subjectCount} subject${subjectCount===1?'':'s'}.`,target:'content',label:'Open teaching overview'},
-        'Financial Secretary':{icon:'💼',title:'Financial Secretary',desc:'Record fee collections, maintain receipts, record expenses, monitor outstanding fees, prepare financial reports, maintain salary/payment records, and provide financial information to Admin.',target:'financialDeskSection',label:'Open financial desk'},
-        'Accountant':{icon:'💰',title:'Accountant',desc:'Maintain financial records, verify income and expenses, reconcile payments, prepare financial statements and reports, monitor balances, and support financial audits/checking.',target:'financialDeskSection',label:'Open financial desk'},
-        'High Section Coordinator':{icon:'🏫',title:'High Section Coordinator',desc:'Coordinate teachers and students in the high section, monitor lesson progress, coordinate schedules, follow up on attendance/results, support teachers, and report section issues to Admin.',target:'content',label:'Open teaching overview'},
-        'Low Section Coordinator':{icon:'🏫',title:'Low Section Coordinator',desc:'Coordinate teachers and students in the low section, monitor lesson progress, coordinate schedules, follow up on attendance/results, support teachers, and report section issues to Admin.',target:'content',label:'Open teaching overview'},
-        'Principal':{icon:'⭐',title:'Principal',desc:'Provide overall school leadership and supervision, oversee staff and academics, support student welfare, supervise administration and finances, review reports, approve requests, monitor school performance, and communicate with staff and parents.',target:'content',label:'Open school overview'},
-        'Admin':{icon:'⚙️',title:'Admin',desc:'Manage students, teachers, classes, fees, expenses, reports, requests, notifications, and overall school records.',target:'content',label:'Open school overview'},
-        'Super Admin':{icon:'👑',title:'Super Admin',desc:'Full access to school systems, users, settings, records, financial information, and administrative controls.',target:'content',label:'Open school overview'}
+      const map={
+        "Teacher":{icon:"📚",desc:`Teaching access is active for ${classCount} class${classCount===1?'':'es'} and ${subjectCount} subject${subjectCount===1?'':'s'}.`,target:"content",label:"Open teaching overview"},
+        "Financial Secretary":{icon:"💼",desc:"Financial responsibility is active in the same teacher login.",target:"financialDeskSection",label:"Open financial desk"},
+        "Accountant":{icon:"💰",desc:"Accounting responsibility is active without removing teaching access.",target:"financialDeskSection",label:"Open financial desk"},
+        "Coordinator of Higher Section":{icon:"🏫",desc:"Higher-section coordination responsibility is assigned alongside teaching.",target:"content",label:"Open classes"},
+        "Coordinator of Lower Section":{icon:"🏫",desc:"Lower-section coordination responsibility is assigned alongside teaching.",target:"content",label:"Open classes"},
+        "Academic Coordinator":{icon:"🎓",desc:"Academic coordination responsibility is active alongside teaching duties.",target:"resultSection",label:"Open results"},
+        "Examination Coordinator":{icon:"📝",desc:"Examination coordination responsibility is active alongside teaching duties.",target:"resultSection",label:"Open results"},
+        "Discipline Coordinator":{icon:"🛡️",desc:"Discipline coordination responsibility is active alongside teaching duties.",target:"rulesSection",label:"Open school rules"},
+        "Principal":{icon:"⭐",desc:"Leadership responsibility is active while teaching access remains available.",target:"content",label:"Open teaching overview"},
+        "Vice Principal":{icon:"⭐",desc:"Leadership responsibility is active while teaching access remains available.",target:"content",label:"Open teaching overview"},
+        "Head Teacher":{icon:"👥",desc:"Head-teacher responsibility is active while teaching access remains available.",target:"content",label:"Open teaching overview"},
+        "Administrator":{icon:"⚙️",desc:"Administrative responsibility is active while teaching access remains available.",target:"content",label:"Open teaching overview"}
       };
-      const fallback={icon:'✓',title:'Additional Responsibility',desc:'This responsibility is active alongside your teaching duties.',target:'content',label:'Open teaching overview'};
-      count.textContent=`${normalized.length} dut${normalized.length===1?'y':'ies'}`;
-      grid.innerHTML=normalized.map(role=>{const d=duties[role]||fallback;return `<article class="duty-card"><div class="duty-icon">${d.icon}</div><div class="duty-title">${escapeHtml(d.title)}</div><div class="duty-desc">${escapeHtml(d.desc)}</div><span class="duty-status">ACTIVE</span><div><a class="duty-action" onclick="scrollToDuty('${d.target}')">${escapeHtml(d.label)} →</a></div></article>`}).join('');
+      const fallback={icon:"✓",desc:"Additional school responsibility is active alongside your teaching duties.",target:"content",label:"Open teaching overview"};
+      count.textContent=`${roles.length} duty${roles.length===1?'':'ies'}`;
+      grid.innerHTML=roles.map(role=>{const d=map[role]||fallback;return `<article class="duty-card"><div class="duty-icon">${d.icon}</div><div class="duty-title">${escapeHtml(role)}</div><div class="duty-desc">${escapeHtml(d.desc)}</div><span class="duty-status">ACTIVE</span><div><a class="duty-action" onclick="scrollToDuty('${d.target}')">${escapeHtml(d.label)} →</a></div></article>`}).join("");
     }
     function scrollToDuty(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});}
 
@@ -729,7 +645,7 @@ function printTeacherFinancialReport(){
         });
       }
       out += `</tbody></table></div>
-        <div class="notice">Fee information is view-only for ordinary teachers. Financial Secretaries can collect fees from the Financial Desk; all saved payments are cloud records shared with Admin.</div>`;
+        <div class="notice">Fee information is view-only in the Teacher Portal. Payment collection, receipts, discounts and financial reports remain under Admin control.</div>`;
       $("feeStatusContent").innerHTML=out;
     }
 
@@ -806,13 +722,27 @@ function printTeacherFinancialReport(){
       const {data,error}=await client.from("teacher_lesson_plans").select("id,class_name,subject,topic,objectives,activities,homework,lesson_date,notes,created_at").eq("teacher_id",currentTeacherId).order("lesson_date",{ascending:false}).order("created_at",{ascending:false}).limit(20);
       if(error){$("lessonHistory").innerHTML=`<div class="notice error">Could not load lesson plans: ${escapeHtml(error.message)}</div>`;return;}
       if(!data?.length){$("lessonHistory").innerHTML='<div class="notice">No lesson plans saved yet.</div>';return;}
-      $("lessonHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Lesson Plans</h4><div class="history-list">'+data.map(p=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(p.topic)}</div><span class="grade-chip">${escapeHtml(p.class_name)} • ${escapeHtml(p.subject)}</span></div><div class="history-meta">${escapeHtml(p.lesson_date||"")}</div><div class="history-body"><b>Objectives:</b> ${escapeHtml(p.objectives||"—")}\n<b>Activities:</b> ${escapeHtml(p.activities||"—")}\n<b>Homework:</b> ${escapeHtml(p.homework||"—")}${p.notes?`\n<b>Notes:</b> ${escapeHtml(p.notes)}`:""}</div></article>`).join('')+'</div>';
+      $("lessonHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Lesson Plans</h4><div class="history-list">'+data.map(p=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(p.topic)}</div><span class="grade-chip">${escapeHtml(p.class_name)} • ${escapeHtml(p.subject)}</span></div><div class="history-meta">${escapeHtml(p.lesson_date||"")}</div><div class="history-body"><b>Objectives:</b> ${escapeHtml(p.objectives||"—")}\n<b>Activities:</b> ${escapeHtml(p.activities||"—")}\n<b>Homework:</b> ${escapeHtml(p.homework||"—")}${p.notes?`\n<b>Notes:</b> ${escapeHtml(p.notes)}`:""}</div><div class="history-actions"><button class="mini-action" type="button" onclick="editLessonPlan('${p.id}')">Edit</button><button class="mini-action danger" type="button" onclick="deleteLessonPlan('${p.id}')">Delete</button></div></article>`).join('')+'</div>';
     }
     async function loadResultHistory(){
       const {data,error}=await client.from("teacher_student_results").select("id,student_id,class_name,subject,assessment_type,assessment_name,term,total_marks,obtained_marks,percentage,grade,exam_date,remarks,created_at,students(name,student_code)").eq("teacher_id",currentTeacherId).order("exam_date",{ascending:false}).order("created_at",{ascending:false}).limit(30);
       if(error){$("resultHistory").innerHTML=`<div class="notice error">Could not load results: ${escapeHtml(error.message)}</div>`;return;}
       if(!data?.length){$("resultHistory").innerHTML='<div class="notice">No student results saved yet.</div>';return;}
       $("resultHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Results</h4><div class="history-list">'+data.map(r=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(r.students?.name||"Student")} — ${escapeHtml(r.assessment_name)}</div><span class="grade-chip">${escapeHtml(r.grade||"")} • ${Number(r.percentage||0).toFixed(2)}%</span></div><div class="history-meta">${escapeHtml(r.class_name)} • ${escapeHtml(r.subject)} • ${escapeHtml(r.assessment_type)} • ${escapeHtml(r.exam_date||"")} • ${Number(r.obtained_marks||0)} / ${Number(r.total_marks||0)}</div>${r.remarks?`<div class="history-body">${escapeHtml(r.remarks)}</div>`:""}</article>`).join('')+'</div>';
+    }
+    async function editLessonPlan(id){
+      try{
+        const {data,error}=await client.from("teacher_lesson_plans").select("id,class_name,subject,lesson_date,topic,objectives,activities,homework,notes").eq("id",id).eq("teacher_id",currentTeacherId).single();
+        if(error) throw error;
+        fillSelect("lessonClass",assignedClasses(),"Select class"); $("lessonClass").value=data.class_name; refreshLessonSubjects(); $("lessonSubject").value=data.subject;
+        $("lessonDate").value=data.lesson_date||""; $("lessonTopic").value=data.topic||""; $("lessonObjectives").value=data.objectives||""; $("lessonActivities").value=data.activities||""; $("lessonHomework").value=data.homework||""; $("lessonNotes").value=data.notes||"";
+        $("lessonPlanForm").dataset.editId=id; $("lessonBtn").textContent="Update Lesson Plan"; document.getElementById("lessonPlanSection")?.scrollIntoView({behavior:'smooth',block:'start'});
+      }catch(err){setRequestMsg("lessonMsg",err.message||"Could not load lesson plan.",false)}
+    }
+    async function deleteLessonPlan(id){
+      if(!confirm("Delete this lesson plan?")) return;
+      try{ const {error}=await client.from("teacher_lesson_plans").delete().eq("id",id).eq("teacher_id",currentTeacherId); if(error) throw error; await loadLessonHistory(); setRequestMsg("lessonMsg","Lesson plan deleted.",true); }
+      catch(err){setRequestMsg("lessonMsg",err.message||"Could not delete lesson plan.",false)}
     }
     function initNewFeatureForms(){
       const classes=assignedClasses();
@@ -829,15 +759,16 @@ function printTeacherFinancialReport(){
       loadNotifications(); loadLessonHistory(); loadResultHistory();
     }
     async function submitLessonPlan(e){
-      e.preventDefault(); setRequestMsg("lessonMsg","",true); setButtonBusy("lessonBtn",true,"Save Lesson Plan","Saving…");
+      e.preventDefault(); setRequestMsg("lessonMsg","",true); setButtonBusy("lessonBtn",true,$("lessonPlanForm").dataset.editId?"Update Lesson Plan":"Save Lesson Plan","Saving…");
       try{
         const cls=$("lessonClass").value, sub=$("lessonSubject").value;
         if(!uniqueAssignments().some(a=>a.class_name===cls&&a.subject===sub)) throw new Error("That class and subject are not assigned to you.");
         const payload={teacher_id:currentTeacherId,class_name:cls,subject:sub,lesson_date:$("lessonDate").value,topic:$("lessonTopic").value,objectives:$("lessonObjectives").value,activities:$("lessonActivities").value,homework:$("lessonHomework").value,notes:$("lessonNotes").value};
-        const {error}=await client.from("teacher_lesson_plans").insert(payload); if(error) throw error;
-        setRequestMsg("lessonMsg","Lesson plan saved successfully.",true); $("lessonPlanForm").reset(); $("lessonDate").value=new Date().toISOString().slice(0,10); initLessonOnly();
-        await loadLessonHistory();
-      }catch(err){setRequestMsg("lessonMsg",err.message||"Could not save lesson plan.",false)}finally{setButtonBusy("lessonBtn",false,"Save Lesson Plan","Saving…")}
+        const editId=$("lessonPlanForm").dataset.editId;
+        const result=editId?await client.from("teacher_lesson_plans").update(payload).eq("id",editId).eq("teacher_id",currentTeacherId):await client.from("teacher_lesson_plans").insert(payload);
+        if(result.error) throw result.error;
+        setRequestMsg("lessonMsg",editId?"Lesson plan updated successfully.":"Lesson plan saved successfully.",true); $("lessonPlanForm").reset(); delete $("lessonPlanForm").dataset.editId; $("lessonDate").value=new Date().toISOString().slice(0,10); $("lessonBtn").textContent="Save Lesson Plan"; initLessonOnly(); await loadLessonHistory();
+      }catch(err){setRequestMsg("lessonMsg",err.message||"Could not save lesson plan.",false)}finally{setButtonBusy("lessonBtn",false,$("lessonPlanForm").dataset.editId?"Update Lesson Plan":"Save Lesson Plan","Saving…")}
     }
     function initLessonOnly(){fillSelect("lessonClass",assignedClasses(),"Select class");refreshLessonSubjects()}
     async function submitResult(e){
@@ -962,5 +893,98 @@ function printTeacherFinancialReport(){
       }
     });
   </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script>
+(function(){
+  const SCHOOL={name:'THE PROGRESS OF LIFE SCHOOL',under:'Under Star Fish Pakistan',address:'Chak 8JB, Mehboob Town, Daewoo Road, Faisalabad',mission:'PROGRESS FOR CHRISTIAN CHILDREN'};
+  const EMBED_LOGO='data:image/jpeg;base64,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';
+  const PDF={};
+  PDF.safe=s=>String(s||'school_form').replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'').slice(0,80)||'school_form';
+  PDF.text=v=>String(v??'').replace(/\s+/g,' ').trim();
+  PDF.logo=()=>EMBED_LOGO;
+  PDF.fields=function(root){
+    const rows=[];
+    root.querySelectorAll('.field,.field-group').forEach(box=>{
+      const label=box.querySelector('label')?.textContent?.trim();
+      const input=box.querySelector('input,select,textarea');
+      if(!label||!input) return;
+      let value='';
+      if(input.tagName==='SELECT') value=input.options[input.selectedIndex]?.text||'';
+      else if(input.type==='checkbox'||input.type==='radio') value=input.checked?'Yes':'No';
+      else value=input.value||'';
+      if(PDF.text(value)) rows.push([label,PDF.text(value)]);
+    });
+    return rows;
+  };
+  PDF.tables=function(root){
+    return [...root.querySelectorAll('table')].map(t=>{
+      const rows=[...t.querySelectorAll('tr')].map(tr=>[...tr.children].map(c=>PDF.text(c.innerText))).filter(r=>r.some(Boolean));
+      return rows.length?rows:null;
+    }).filter(Boolean);
+  };
+  PDF.bodyText=function(root){
+    const clone=root.cloneNode(true);
+    clone.querySelectorAll('button,.tpls-pdf-btn,input,select,textarea,table,label').forEach(e=>e.remove());
+    return PDF.text(clone.innerText||'');
+  };
+  PDF.download=async function(elementOrId,title){
+    const src=typeof elementOrId==='string'?document.getElementById(elementOrId):elementOrId;
+    if(!src) return alert('This form/report could not be found.');
+    if(!window.jspdf?.jsPDF) return alert('PDF engine is still loading. Please wait a moment and try again.');
+    try{
+      const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+      const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
+      let y=12;
+      doc.setFillColor(244,248,253);doc.roundedRect(10,8,W-20,32,3,3,'F');
+      try{doc.addImage(PDF.logo(),'JPEG',14,12,22,22);}catch(e){console.warn('Logo could not be embedded',e);}
+      doc.setTextColor(18,61,115);doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text(SCHOOL.name,41,15);
+      doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(82,98,122);doc.text(SCHOOL.under,41,20);doc.text(SCHOOL.address,41,24);doc.setFont('helvetica','bold');doc.text(SCHOOL.mission,41,28);
+      y=47;doc.setFillColor(18,61,115);doc.roundedRect(10,y,W-20,9,2,2,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11);doc.text(title||'Official School Form',14,y+6);y+=15;
+      doc.setTextColor(100,116,139);doc.setFont('helvetica','normal');doc.setFontSize(7);doc.text('Official school record • Generated on demand • '+new Date().toLocaleString(),14,y);y+=6;
+      const tables=PDF.tables(src);
+      const fields=PDF.fields(src);
+      if(fields.length){
+        const data=fields.map(r=>[r[0],r[1]]);
+        doc.autoTable({startY:y,head:[['Field','Information']],body:data,theme:'grid',styles:{font:'helvetica',fontSize:8,cellPadding:2.5,textColor:[23,32,51]},headStyles:{fillColor:[18,61,115],textColor:255,fontStyle:'bold'},columnStyles:{0:{cellWidth:48,fontStyle:'bold'},1:{cellWidth:132}},margin:{left:14,right:14}});
+        y=doc.lastAutoTable.finalY+8;
+      }
+      for(const rows of tables){
+        if(y>H-35){doc.addPage();y=16;}
+        const head=rows.length>1? [rows[0]]:[]; const body=rows.length>1?rows.slice(1):rows;
+        doc.autoTable({startY:y,head,body,theme:'grid',styles:{font:'helvetica',fontSize:7.5,cellPadding:2.2,overflow:'linebreak',textColor:[23,32,51]},headStyles:{fillColor:[18,61,115],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[245,248,252]},margin:{left:14,right:14}});
+        y=doc.lastAutoTable.finalY+8;
+      }
+      const body=PDF.bodyText(src);
+      if(body){
+        const lines=doc.splitTextToSize(body,W-28);
+        if(y+lines.length*4>H-25){doc.addPage();y=16;}
+        doc.setTextColor(45,55,72);doc.setFontSize(8);doc.text(lines,14,y,{maxWidth:W-28});y+=lines.length*4+5;
+      }
+      const low=String(title||'').toLowerCase();
+      const extras=[];
+      if(low.includes('lesson plan')) extras.push('Teaching Resources: ______________________________','Assessment / Evaluation: __________________________','Homework / Follow-up: ____________________________','Teacher Remarks: _________________________________','Teacher Signature: __________________  Date: __________','Coordinator / Principal Remarks: __________________________');
+      if(low.includes('leave application')) extras.push('Applicant Signature: __________________  Date: __________','Coordinator / Principal Recommendation:  ☐ Recommended   ☐ Not Recommended','Principal / Authorized Approval:  ☐ Approved   ☐ Not Approved','Approval Signature: __________________  Date: __________');
+      if(low.includes('suggestion')) extras.push('Problem / Need Identified: ______________________________','Proposed Solution: _____________________________________','Expected Benefit: ______________________________________','Management Review:  ☐ Accepted   ☐ Under Review   ☐ Not Approved','Management Remarks: __________________________________');
+      if(low.includes('expense')) extras.push('Receipts Attached:  ☐ Yes   ☐ No','Staff Signature / Date: ________________________________','Accounts / Principal Verification: _______________________');
+      if(extras.length){
+        if(y+extras.length*7>H-25){doc.addPage();y=16;}
+        doc.setDrawColor(185,199,216);doc.line(14,y,W-14,y);y+=6;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(45,55,72);
+        extras.forEach(line=>{const ls=doc.splitTextToSize(line,W-28);doc.text(ls,14,y);y+=Math.max(6,ls.length*4+2);});
+      }
+      const pages=doc.getNumberOfPages();
+      for(let p=1;p<=pages;p++){doc.setPage(p);doc.setDrawColor(215,224,235);doc.line(14,H-12,W-14,H-12);doc.setFontSize(6.5);doc.setTextColor(102,112,133);doc.text(SCHOOL.name+' • Official school record',14,H-7);doc.text('Page '+p+' of '+pages,W-14,H-7,{align:'right'});}
+      doc.save(PDF.safe(title)+'.pdf');
+    }catch(err){console.error('TPLS PDF generation failed:',err);alert('PDF could not be generated: '+(err.message||err));}
+  };
+  PDF.button=function(label,title,id){const b=document.createElement('button');b.type='button';b.className='btn tpls-pdf-btn';b.textContent='⬇ '+(label||'Download PDF');b.onclick=()=>PDF.download(id,title);return b};
+  function addSection(id,title){const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const st=el.querySelector('.section-title');if(!st)return;st.classList.add('tpls-pdf-toolbar');st.appendChild(PDF.button(null,title,id));el.dataset.pdfAdded='1'}
+  function addAdmin(){[['students','Students Details'],['teachers','Teachers Details'],['fees','Fee Records'],['expenses','Expense Records'],['receipts','Fee Receipts'],['reports','Financial Report'],['leave-applications','Leave Applications'],['suggestions','Teacher Suggestions'],['lesson-plans','Lesson Plans'],['student-results','Student Results'],['teacher-notifications','Teacher Notifications']].forEach(x=>addSection(x[0],x[1]));[['studentModal','Student Details Form'],['teacherModal','Teacher Details Form'],['feeModal','Fee Payment Form'],['expenseModal','Expense Report Form'],['receiptModal','Fee Receipt'],['notificationModal','Teacher Notification'],['teacherDetailModal','Teacher Submission']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const target=id==='receiptModal'?(el.querySelector('#receiptPrintArea')||el.querySelector('.modal-body')):(el.querySelector('.modal-body')||el);const host=el.querySelector('.modal-head')||el.querySelector('.modal-body')||el;host.appendChild(PDF.button(null,title,target));el.dataset.pdfAdded='1'})}
+  function addTeacher(){[['notificationSection','Notifications'],['lessonPlanSection','Lesson Plan Submission Form'],['resultSection','Student Result Form'],['teacherRequestSection','Staff / Teacher Leave Application'],['suggestionSection','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const h=el.querySelector('h3');if(!h)return;const b=PDF.button(null,title,id);b.style.marginLeft='auto';const wrap=document.createElement('div');wrap.className='tpls-pdf-toolbar';wrap.style.justifyContent='space-between';h.parentNode.insertBefore(wrap,h);wrap.appendChild(h);wrap.appendChild(b);el.dataset.pdfAdded='1'});[['lessonPlanForm','Lesson Plan Submission Form'],['resultForm','Student Result Form'],['leaveForm','Staff / Teacher Leave Application'],['suggestionForm','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfFormAdded)return;const b=PDF.button(null,title,el);b.style.marginTop='10px';el.appendChild(b);el.dataset.pdfFormAdded='1'})}
+  function addAll(){const isAdmin=!!document.getElementById('studentModal')||!!document.getElementById('students');if(isAdmin)addAdmin();else addTeacher()}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(addAll,700));else setTimeout(addAll,700);window.addEventListener('load',()=>setTimeout(addAll,500));
+})();
+</script>
 </body>
 </html>
