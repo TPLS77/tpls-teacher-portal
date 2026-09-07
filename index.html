@@ -108,6 +108,27 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 .collective-panel{margin-top:22px;padding:24px;border-radius:26px;background:linear-gradient(135deg,#0b2f67 0%,#1d4ed8 48%,#6d28d9 100%);color:#fff;box-shadow:0 22px 55px rgba(37,67,150,.20);position:relative;overflow:hidden}
 .collective-panel:after{content:"";position:absolute;width:320px;height:320px;border:55px solid rgba(255,255,255,.08);border-radius:50%;right:-150px;top:-190px}.collective-head{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.collective-head h3{color:#fff;margin:0 0 5px}.collective-head .muted{color:#dbeafe}.duty-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:18px}.duty-card{border:1px solid rgba(255,255,255,.18);border-radius:17px;padding:16px;background:rgba(255,255,255,.10);backdrop-filter:blur(8px);transition:.2s}.duty-card:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}.duty-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.16);font-size:19px;margin-bottom:10px}.duty-title{font-weight:800;font-size:14px}.duty-desc{font-size:11px;line-height:1.55;color:#e6efff;margin-top:5px;min-height:34px}.duty-status{display:inline-flex;margin-top:10px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.14);font-size:10px;font-weight:800}.duty-action{display:inline-block;margin-top:10px;color:#fff;text-decoration:none;font-size:11px;font-weight:800;cursor:pointer}.collective-empty{position:relative;z-index:1;color:#e6efff;padding:12px 0}
 @media(max-width:850px){.duty-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.duty-grid{grid-template-columns:1fr}.collective-panel{padding:19px}.welcome{padding:22px}}
+<style id="tpls-dashboard-only-style">
+  /* Requested dashboard scope: staff info + assigned classes/students + class growth. */
+  #dashboardPage.dashboard-only-mode .dashboard-extra{display:none!important}
+  #dashboardPage.feature-page-mode .principal-card,
+  #dashboardPage.feature-page-mode .welcome,
+  #dashboardPage.feature-page-mode .quick-grid,
+  #dashboardPage.feature-page-mode .collective-panel{display:none!important}
+  #dashboardPage.feature-page-mode .tpls-feature-grid{display:block!important}
+  /* Dashboard shows only the teacher profile. Other content opens from the sidebar. */
+  #dashboardPage.dashboard-only-mode .principal-card,
+  #dashboardPage.dashboard-only-mode .welcome,
+  #dashboardPage.dashboard-only-mode .quick-grid,
+  #dashboardPage.dashboard-only-mode .dashboard-extra{display:none!important}
+  #dashboardPage.dashboard-only-mode #content > :not(#teacherProfileSection){display:none!important}
+  #dashboardPage.feature-page-mode #content #teacherProfileSection{display:none!important}
+  .tpls-growth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+  .tpls-growth-card{background:#fff;border:1px solid #e1e7f0;border-radius:18px;padding:18px;box-shadow:0 10px 28px rgba(15,23,42,.05)}
+  .tpls-growth-card h4{margin:0 0 4px;font-size:15px;color:#15244a}.tpls-growth-card p{margin:0 0 12px;color:#70809d;font-size:11px}
+  .tpls-chart-wrap{height:280px;position:relative}.tpls-chart-empty{height:100%;display:grid;place-items:center;color:#70809d;font-size:12px;background:#f8faff;border-radius:14px;border:1px dashed #d7e1ef;text-align:center;padding:20px}
+  .tpls-dashboard-badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:#edf4ff;color:#3154db;font-size:10px;font-weight:800}
+  @media(max-width:800px){.tpls-growth-grid{grid-template-columns:1fr}}
 </style>
 
 <style id="tpls-pdf-tools-style">
@@ -128,7 +149,123 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 .tpls-pdf-sheet input,.tpls-pdf-sheet select,.tpls-pdf-sheet textarea{border:1px solid #cbd5e1!important;background:#fff!important;padding:7px!important;box-sizing:border-box!important}
 .tpls-pdf-foot{margin-top:18px;padding-top:10px;border-top:1px solid #d7e0eb;font-size:9px;color:#667085}
 </style>
-<style id="tpls-template-pdf-css">.pdf-template-extra{margin-top:12px}.pdf-box{border:1px solid #c7d3e1;border-radius:4px;margin:8px 0;min-height:44px}.pdf-label{background:#eef4fb;color:#163f73;font-weight:700;font-size:10px;padding:5px 7px;border-bottom:1px solid #c7d3e1}.pdf-value{padding:8px;font-size:10px;min-height:24px;white-space:pre-wrap}.pdf-line{display:flex;gap:8px;align-items:flex-end;font-size:10px;font-weight:700;margin:12px 0}.pdf-line .line{border-bottom:1px solid #7a8798;flex:1;height:14px}.pdf-signrow{display:grid;grid-template-columns:1fr 1fr;gap:18px}.pdf-checks{border:1px solid #d4deea;padding:8px;margin:8px 0;font-size:10px}.pdf-note{border:1px solid #d4deea;padding:10px;margin:8px 0;font-size:10px;line-height:1.5;background:#fafcff}</style></head>
+<style id="tpls-template-pdf-css">.pdf-template-extra{margin-top:12px}.pdf-box{border:1px solid #c7d3e1;border-radius:4px;margin:8px 0;min-height:44px}.pdf-label{background:#eef4fb;color:#163f73;font-weight:700;font-size:10px;padding:5px 7px;border-bottom:1px solid #c7d3e1}.pdf-value{padding:8px;font-size:10px;min-height:24px;white-space:pre-wrap}.pdf-line{display:flex;gap:8px;align-items:flex-end;font-size:10px;font-weight:700;margin:12px 0}.pdf-line .line{border-bottom:1px solid #7a8798;flex:1;height:14px}.pdf-signrow{display:grid;grid-template-columns:1fr 1fr;gap:18px}.pdf-checks{border:1px solid #d4deea;padding:8px;margin:8px 0;font-size:10px}.pdf-note{border:1px solid #d4deea;padding:10px;margin:8px 0;font-size:10px;line-height:1.5;background:#fafcff}</style>
+<style id="tpls-professional-redesign">
+/* PROFESSIONAL TEACHER PORTAL REDESIGN — visual only */
+:root{
+  --tp-navy:#061d49;--tp-navy2:#0b2c67;--tp-blue:#3557f5;--tp-blue2:#2846d8;
+  --tp-bg:#f5f7fb;--tp-card:#fff;--tp-text:#15244a;--tp-muted:#70809d;
+}
+#dashboardPage{background:var(--tp-bg);min-height:100vh}
+#dashboardPage .tp-sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:274px;z-index:20;
+  background:linear-gradient(180deg,#061d49 0%,#08275c 52%,#061a40 100%);
+  color:#fff;padding:22px 16px;display:flex;flex-direction:column;
+  box-shadow:12px 0 35px rgba(6,29,73,.18);overflow-y:auto;
+}
+.tp-brand{display:flex;align-items:center;gap:12px;padding:4px 8px 18px;border-bottom:1px solid rgba(255,255,255,.12)}
+.tp-brand img{width:52px;height:52px;object-fit:contain;border-radius:14px;background:#fff;padding:5px}
+.tp-brand strong{font-size:14px;line-height:1.2}.tp-brand span{display:block;font-size:10px;color:#b8c8e8;margin-top:3px}
+.tp-profile{padding:20px 10px 17px;text-align:center;border-bottom:1px solid rgba(255,255,255,.12)}
+.tp-profile img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.25);background:#fff}
+.tp-profile-name{font-size:15px;font-weight:800;margin-top:10px}
+.tp-profile-role{display:inline-flex;margin-top:6px;padding:4px 10px;border-radius:999px;background:#415ff5;font-size:10px;font-weight:800}
+.tp-profile-id{font-size:10px;color:#b9c8e8;margin-top:8px;letter-spacing:.5px}
+.tp-nav{padding-top:15px;display:grid;gap:5px}
+.tp-nav a{display:flex;align-items:center;gap:12px;color:#dce6fb;text-decoration:none;padding:11px 12px;border-radius:11px;font-size:13px;font-weight:650;cursor:pointer;transition:.18s}
+.tp-nav a:hover,.tp-nav a.active{background:linear-gradient(90deg,#3657f6,#4d63ef);color:#fff;box-shadow:0 8px 20px rgba(52,87,245,.25)}
+.tp-nav .ico{width:22px;text-align:center;font-size:16px}
+.tp-sidebar-bottom{margin-top:auto;padding:15px 9px 2px;color:#8fa4cc;font-size:10px;line-height:1.55;text-align:center}
+#dashboardPage>.top{margin-left:274px;position:sticky;top:0;z-index:10}
+#dashboardPage>.top .top-in{max-width:none;padding:13px 28px}
+#dashboardPage>.wrap{margin-left:274px;max-width:none;padding:28px 34px 55px}
+#dashboardPage .brand{font-size:18px;color:var(--tp-text)}
+#dashboardPage .brand img{display:none}
+#dashboardPage .teacher-mini{gap:10px}
+#dashboardPage .teacher-mini:before{content:"";width:1px;height:28px;background:#e1e7f0;order:3}
+#dashboardPage .teacher-mini .logout{order:4}
+#dashboardPage .welcome{border-radius:22px;padding:25px 28px;margin-bottom:20px}
+#dashboardPage .principal-card{border-radius:20px}
+#dashboardPage .quick-grid{display:none!important}
+#dashboardPage .collective-panel{border-radius:22px}
+#dashboardPage .section{border-radius:18px}
+#dashboardPage .stat{border-radius:17px}
+.tp-page-title{font-size:12px;color:#8290a8;margin-bottom:5px}
+.tp-id-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid #dce5f3;background:#f8faff;border-radius:10px;color:#234277;font-weight:800;font-size:11px;letter-spacing:.35px}
+.tp-id-dot{width:7px;height:7px;border-radius:50%;background:#20a464;box-shadow:0 0 0 4px #e5f7ee}
+.tp-fee-filter{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.tp-fee-filter select,.tp-fee-filter input{width:auto;min-width:165px;padding:10px 12px;border:1px solid #d5deec;border-radius:10px;background:#fff}
+.tp-fee-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:15px}
+.tp-fee-mini{padding:15px;border:1px solid #e1e7f0;border-radius:14px;background:#fbfcff}
+.tp-fee-mini b{display:block;font-size:22px;margin-top:5px;color:var(--tp-text)}
+.tp-fee-mini small{color:var(--tp-muted);font-weight:700}
+.tp-pending{font-weight:800;color:#c22b3c}
+.tp-status-only .fee-table{min-width:650px}
+.tp-status-only .fee-table th,.tp-status-only .fee-table td{padding:13px 12px}
+.tp-status-only .fee-table tbody tr:hover{background:#f8faff}
+.tp-status-only .fee-table .student-cell{display:flex;align-items:center;gap:10px}
+.tp-status-only .fee-table .student-cell img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#edf3fa}
+.tp-status-only .fee-table .student-cell small{display:block;color:var(--tp-muted);margin-top:3px}
+.tp-download-row{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.tp-download-btn{border:1px solid #d7e1ef;background:#fff;color:#214b8b;border-radius:9px;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer}
+.tp-download-btn:hover{background:#f3f7ff;border-color:#b9cae6}
+.tp-history-card{border:1px solid #e1e7f0!important;background:#fff!important}
+@media(max-width:900px){
+  #dashboardPage>.top,#dashboardPage>.wrap{margin-left:0}
+  #dashboardPage>.top{padding-left:0}
+  #dashboardPage .tp-sidebar{position:relative;width:100%;height:auto;bottom:auto;padding:12px;overflow:visible}
+  .tp-profile{display:none}.tp-nav{display:flex;overflow:auto;padding:9px 0 2px}.tp-nav a{white-space:nowrap;padding:9px 11px}
+  .tp-sidebar-bottom{display:none}.tp-brand{border:0;padding:0 4px}
+  #dashboardPage>.top .top-in{padding:12px 16px}.tp-fee-summary{grid-template-columns:repeat(2,1fr)}
+  #dashboardPage>.wrap{padding:20px 16px 40px}
+}
+@media(max-width:560px){
+  .tp-fee-summary{grid-template-columns:1fr 1fr}.tp-brand strong{font-size:12px}
+  #dashboardPage .welcome{padding:20px}.tp-fee-filter{width:100%}.tp-fee-filter select,.tp-fee-filter input{flex:1;min-width:135px}
+}
+
+/* TPLS requested feature additions — functionality only */
+#dashboardPage .quick-grid{display:grid!important}
+.student{cursor:pointer;transition:.18s}
+.student:hover{background:#f5f9ff;border-color:#b9cae6;transform:translateY(-1px)}
+.student .open-hint{margin-left:auto;font-size:11px;font-weight:800;color:#3557f5}
+.tpls-feature-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.tpls-event-list{display:grid;gap:10px}
+.tpls-event{border:1px solid #e1e7f0;border-radius:14px;padding:14px;background:#fbfdff}
+.tpls-event-date{font-size:11px;color:#3557f5;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.tpls-event-title{font-weight:800;margin-top:4px}
+.tpls-event-meta{font-size:12px;color:#64748b;margin-top:5px}
+.tpls-event-desc{font-size:12px;color:#425466;line-height:1.55;margin-top:8px;white-space:pre-wrap}
+.tpls-salary-box{position:relative;overflow:hidden;padding:24px;border:1px solid #dbe5f4;border-radius:22px;background:linear-gradient(145deg,#ffffff 0%,#f7faff 58%,#eef4ff 100%);box-shadow:0 16px 38px rgba(30,64,175,.08)}
+.tpls-salary-box:before{content:"";position:absolute;top:-70px;right:-55px;width:180px;height:180px;border-radius:50%;background:rgba(53,87,245,.08);pointer-events:none}
+.tpls-salary-intro{position:relative;display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:14px 16px;border:1px solid #e1e9f7;border-radius:16px;background:rgba(255,255,255,.76)}
+.tpls-salary-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#1e4fd7,#5548e8);color:#fff;font-size:23px;box-shadow:0 10px 22px rgba(53,87,245,.22);flex:0 0 auto}
+.tpls-salary-intro strong{display:block;color:#102a56;font-size:14px;margin-bottom:3px}.tpls-salary-intro span{color:#71819a;font-size:12px;line-height:1.45}
+.tpls-salary-form{position:relative;display:grid;gap:16px}.tpls-salary-form .field-group{gap:7px}.tpls-salary-form label{font-size:12px;font-weight:800;color:#18345f;letter-spacing:.01em}.tpls-salary-form input,.tpls-salary-form select{height:54px;border:1px solid #d3dfef;border-radius:14px;background:#fff;padding:0 16px;font-size:15px;box-shadow:0 5px 14px rgba(30,64,175,.035);transition:border-color .18s,box-shadow .18s,transform .18s}.tpls-salary-form input:focus,.tpls-salary-form select:focus{border-color:#5572ed;box-shadow:0 0 0 4px rgba(53,87,245,.10);outline:none}.tpls-salary-form input::placeholder{color:#9aa8ba}.tpls-salary-actions{display:flex;justify-content:flex-end;margin-top:2px}.tpls-salary-actions .btn{min-width:205px;height:54px;border:0;border-radius:15px;background:linear-gradient(135deg,#2864e8,#5545e8);box-shadow:0 12px 24px rgba(53,87,245,.23);font-size:14px;font-weight:800;letter-spacing:.01em}.tpls-salary-actions .btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 15px 28px rgba(53,87,245,.28)}
+.tpls-salary-note{display:flex;align-items:center;gap:8px;margin-top:1px;color:#71819a;font-size:11px}.tpls-salary-note b{color:#3f5f95}.tpls-salary-box #salaryMsg{margin-top:4px;border-radius:13px;line-height:1.45}
+@media(max-width:800px){.tpls-salary-actions{justify-content:stretch}.tpls-salary-actions .btn{width:100%}}
+.tpls-modal{position:fixed;inset:0;background:rgba(15,23,42,.58);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px}
+.tpls-modal.hidden{display:none!important}
+.tpls-modal-card{width:min(900px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(15,23,42,.25);padding:22px}
+.tpls-modal-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;border-bottom:1px solid #e5eaf1;padding-bottom:14px;margin-bottom:16px}
+.tpls-modal-head h3{margin:0 0 5px;font-size:22px}
+.tpls-close{border:1px solid #d7e1ef;background:#fff;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+.tpls-student-summary{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start}
+.tpls-student-photo{width:96px;height:96px;border-radius:20px;object-fit:cover;background:#edf3fa;border:1px solid #dbe5f1}
+.tpls-data-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tpls-data-item{padding:11px;border:1px solid #e5eaf1;border-radius:12px;background:#fafcff}
+.tpls-data-item small{display:block;color:#70809d;font-size:10px;margin-bottom:4px}
+.tpls-data-item b{font-size:12px;word-break:break-word}
+.tpls-modal-section{margin-top:18px}
+.tpls-modal-section h4{margin:0 0 10px}
+.tpls-modal-table{width:100%;border-collapse:collapse;font-size:12px}
+.tpls-modal-table th,.tpls-modal-table td{padding:9px 8px;border-bottom:1px solid #e5eaf1;text-align:left;vertical-align:top}
+.tpls-modal-table th{font-size:10px;color:#70809d}
+.tpls-loading{text-align:center;padding:28px;color:#64748b}
+@media(max-width:800px){.tpls-feature-grid{grid-template-columns:1fr}.tpls-student-summary{grid-template-columns:1fr}.tpls-data-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
 <body>
   <div id="loginPage" class="page">
     <section class="hero">
@@ -141,7 +278,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           <div class="quote">“Education is not preparation for life; education is life itself.”</div>
           <div class="source">— John Dewey</div>
         </div>
-        <div class="principal-card"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">“Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.”</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
+        <div class="principal-card dashboard-extra"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">“Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.”</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
       </div>
     </section>
     <section class="login-side">
@@ -184,17 +321,21 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       </div>
     </header>
     <main class="wrap">
-      <div class="principal-card"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
-      <div class="welcome">
+      <div class="principal-card dashboard-extra"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
+      <div class="welcome dashboard-extra">
         <div><h2 id="welcomeName">Welcome</h2><div class="muted">Here is your teaching and collective-duty overview.</div></div>
       </div>
 
-      <section id="collectiveDutiesSection" class="collective-panel">
+      <section id="collectiveDutiesSection" class="collective-panel dashboard-extra">
         <div class="collective-head"><div><h3>◈ Collective Duties Dashboard</h3><div class="muted">All responsibilities assigned to you are shown together. Teaching remains your core staff access.</div></div><div id="collectiveDutyCount" class="duty-status">0 duties</div></div>
         <div id="collectiveDutiesGrid" class="duty-grid"><div class="collective-empty">Loading your responsibilities…</div></div>
       </section>
 
-      <div class="quick-grid" style="margin-bottom:22px">
+      <div class="quick-grid dashboard-extra" style="margin-bottom:22px">
+        <div class="quick-card" data-scroll="content">
+          <div class="quick-icon">👨‍🎓</div><h4>My Students</h4>
+          <p>Open your assigned students and view their complete school information, fee history and results.</p>
+        </div>
         <div class="quick-card" data-scroll="lessonPlanSection">
           <div class="quick-icon">📚</div><h4>Lesson Plans</h4>
           <p>Create and save lesson plans for your assigned classes and subjects.</p>
@@ -220,22 +361,61 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           <p>Quickly review important teacher responsibilities and expectations.</p>
         </div>
       </div>
+      <div id="dashboardHome" aria-hidden="true"></div>
       <div id="content"><div class="loading">Loading your teacher profile…</div></div>
 
 
-      <section class="section">
+
+      <div class="tpls-feature-grid dashboard-extra">
+        <section id="eventsSection" class="section" style="margin-top:0">
+          <div class="section-head" style="display:flex;align-items:center;justify-content:space-between;gap:15px">
+            <div><h3>📅 School Events</h3><div class="muted">Events added by the school administrator appear here automatically.</div></div>
+            <span class="badge-status">LIVE</span>
+          </div>
+          <div id="eventsContent" class="loading">Loading school events…</div>
+        </section>
+
+        <section id="salarySection" class="section" style="margin-top:0">
+          <div class="section-head"><h3>💳 Salary Received</h3><div class="muted">Notify administration when you receive your salary.</div></div>
+          <div class="tpls-salary-box">
+            <div class="tpls-salary-intro">
+              <div class="tpls-salary-icon">💰</div>
+              <div><strong>Salary payment confirmation</strong><span>Enter the payment details below. Your administration will receive this record for verification.</span></div>
+            </div>
+            <form id="salaryForm" class="tpls-salary-form">
+              <div class="form-grid-3">
+                <div class="field-group"><label for="salaryAmount">Amount Received (PKR)</label><input id="salaryAmount" type="number" min="0" step="0.01" placeholder="e.g. 30,000" required></div>
+                <div class="field-group"><label for="salaryDate">Date Received</label><input id="salaryDate" type="date" required></div>
+                <div class="field-group"><label for="salaryBank">Bank / Payment Method</label><select id="salaryBank" required><option value="">Select payment method</option><option>Bank Transfer</option><option>Cash</option><option>JazzCash</option><option>EasyPaisa</option><option>Other Bank / Method</option></select></div>
+              </div>
+              <div class="request-grid" style="margin-top:12px">
+                <div class="field-group"><label for="salaryReference">Transaction / Reference (optional)</label><input id="salaryReference" placeholder="Transaction ID, cheque no., etc."></div>
+                <div class="field-group"><label for="salaryNotes">Additional Details</label><input id="salaryNotes" placeholder="Optional note for administration"></div>
+              </div>
+              <div class="tpls-salary-note">🔒 <span>Only your salary confirmation details are submitted to school administration.</span></div>
+              <div class="tpls-salary-actions"><button class="btn small-btn" type="submit" id="salaryBtn">✓&nbsp; Notify Administration</button></div>
+              <div id="salaryMsg" class="request-msg"></div>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <section id="feeStatusSection" class="section dashboard-extra">
         <div class="fee-toolbar">
           <div>
             <h3 style="margin-bottom:5px">Student Fee Status</h3>
             <div class="muted">View the fee status of students in your assigned classes. This is read-only.</div>
           </div>
-          <input id="feeMonth" class="month-input" type="month" title="Select fee month">
+          <div class="tp-fee-filter">
+            <select id="feeClass" title="Select assigned class"><option value="">All assigned classes</option></select>
+            <input id="feeMonth" class="month-input" type="month" title="Select fee month">
+          </div>
         </div>
         <div id="feeStatusContent" class="loading">Loading fee status…</div>
       </section>
 
 
-      <section id="notificationSection" class="section">
+      <section id="notificationSection" class="section dashboard-extra">
         <div class="section-head" style="display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap">
           <div><h3>🔔 Notifications</h3><div class="muted">Messages and announcements from school administration.</div></div>
           <button id="markNotificationsReadBtn" class="logout" type="button">Mark all as read</button>
@@ -243,7 +423,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         <div id="notificationContent" class="loading">Loading notifications…</div>
       </section>
 
-      <section id="lessonPlanSection" class="section">
+      <section id="lessonPlanSection" class="section dashboard-extra">
         <h3>📚 Lesson Plans</h3>
         <div class="muted" style="margin-bottom:18px">Create a lesson plan using only your assigned class and subject.</div>
         <form id="lessonPlanForm">
@@ -265,7 +445,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         <div id="lessonHistory" style="margin-top:22px"></div>
       </section>
 
-      <section id="resultSection" class="section">
+      <section id="resultSection" class="section dashboard-extra">
         <h3>📝 Tests & Student Results</h3>
         <div class="muted" style="margin-bottom:18px">Select your assigned class, subject and student, then record the student's result.</div>
         <form id="resultForm">
@@ -288,7 +468,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         <div id="resultHistory" style="margin-top:22px"></div>
       </section>
 
-      <section id="teacherRequestSection" class="section">
+      <section id="teacherRequestSection" class="section dashboard-extra">
         <h3>📝 Leave Application</h3>
         <div class="muted" style="margin-bottom:18px">Send a leave application to the school administration.</div>
         <form id="leaveForm">
@@ -306,7 +486,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         </form>
       </section>
 
-      <section id="suggestionSection" class="section">
+      <section id="suggestionSection" class="section dashboard-extra">
         <h3>💡 Suggestion to Administration</h3>
         <div class="muted" style="margin-bottom:18px">Have an idea that can improve the school? Send it privately to administration.</div>
         <form id="suggestionForm">
@@ -322,7 +502,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         </form>
       </section>
 
-      <section id="rulesSection" class="section">
+      <section id="rulesSection" class="section dashboard-extra">
         <h3>📘 Teacher Rules & Expectations</h3>
         <ul class="rule-list">
           <li><span class="rule-num">1</span><div><b>Professional conduct</b><br><span class="muted">Treat students, parents and colleagues with respect, patience and professionalism.</span></div></li>
@@ -339,6 +519,18 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     </main>
   </div>
 
+
+  <div id="studentDetailsModal" class="tpls-modal hidden" aria-hidden="true">
+    <div class="tpls-modal-card" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle">
+      <div class="tpls-modal-head">
+        <div><h3 id="studentModalTitle">Student Details</h3><div id="studentModalSub" class="muted">Assigned student</div></div>
+        <button class="tpls-close" type="button" onclick="closeStudentDetails()">✕ Close</button>
+      </div>
+      <div id="studentModalContent" class="tpls-loading">Loading student information…</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script>
@@ -446,7 +638,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       // active profile, then the newest profile. The Admin portal can clean up
       // duplicates later without making the login itself fail.
       const {data:teacherRows,error:tErr}=await client.from("teachers")
-        .select("id,teacher_code,name,gender,phone,email,qualification,joining_date,status,designation,photo_path,created_at")
+        .select("id,teacher_code,name,gender,phone,email,cnic_number,qualification,joining_date,status,designation,photo_path,created_at")
         .ilike("email",email)
         .order("created_at",{ascending:false})
         .limit(20);
@@ -455,6 +647,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       if(!rows.length) throw new Error("Your login email is not linked to a teacher profile. Please ask the school administrator to add this email to your teacher profile.");
       const activeRows=rows.filter(r=>!r.status || String(r.status).toLowerCase()==="active");
       const teacher=(activeRows[0]||rows[0]);
+      teacher.cnic=teacher.cnic_number||"";
       if(teacher.status && String(teacher.status).toLowerCase() !== "active") throw new Error("This teacher account is currently inactive. Please contact the school administrator.");
 
       const {data:assignments,error:aErr}=await client.from("teacher_assignments")
@@ -481,11 +674,21 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         feePayments=p||[];
       }
 
+      let growthResults=[];
+      if(studentIds.length){
+        const {data:r,error:rErr}=await client.from("teacher_student_results")
+          .select("student_id,class_name,subject,assessment_name,term,total_marks,obtained_marks,percentage,exam_date,created_at")
+          .eq("teacher_id",teacher.id).in("student_id",studentIds)
+          .order("exam_date").order("created_at");
+        if(rErr) throw rErr;
+        growthResults=r||[];
+      }
+
       const teacherPhoto=await signedPhoto("teacher-photos",teacher.photo_path);
       const studentPhotos=await Promise.all(students.map(s=>signedPhoto("student-photos",s.photo_path)));
       students.forEach((s,i)=>s._photo=studentPhotos[i]);
 
-      renderTeacher(teacher,assignments||[],students,teacherPhoto,feePayments);
+      renderTeacher(teacher,assignments||[],students,teacherPhoto,feePayments,growthResults);
       await loadFinancialDesk();
     }
 
@@ -517,15 +720,22 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
     function scrollToDuty(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});}
 
-    function renderTeacher(t,assignments,students,teacherPhoto,feePayments){
+    function renderTeacher(t,assignments,students,teacherPhoto,feePayments,growthResults=[]){
       currentTeacherId=t.id;
       teacherContext={teacher:t,assignments,students};
       renderCollectiveDuties(t,assignments,students);
+      const dashboardPage=$("dashboardPage");
+      if(dashboardPage){dashboardPage.classList.add("dashboard-only-mode");dashboardPage.classList.remove("feature-page-mode");}
       $("loginPage").classList.add("hidden");
       $("dashboardPage").classList.remove("hidden");
       $("welcomeName").textContent=`Welcome, ${t.name}`;
       $("topName").textContent=t.name;
       if(teacherPhoto) $("topAvatar").src=teacherPhoto;
+      if(window.installTeacherSidebar) window.installTeacherSidebar();
+      const sideName=document.getElementById("tpSideName"), sideId=document.getElementById("tpSideId"), sideAvatar=document.getElementById("tpSideAvatar");
+      if(sideName) sideName.textContent=t.name;
+      if(sideId) sideId.textContent=professionalTeacherId(t.teacher_code,t.id,t.joining_date);
+      if(sideAvatar && teacherPhoto) sideAvatar.src=teacherPhoto;
 
       const classNames=[...new Set(assignments.map(a=>a.class_name).filter(Boolean))];
       const subjectNames=[...new Set(assignments.map(a=>a.subject).filter(Boolean))];
@@ -536,26 +746,27 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
       const financialAccess=isFinancialRole(t.designation);
       let html=`
-        <div class="notice" style="margin-bottom:16px;background:linear-gradient(135deg,#eef6ff,#f5f0ff);border:1px solid #dbe7ff"><strong>${escapeHtml(t.designation||"Teaching Staff")}</strong> · Teaching access is always included. Your administrative designation does not remove your teaching classes, students, results, lesson plans, notifications or requests.</div>
-        ${financialAccess ? `<section class="section" id="financialDeskSection">
+        <div class="notice dashboard-extra" style="margin-bottom:16px;background:linear-gradient(135deg,#eef6ff,#f5f0ff);border:1px solid #dbe7ff"><strong>${escapeHtml(t.designation||"Teaching Staff")}</strong> · Teaching access is always included. Your administrative designation does not remove your teaching classes, students, results, lesson plans, notifications or requests.</div>
+        ${financialAccess ? `<section class="section dashboard-extra" id="financialDeskSection">
           <div class="section-head"><h3>💼 Financial Desk</h3><div class="muted">Your financial responsibility is active in the same teacher login.</div></div>
           <div id="financialDeskContent"><div class="loading">Loading financial information…</div></div>
         </section>` : ""}
-        <div class="grid">
+        <div class="grid dashboard-extra">
           <div class="stat"><div class="muted">Assigned Classes</div><div class="num">${classNames.length}</div></div>
           <div class="stat"><div class="muted">Assigned Subjects</div><div class="num">${subjectNames.length}</div></div>
           <div class="stat"><div class="muted">Students Available</div><div class="num">${students.length}</div></div>
         </div>
-        <section class="section">
+        <section id="teacherProfileSection" class="section">
           <h3>My Profile</h3>
           <div class="profile">
             <img class="profile-photo" src="${teacherPhoto||"school-logo.jpg"}" alt="Teacher photo">
             <div class="details">
               <div class="detail"><small>Name</small><b>${escapeHtml(t.name)}</b></div>
-              <div class="detail"><small>Teacher ID</small><b>${escapeHtml(t.teacher_code)}</b></div>
+              <div class="detail"><small>Professional Teacher ID</small><div class="tp-id-badge"><span class="tp-id-dot"></span><b>${escapeHtml(professionalTeacherId(t.teacher_code,t.id,t.joining_date))}</b></div></div>
               <div class="detail"><small>Designation</small><b>${escapeHtml(t.designation||"Teaching Staff")}</b></div>
               <div class="detail"><small>Gender</small><b>${escapeHtml(t.gender||"—")}</b></div>
               <div class="detail"><small>Phone</small><b>${escapeHtml(t.phone||"—")}</b></div>
+              <div class="detail"><small>CNIC Number</small><b>${escapeHtml(t.cnic||"—")}</b></div>
               <div class="detail"><small>Email</small><b>${escapeHtml(t.email||"—")}</b></div>
               <div class="detail"><small>Qualification</small><b>${escapeHtml(t.qualification||"—")}</b></div>
               <div class="detail"><small>Joining Date</small><b>${escapeHtml(t.joining_date||"—")}</b></div>
@@ -563,7 +774,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
             </div>
           </div>
         </section>
-        <section class="section">
+        <section id="teacherClassesSection" class="section">
           <h3>My Classes & Students</h3>
           <div class="class-grid">
       `;
@@ -579,76 +790,127 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
             <div class="students">`;
           if(!list.length) html+=`<div class="muted" style="padding:10px">No active students found in this class.</div>`;
           else list.forEach(s=>{
-            html+=`<div class="student">
+            html+=`<div class="student" role="button" tabindex="0" onclick="openStudentDetails('${escapeHtml(s.id)}')" onkeydown="if(event.key==='Enter'||event.key===' ')openStudentDetails('${escapeHtml(s.id)}')">
               <img src="${s._photo||"school-logo.jpg"}" alt="">
               <div><b>${escapeHtml(s.name)}</b><span>ID: ${escapeHtml(s.student_code)} • ${escapeHtml(s.gender||"—")} • ${escapeHtml(s.status||"—")}</span></div>
+              <span class="open-hint">View details →</span>
             </div>`;
           });
           html+=`</div></article>`;
         });
       }
-      html+=`</div></section>`;
+      html+=`</div></section>
+        <section id="teacherGrowthSection" class="section" style="margin-top:22px">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap">
+            <div><h3 style="margin-bottom:5px">📈 Class Academic Growth</h3><div class="muted">Professional performance trends for your assigned classes, based on recorded student results.</div></div>
+            <span class="tpls-dashboard-badge">TEACHER CLASS GROWTH</span>
+          </div>
+          <div id="teacherGrowthCharts" class="tpls-growth-grid"><div class="tpls-chart-empty">Loading class growth…</div></div>
+        </section>`;
       $("content").innerHTML=html;
+      renderTeacherGrowthCharts(classNames,growthResults);
 
-      const feeMonthEl=$("feeMonth");
+      const feeMonthEl=$("feeMonth"), feeClassEl=$("feeClass");
+      if(feeClassEl){
+        fillSelect("feeClass",classNames,"All assigned classes");
+        feeClassEl.onchange=()=>renderFeeStatus(students,feePayments,feeMonthEl.value,feeClassEl.value);
+      }
       feeMonthEl.value=currentMonth();
-      feeMonthEl.onchange=()=>renderFeeStatus(students,feePayments,feeMonthEl.value);
-      renderFeeStatus(students,feePayments,feeMonthEl.value);
+      feeMonthEl.onchange=()=>renderFeeStatus(students,feePayments,feeMonthEl.value,feeClassEl?.value||"");
+      renderFeeStatus(students,feePayments,feeMonthEl.value,feeClassEl?.value||"");
       initNewFeatureForms();
     }
 
-    function renderFeeStatus(students,feePayments,month){
+    function renderTeacherGrowthCharts(classNames,results){
+      const host=$("teacherGrowthCharts"); if(!host)return;
+      if(!window.Chart){host.innerHTML='<div class="tpls-chart-empty">Academic growth charts could not load. Please check your internet connection.</div>';return;}
+      const safeResults=Array.isArray(results)?results:[];
+      const palette=["#3557f5","#7c3aed","#06b6d4","#f59e0b","#16a34a","#e11d48"];
+      if(!safeResults.length){
+        host.innerHTML=`<div class="tpls-chart-empty" style="grid-column:1/-1"><div><strong>No result records yet.</strong><br>Class growth graphs will appear automatically after student results are recorded.</div></div>`;
+        return;
+      }
+      const classes=[...new Set((classNames||[]).filter(Boolean))];
+      host.innerHTML=classes.map((cls,i)=>`<article class="tpls-growth-card"><h4>${escapeHtml(cls)}</h4><p>Average class percentage by assessment date</p><div class="tpls-chart-wrap"><canvas id="growthChart_${i}"></canvas></div></article>`).join("");
+      classes.forEach((cls,i)=>{
+        const rows=safeResults.filter(r=>String(r.class_name||"")===String(cls)&&Number.isFinite(Number(r.percentage))).sort((a,b)=>String(a.exam_date||a.created_at||"").localeCompare(String(b.exam_date||b.created_at||"")));
+        const buckets=new Map();
+        rows.forEach(r=>{
+          const date=String(r.exam_date||r.created_at||"").slice(0,10)||"Undated";
+          if(!buckets.has(date))buckets.set(date,[]); buckets.get(date).push(Number(r.percentage));
+        });
+        const labels=[...buckets.keys()]; const values=labels.map(k=>{const a=buckets.get(k)||[];return a.length?a.reduce((x,y)=>x+y,0)/a.length:0;});
+        const canvas=$("growthChart_"+i); if(!canvas)return;
+        new Chart(canvas,{type:"line",data:{labels,datasets:[{label:"Class Average %",data:values,borderColor:palette[i%palette.length],backgroundColor:"rgba(53,87,245,.08)",fill:true,tension:.35,pointRadius:4,pointHoverRadius:6,borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:c=>` ${Number(c.parsed.y||0).toFixed(1)}% average`}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+"%",font:{size:10}}},x:{ticks:{font:{size:9},maxRotation:45,minRotation:0}}}}});
+      });
+    }
+
+    function monthKeyFromDate(d){
+      const x=new Date(d);
+      return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}`;
+    }
+    function addOneMonth(key){
+      const [y,m]=String(key).split("-").map(Number);
+      if(!y||!m) return key;
+      const d=new Date(y,m-1,1); d.setMonth(d.getMonth()+1);
+      return monthKeyFromDate(d);
+    }
+    function pendingMonthsForStudent(student,feePayments,uptoMonth){
+      const expected=Number(student.monthly_fee||0);
+      if(expected<=0) return 0;
+      const own=feePayments.filter(p=>p.student_id===student.id);
+      let start=own.map(p=>String(p.fee_month||"").slice(0,7)).filter(x=>/^\d{4}-\d{2}$/.test(x)).sort()[0]||uptoMonth;
+      if(start>uptoMonth) start=uptoMonth;
+      let pending=0, cur=start;
+      let guard=0;
+      while(cur<=uptoMonth && guard++<120){
+        const pm=own.filter(p=>String(p.fee_month||"").slice(0,7)===cur);
+        const paid=pm.reduce((a,p)=>a+Number(p.paid_amount||0),0);
+        const discount=pm.reduce((a,p)=>a+Number(p.discount||0),0);
+        if(expected-paid-discount>0) pending++;
+        cur=addOneMonth(cur);
+      }
+      return pending;
+    }
+    function renderFeeStatus(students,feePayments,month,classFilter=""){
       const monthKey=month || currentMonth();
-      const rows=students.map(s=>{
+      const visibleStudents=classFilter ? students.filter(s=>s.class_name===classFilter) : students;
+      const rows=visibleStudents.map(s=>{
         const payments=feePayments.filter(p=>p.student_id===s.id && String(p.fee_month||"").slice(0,7)===monthKey);
         const paid=payments.reduce((sum,p)=>sum+Number(p.paid_amount||0),0);
         const discount=payments.reduce((sum,p)=>sum+Number(p.discount||0),0);
         const expected=Number(s.monthly_fee||0);
         const state=feeStatus(expected,paid,discount);
-        const last=payments.slice().sort((a,b)=>String(b.payment_date||"").localeCompare(String(a.payment_date||"")))[0];
-        return {...s,expected,paid,discount,last,state};
+        const pendingMonths=pendingMonthsForStudent(s,feePayments,monthKey);
+        return {...s,expected,paid,discount,state,pendingMonths};
       });
-
-      const totalExpected=rows.reduce((a,r)=>a+r.expected,0);
-      const totalPaid=rows.reduce((a,r)=>a+r.paid,0);
-      const totalDue=rows.reduce((a,r)=>a+r.state.due,0);
       const paidCount=rows.filter(r=>r.state.label==="Paid").length;
       const partialCount=rows.filter(r=>r.state.label==="Partial").length;
       const unpaidCount=rows.filter(r=>r.state.label==="Unpaid").length;
-
-      let out=`
-        <div class="grid" style="margin-bottom:18px">
-          <div class="stat"><div class="muted">Expected</div><div class="num">PKR ${totalExpected.toLocaleString()}</div></div>
-          <div class="stat"><div class="muted">Collected</div><div class="num">PKR ${totalPaid.toLocaleString()}</div></div>
-          <div class="stat"><div class="muted">Outstanding</div><div class="num">PKR ${totalDue.toLocaleString()}</div></div>
-        </div>
-        <div class="fee-note" style="margin-bottom:12px">${rows.length} students • ${paidCount} Paid • ${partialCount} Partial • ${unpaidCount} Unpaid</div>
-        <div class="fee-table-wrap"><table class="fee-table">
-          <thead><tr><th>Student</th><th>Expected</th><th>Paid</th><th>Outstanding</th><th>Status</th><th>Last Payment</th></tr></thead>
-          <tbody>
-      `;
+      const totalPendingMonths=rows.reduce((a,r)=>a+r.pendingMonths,0);
+      let out=`<div class="tp-fee-summary">
+        <div class="tp-fee-mini"><small>Students</small><b>${rows.length}</b></div>
+        <div class="tp-fee-mini"><small>Paid This Month</small><b>${paidCount}</b></div>
+        <div class="tp-fee-mini"><small>Partial / Pending</small><b>${partialCount+unpaidCount}</b></div>
+        <div class="tp-fee-mini"><small>Total Pending Months</small><b class="tp-pending">${totalPendingMonths}</b></div>
+      </div>
+      <div class="fee-note" style="margin-bottom:12px">${classFilter?`Class: <strong>${escapeHtml(classFilter)}</strong> • `:""}Month: <strong>${escapeHtml(monthKey)}</strong> • Fee details remain view-only.</div>
+      <div class="fee-table-wrap tp-status-only"><table class="fee-table">
+        <thead><tr><th>Student</th><th>Class</th><th>This Month</th><th>Pending Months</th></tr></thead><tbody>`;
       if(!rows.length){
-        out += `<tr><td colspan="6" class="loading">No students are currently assigned to your classes.</td></tr>`;
-      } else {
-        rows.forEach(r=>{
-          out += `<tr>
-            <td><div style="display:flex;align-items:center;gap:10px">
-              <img src="${r._photo||"school-logo.jpg"}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;background:#edf3fa">
-              <div><strong>${escapeHtml(r.name)}</strong><div class="fee-note">ID: ${escapeHtml(r.student_code)}</div></div>
-            </div></td>
-            <td class="fee-amount">PKR ${r.expected.toLocaleString()}</td>
-            <td>PKR ${r.paid.toLocaleString()}</td>
-            <td>PKR ${r.state.due.toLocaleString()}</td>
-            <td><span class="fee-badge ${r.state.cls}">${r.state.label}</span></td>
-            <td>${r.last ? escapeHtml(r.last.payment_date||"—") : "—"}</td>
-          </tr>`;
-        });
-      }
-      out += `</tbody></table></div>
-        <div class="notice">Fee information is view-only in the Teacher Portal. Payment collection, receipts, discounts and financial reports remain under Admin control.</div>`;
+        out+=`<tr><td colspan="4" class="loading">No students are currently assigned to this class.</td></tr>`;
+      }else rows.forEach(r=>{
+        const statusClass=r.state.cls;
+        out+=`<tr>
+          <td><div class="student-cell"><img src="${r._photo||"school-logo.jpg"}" alt=""><div><strong>${escapeHtml(r.name)}</strong><small>ID: ${escapeHtml(r.student_code)}</small></div></div></td>
+          <td>${escapeHtml(r.class_name||"—")}</td>
+          <td><span class="fee-badge ${statusClass}">${escapeHtml(r.state.label)}</span></td>
+          <td><strong class="${r.pendingMonths?'tp-pending':''}">${r.pendingMonths} month${r.pendingMonths===1?'':'s'}</strong></td>
+        </tr>`;
+      });
+      out+=`</tbody></table></div><div class="notice">Teachers can see the student's fee <strong>status and number of pending months only</strong>. Payment amounts, discounts, receipts and financial records remain under Admin control.</div>`;
       $("feeStatusContent").innerHTML=out;
     }
-
 
     let teacherContext={teacher:null,assignments:[],students:[]};
     let notifications=[];
@@ -697,8 +959,9 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const countEl=$("quickNotificationCount"); if(countEl) countEl.textContent=`${unread} new`;
       const bellTitle=document.querySelector('[data-scroll="notificationSection"] h4'); if(bellTitle) bellTitle.innerHTML=`Notifications <span class="badge-status">${unread} new</span>`;
       if(!notifications.length){$("notificationContent").innerHTML='<div class="notice">No notifications have been sent to you yet.</div>';return;}
-      $("notificationContent").innerHTML='<div class="notification-list">'+notifications.map(n=>`<article class="notification ${n.is_read?'':'unread'}"><div class="notification-top"><div class="notification-title">${escapeHtml(n.title)}</div><div class="notification-time">${formatDateTime(n.created_at)}</div></div><div class="notification-msg">${escapeHtml(n.message||"")}</div>${n.attachment_path?'<div class="notification-actions"><button class="mini-action" data-download-notification="'+escapeHtml(n.id)+'">📎 '+escapeHtml(n.attachment_name||'View attachment')+'</button></div>':''}${n.is_read?'':'<div class="notification-actions"><button class="mini-action" data-read-notification="'+escapeHtml(n.id)+'">Mark as read</button></div>'}</article>`).join('')+'</div>';
+      $("notificationContent").innerHTML='<div class="notification-list">'+notifications.map(n=>`<article class="notification ${n.is_read?'':'unread'}"><div class="notification-top"><div class="notification-title">${escapeHtml(n.title)}</div><div class="notification-time">${formatDateTime(n.created_at)}</div></div><div class="notification-msg">${escapeHtml(n.message||"")}</div>${n.attachment_path?'<div class="notification-actions"><button class="mini-action" data-download-notification="'+escapeHtml(n.id)+'">📎 '+escapeHtml(n.attachment_name||'View attachment')+'</button></div>':''}<div class="notification-actions">${n.is_read?'<button class="mini-action" data-delete-notification="'+escapeHtml(n.id)+'">🗑 Delete</button>':'<button class="mini-action" data-read-notification="'+escapeHtml(n.id)+'">Mark as read</button>'}</div></article>`).join('')+'</div>';
       document.querySelectorAll('[data-read-notification]').forEach(btn=>btn.addEventListener('click',async()=>{await markNotificationRead(btn.dataset.readNotification)}));
+      document.querySelectorAll('[data-delete-notification]').forEach(btn=>btn.addEventListener('click',async()=>{await deleteNotification(btn.dataset.deleteNotification)}));
       document.querySelectorAll('[data-download-notification]').forEach(btn=>btn.addEventListener('click',async()=>{await openNotificationAttachment(btn.dataset.downloadNotification)}));
     }
     async function openNotificationAttachment(id){
@@ -709,9 +972,18 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const a=document.createElement("a");a.href=data.signedUrl;a.target="_blank";a.rel="noopener";a.download=n.attachment_name||"attachment";a.click();
     }
     async function markNotificationRead(id){
-      const {error}=await client.from("teacher_notifications").update({is_read:true}).eq("id",id).eq("teacher_id",currentTeacherId);
+      const {error}=await client.from("teacher_notifications").update({is_read:true}).eq("id",id).or(`teacher_id.eq.${currentTeacherId},teacher_id.is.null`);
       if(!error){const n=notifications.find(x=>x.id===id);if(n)n.is_read=true;renderNotifications();}
     }
+    async function deleteNotification(id){
+      const n=notifications.find(x=>String(x.id)===String(id));
+      if(!n || !n.is_read) return alert("Only notifications marked as read can be deleted.");
+      if(!confirm("Delete this notification from your teacher portal?")) return;
+      const {error}=await client.from("teacher_notifications").delete().eq("id",id).eq("teacher_id",currentTeacherId).eq("is_read",true);
+      if(error){alert("Could not delete the notification: "+(error.message||"Database error."));return;}
+      notifications=notifications.filter(x=>String(x.id)!==String(id)); renderNotifications();
+    }
+
     async function markAllNotificationsRead(){
       const ids=notifications.filter(n=>!n.is_read && n.teacher_id).map(n=>n.id);
       if(!ids.length) return;
@@ -722,13 +994,13 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const {data,error}=await client.from("teacher_lesson_plans").select("id,class_name,subject,topic,objectives,activities,homework,lesson_date,notes,created_at").eq("teacher_id",currentTeacherId).order("lesson_date",{ascending:false}).order("created_at",{ascending:false}).limit(20);
       if(error){$("lessonHistory").innerHTML=`<div class="notice error">Could not load lesson plans: ${escapeHtml(error.message)}</div>`;return;}
       if(!data?.length){$("lessonHistory").innerHTML='<div class="notice">No lesson plans saved yet.</div>';return;}
-      $("lessonHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Lesson Plans</h4><div class="history-list">'+data.map(p=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(p.topic)}</div><span class="grade-chip">${escapeHtml(p.class_name)} • ${escapeHtml(p.subject)}</span></div><div class="history-meta">${escapeHtml(p.lesson_date||"")}</div><div class="history-body"><b>Objectives:</b> ${escapeHtml(p.objectives||"—")}\n<b>Activities:</b> ${escapeHtml(p.activities||"—")}\n<b>Homework:</b> ${escapeHtml(p.homework||"—")}${p.notes?`\n<b>Notes:</b> ${escapeHtml(p.notes)}`:""}</div><div class="history-actions"><button class="mini-action" type="button" onclick="editLessonPlan('${p.id}')">Edit</button><button class="mini-action danger" type="button" onclick="deleteLessonPlan('${p.id}')">Delete</button></div></article>`).join('')+'</div>';
+      $("lessonHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Lesson Plans</h4><div class="history-list">'+data.map(p=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(p.topic)}</div><span class="grade-chip">${escapeHtml(p.class_name)} • ${escapeHtml(p.subject)}</span></div><div class="history-meta">${escapeHtml(p.lesson_date||"")}</div><div class="history-body"><b>Objectives:</b> ${escapeHtml(p.objectives||"—")}\n<b>Activities:</b> ${escapeHtml(p.activities||"—")}\n<b>Homework:</b> ${escapeHtml(p.homework||"—")}${p.notes?`\n<b>Notes:</b> ${escapeHtml(p.notes)}`:""}</div><div class="history-actions"><button class="mini-action" type="button" onclick="editLessonPlan('${p.id}')">Edit</button><button class="mini-action danger" type="button" onclick="deleteLessonPlan('${p.id}')">Delete</button><button class="tp-download-btn" type="button" onclick='PDF.downloadLessonRecord(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Download PDF</button></div></article>`).join('')+'</div>';
     }
     async function loadResultHistory(){
       const {data,error}=await client.from("teacher_student_results").select("id,student_id,class_name,subject,assessment_type,assessment_name,term,total_marks,obtained_marks,percentage,grade,exam_date,remarks,created_at,students(name,student_code)").eq("teacher_id",currentTeacherId).order("exam_date",{ascending:false}).order("created_at",{ascending:false}).limit(30);
       if(error){$("resultHistory").innerHTML=`<div class="notice error">Could not load results: ${escapeHtml(error.message)}</div>`;return;}
       if(!data?.length){$("resultHistory").innerHTML='<div class="notice">No student results saved yet.</div>';return;}
-      $("resultHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Results</h4><div class="history-list">'+data.map(r=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(r.students?.name||"Student")} — ${escapeHtml(r.assessment_name)}</div><span class="grade-chip">${escapeHtml(r.grade||"")} • ${Number(r.percentage||0).toFixed(2)}%</span></div><div class="history-meta">${escapeHtml(r.class_name)} • ${escapeHtml(r.subject)} • ${escapeHtml(r.assessment_type)} • ${escapeHtml(r.exam_date||"")} • ${Number(r.obtained_marks||0)} / ${Number(r.total_marks||0)}</div>${r.remarks?`<div class="history-body">${escapeHtml(r.remarks)}</div>`:""}</article>`).join('')+'</div>';
+      $("resultHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Results</h4><div class="history-list">'+data.map(r=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(r.students?.name||"Student")} — ${escapeHtml(r.assessment_name)}</div><span class="grade-chip">${escapeHtml(r.grade||"")} • ${Number(r.percentage||0).toFixed(2)}%</span></div><div class="history-meta">${escapeHtml(r.class_name)} • ${escapeHtml(r.subject)} • ${escapeHtml(r.assessment_type)} • ${escapeHtml(r.exam_date||"")} • ${Number(r.obtained_marks||0)} / ${Number(r.total_marks||0)}</div>${r.remarks?`<div class="history-body">${escapeHtml(r.remarks)}</div>`:""}<div class="history-actions"><button class="tp-download-btn" type="button" onclick='PDF.downloadResultRecord(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Download PDF</button></div></article>`).join('')+'</div>';
     }
     async function editLessonPlan(id){
       try{
@@ -744,6 +1016,146 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       try{ const {error}=await client.from("teacher_lesson_plans").delete().eq("id",id).eq("teacher_id",currentTeacherId); if(error) throw error; await loadLessonHistory(); setRequestMsg("lessonMsg","Lesson plan deleted.",true); }
       catch(err){setRequestMsg("lessonMsg",err.message||"Could not delete lesson plan.",false)}
     }
+
+    function normalizeEvent(e){
+      return {
+        id:e.id,
+        title:e.title||e.event_title||e.name||e.subject||"School Event",
+        date:e.event_date||e.date||e.start_date||"",
+        time:e.event_time||e.time||e.start_time||"",
+        location:e.location||e.venue||e.place||"",
+        description:e.description||e.details||e.message||"",
+        status:e.status||""
+      };
+    }
+
+    async function loadEvents(){
+      const el=$("eventsContent"); if(!el) return;
+      try{
+        let rows=[];
+        const first=await client.from("school_events").select("*");
+        if(!first.error) rows=first.data||[];
+        else{
+          const second=await client.from("events").select("*");
+          if(!second.error) rows=second.data||[];
+          else throw second.error;
+        }
+        const events=rows.map(normalizeEvent).filter(e=>String(e.status).toLowerCase()!=="cancelled");
+        events.sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.time).localeCompare(String(b.time)));
+        if(!events.length){el.innerHTML='<div class="notice">No upcoming school events have been added by administration yet.</div>';return;}
+        el.innerHTML='<div class="tpls-event-list">'+events.slice(0,12).map(e=>`<article class="tpls-event"><div class="tpls-event-date">${escapeHtml(e.date?formatDateTime(e.date).split(",")[0]: "Date to be announced")}</div><div class="tpls-event-title">${escapeHtml(e.title)}</div>${(e.time||e.location)?`<div class="tpls-event-meta">${escapeHtml([e.time,e.location].filter(Boolean).join(" • "))}</div>`:""}${e.description?`<div class="tpls-event-desc">${escapeHtml(e.description)}</div>`:""}</article>`).join("")+'</div>';
+      }catch(err){
+        console.warn("Events could not be loaded:",err);
+        el.innerHTML='<div class="notice">No school events are available right now. Events added by administration will appear here when the events table is available.</div>';
+      }
+    }
+
+    function studentIsAssigned(studentId){
+      return !!teacherContext.students.find(s=>String(s.id)===String(studentId));
+    }
+
+    async function openStudentDetails(studentId){
+      if(!studentIsAssigned(studentId)){alert("This student is not assigned to you.");return;}
+      const modal=$("studentDetailsModal"), content=$("studentModalContent");
+      if(!modal||!content)return;
+      modal.classList.remove("hidden"); modal.setAttribute("aria-hidden","false");
+      content.innerHTML='<div class="tpls-loading">Loading student information, fee history and results…</div>';
+      try{
+        const [{data:student,error:se},{data:fees,error:fe},{data:results,error:re}]=await Promise.all([
+          client.from("students").select("*").eq("id",studentId).single(),
+          client.from("fee_payments").select("*").eq("student_id",studentId).order("fee_month",{ascending:false}).order("payment_date",{ascending:false}),
+          client.from("teacher_student_results").select("id,class_name,subject,assessment_type,assessment_name,term,total_marks,obtained_marks,percentage,grade,exam_date,remarks,created_at").eq("student_id",studentId).order("exam_date",{ascending:false}).order("created_at",{ascending:false})
+        ]);
+        if(se) throw se;
+        if(fe) throw fe;
+        if(re) throw re;
+        const local=teacherContext.students.find(s=>String(s.id)===String(studentId))||{};
+        const photo=local._photo||await signedPhoto("student-photos",student.photo_path);
+        $("studentModalTitle").textContent=student.name||student.full_name||"Student Details";
+        $("studentModalSub").textContent=`Assigned to you • ${student.student_code||student.admission_no||""} • ${student.class_name||"—"}`;
+        const excluded=new Set(["id","photo_path","created_at","updated_at"]);
+        const entries=Object.entries(student||{}).filter(([k,v])=>!excluded.has(k)&&v!==null&&v!==undefined&&v!=="").map(([k,v])=>`<div class="tpls-data-item"><small>${escapeHtml(k.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()))}</small><b>${escapeHtml(String(v))}</b></div>`).join("");
+        const feeRows=(fees||[]).map(f=>`<tr><td>${escapeHtml(String(f.fee_month||"").slice(0,10)||"—")}</td><td>${escapeHtml(f.payment_date||"—")}</td><td>${escapeHtml(String(f.paid_amount??f.amount_paid??"—"))}</td><td>${escapeHtml(String(f.discount??"0"))}</td><td>${escapeHtml(f.receipt_number||f.receipt_no||"—")}</td></tr>`).join("");
+        const resultRows=(results||[]).map(r=>`<tr><td>${escapeHtml(r.exam_date||"—")}</td><td>${escapeHtml(r.subject||"—")}</td><td>${escapeHtml(r.assessment_name||r.assessment_type||"—")}</td><td>${escapeHtml(String(r.obtained_marks??"—"))} / ${escapeHtml(String(r.total_marks??"—"))}</td><td>${escapeHtml(String(r.percentage??"—"))}%</td><td>${escapeHtml(r.grade||"—")}</td></tr>`).join("");
+        content.innerHTML=`<div class="tpls-student-summary"><img class="tpls-student-photo" src="${photo||"school-logo.jpg"}" alt=""><div><div class="tpls-data-grid">${entries||'<div class="notice">No student data is available.</div>'}</div></div></div>
+          <div class="tpls-modal-section"><h4>📈 Student Academic Growth</h4><div class="tpls-growth-card" style="padding:14px"><p style="margin-bottom:8px">This student's percentage trend across recorded assessments.</p><div class="tpls-chart-wrap"><canvas id="studentGrowthChart"></canvas></div></div></div>
+          <div class="tpls-modal-section"><h4>💳 Previous Fee History</h4><div class="fee-table-wrap"><table class="tpls-modal-table"><thead><tr><th>Fee Month</th><th>Payment Date</th><th>Paid</th><th>Discount</th><th>Receipt</th></tr></thead><tbody>${feeRows||'<tr><td colspan="5">No fee payments recorded.</td></tr>'}</tbody></table></div></div>
+          <div class="tpls-modal-section"><h4>📝 Results History</h4><div class="fee-table-wrap"><table class="tpls-modal-table"><thead><tr><th>Date</th><th>Subject</th><th>Assessment</th><th>Marks</th><th>%</th><th>Grade</th></tr></thead><tbody>${resultRows||'<tr><td colspan="6">No results recorded.</td></tr>'}</tbody></table></div></div>`;
+        renderStudentGrowthChart(results);
+      }catch(err){
+        console.error("Student details failed:",err);
+        content.innerHTML=`<div class="notice error">Could not load this student's complete information: ${escapeHtml(err.message||"Cloud data unavailable.")}</div>`;
+      }
+    }
+    function renderStudentGrowthChart(results){
+      const canvas=$("studentGrowthChart"); if(!canvas||!window.Chart)return;
+      const rows=(results||[]).filter(r=>Number.isFinite(Number(r.percentage))).sort((a,b)=>String(a.exam_date||a.created_at||"").localeCompare(String(b.exam_date||b.created_at||"")));
+      if(!rows.length){canvas.parentElement.innerHTML='<div class="tpls-chart-empty">No percentage-based results are recorded for this student yet.</div>';return;}
+      new Chart(canvas,{type:"line",data:{labels:rows.map(r=>String(r.exam_date||r.created_at||"").slice(0,10)||"Undated"),datasets:[{label:"Student Percentage",data:rows.map(r=>Number(r.percentage)),borderColor:"#3557f5",backgroundColor:"rgba(53,87,245,.08)",fill:true,tension:.35,pointRadius:4,borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:c=>` ${Number(c.parsed.y||0).toFixed(1)}%`}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+"%",font:{size:10}}},x:{ticks:{font:{size:9},maxRotation:45}}}}});
+    }
+    function closeStudentDetails(){
+      const modal=$("studentDetailsModal"); if(!modal)return;
+      modal.classList.add("hidden"); modal.setAttribute("aria-hidden","true");
+    }
+    window.openStudentDetails=openStudentDetails;
+    window.closeStudentDetails=closeStudentDetails;
+
+    async function submitSalaryReceived(e){
+      e.preventDefault();
+      setRequestMsg("salaryMsg","",true);
+      setButtonBusy("salaryBtn",true,"Notify Administration","Submitting…");
+      const amount=Number($("salaryAmount").value||0);
+      if(amount<=0){setRequestMsg("salaryMsg","Please enter a valid salary amount.",false);setButtonBusy("salaryBtn",false,"Notify Administration","Submitting…");return;}
+      const bank=$("salaryBank").value;
+      const received=$("salaryDate").value;
+      const reference=$("salaryReference").value.trim();
+      const notes=$("salaryNotes").value.trim();
+      const teacher=teacherContext.teacher||{};
+      const message=[
+        `Salary received: PKR ${amount.toLocaleString()}`,
+        `Date received: ${received||"—"}`,
+        `Bank / payment method: ${bank||"—"}`,
+        reference?`Transaction / reference: ${reference}`:"",
+        notes?`Additional details: ${notes}`:""
+      ].filter(Boolean).join("\\n");
+      const salarySubject=`Salary Received — PKR ${amount.toLocaleString()} — ${received||"Date not provided"}`;
+      let ok=false;
+      // Save salary confirmations directly in the admin Staff Salaries module.
+      // This keeps them out of the Suggestions list.
+      try{
+        const {error}=await client.from("staff_salary_submissions").insert({
+          teacher_id:currentTeacherId,
+          salary_month:received||new Date().toISOString().slice(0,10),
+          amount,
+          paid_by:"School Administration",
+          bank_name:bank,
+          notes:[reference?`Transaction / Reference: ${reference}`:"",notes].filter(Boolean).join("\n")||null
+        });
+        if(!error){
+          setRequestMsg("salaryMsg","Salary received record has been sent to administration.",true);
+          ok=true;
+        }else{
+          console.warn("Staff salary table submission failed:",error);
+          // Keep compatibility with older databases that do not yet have the salary table.
+          const salaryPayload={request_type:"salary_received",subject:salarySubject,message};
+          ok=await submitTeacherRequest(salaryPayload,"salaryMsg","salaryBtn","Notify Administration","Submitting…");
+          if(!ok){
+            const lastMsg=String($("salaryMsg")?.textContent||"").toLowerCase();
+            if(lastMsg.includes("request_type_check")||lastMsg.includes("check constraint")){
+              ok=await submitTeacherRequest({...salaryPayload,request_type:"suggestion",subject:`[SALARY RECEIVED] ${salarySubject}`},"salaryMsg","salaryBtn","Notify Administration","Submitting…");
+            }
+          }
+        }
+      }catch(err){
+        console.warn("Staff salary submission failed:",err);
+        const salaryPayload={request_type:"salary_received",subject:salarySubject,message};
+        ok=await submitTeacherRequest(salaryPayload,"salaryMsg","salaryBtn","Notify Administration","Submitting…");
+      }finally{
+        setButtonBusy("salaryBtn",false,"Notify Administration","Submitting…");
+      }
+      if(ok){$("salaryForm").reset();$("salaryDate").value=new Date().toISOString().slice(0,10);}
+    }
+
     function initNewFeatureForms(){
       const classes=assignedClasses();
       fillSelect("lessonClass",classes,"Select class");
@@ -756,7 +1168,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       $("lessonDate").value=new Date().toISOString().slice(0,10); $("examDate").value=new Date().toISOString().slice(0,10);
       $("lessonPlanForm").onsubmit=submitLessonPlan; $("resultForm").onsubmit=submitResult;
       $("markNotificationsReadBtn").onclick=markAllNotificationsRead;
-      loadNotifications(); loadLessonHistory(); loadResultHistory();
+      if($("salaryForm")){$("salaryForm").onsubmit=submitSalaryReceived;$("salaryDate").value=new Date().toISOString().slice(0,10);}
+      loadNotifications(); loadLessonHistory(); loadResultHistory(); loadEvents();
     }
     async function submitLessonPlan(e){
       e.preventDefault(); setRequestMsg("lessonMsg","",true); setButtonBusy("lessonBtn",true,$("lessonPlanForm").dataset.editId?"Update Lesson Plan":"Save Lesson Plan","Saving…");
@@ -886,6 +1299,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
 
     $("logoutBtn").addEventListener("click", async()=>{await client.auth.signOut();location.reload();});
+    document.addEventListener("click",e=>{if(e.target.id==="studentDetailsModal")closeStudentDetails();});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeStudentDetails();});
 
     client.auth.getSession().then(async({data})=>{
       if(data.session){
@@ -893,6 +1308,70 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       }
     });
   </script>
+
+
+<script id="tpls-sidebar-script">
+(function(){
+  function professionalTeacherId(code,id,joiningDate){
+    const year=(String(joiningDate||"").match(/^(\d{4})/)||[])[1] || String(new Date().getFullYear());
+    const raw=String(code||"").trim();
+    const digits=raw.match(/(\d{1,6})\s*$/);
+    let employeeNo=digits?digits[1]:"";
+    if(!employeeNo && raw) employeeNo=raw.replace(/[^0-9]/g,"").slice(-6);
+    if(!employeeNo) employeeNo=String(id||"").replace(/-/g,"").slice(-3);
+    employeeNo=String(employeeNo||"001").replace(/\D/g,"").slice(-3).padStart(3,"0");
+    return `TPLS-${year}-${employeeNo}`;
+  }
+  function showTeacherFeaturePage(id){
+    const dash=document.getElementById("dashboardPage"); if(!dash)return;
+    const dashboardTargets=new Set(["dashboardHome"]);
+    const pageIds=["dashboardHome","content","eventsSection","salarySection","financialDeskSection","feeStatusSection","lessonPlanSection","resultSection","teacherRequestSection","suggestionSection","notificationSection","rulesSection"];
+    dash.classList.remove("dashboard-only-mode","feature-page-mode");
+    if(dashboardTargets.has(id)){
+      dash.classList.add("dashboard-only-mode");
+      pageIds.forEach(x=>{const el=document.getElementById(x);if(el)el.classList.remove("hidden")});
+      return;
+    }
+    dash.classList.add("feature-page-mode");
+    pageIds.forEach(x=>{const el=document.getElementById(x);if(el)el.classList.toggle("hidden",x!==id)});
+    const el=document.getElementById(id); if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  function installTeacherSidebar(){
+    const dash=document.getElementById("dashboardPage");
+    if(!dash||dash.querySelector(".tp-sidebar")) return;
+    const nav=[
+      ["dashboardHome","⌂","Dashboard"],
+      ["content","👨‍🎓","My Students"],
+      ["eventsSection","📅","School Events"],
+      ["salarySection","💳","Salary Received"],
+      ["feeStatusSection","💰","Student Fees"],
+      ["lessonPlanSection","▣","Lesson Plans"],
+      ["resultSection","✓","Tests & Results"],
+      ["teacherRequestSection","□","Leave Application"],
+      ["suggestionSection","✦","Suggestions"],
+      ["notificationSection","◉","Notifications"],
+      ["rulesSection","◌","School Rules"]
+    ];
+    const side=document.createElement("aside");
+    side.className="tp-sidebar";
+    side.innerHTML=`<div class="tp-brand"><img src="school-logo.jpg" alt=""><div><strong>THE PROGRESS<br>OF LIFE SCHOOL</strong><span>Teacher Portal • Faisalabad</span></div></div>
+      <div class="tp-profile"><img id="tpSideAvatar" src="school-logo.jpg" alt=""><div id="tpSideName" class="tp-profile-name">Teacher</div><div class="tp-profile-role">Teacher</div><div id="tpSideId" class="tp-profile-id">TPLS-2026-001</div></div>
+      <nav class="tp-nav">${nav.map((n,i)=>`<a href="#${n[0]}" data-tp-target="${n[0]}" class="${i===0?'active':''}"><span class="ico">${n[1]}</span><span>${n[2]}</span></a>`).join("")}</nav>
+      <div class="tp-sidebar-bottom">Secure teacher access<br>© The Progress of Life School</div>`;
+    dash.insertBefore(side,dash.firstElementChild);
+    side.querySelectorAll("[data-tp-target]").forEach(a=>a.addEventListener("click",function(e){
+      e.preventDefault(); const id=this.dataset.tpTarget;
+      showTeacherFeaturePage(id);
+      side.querySelectorAll("a").forEach(x=>x.classList.remove("active")); this.classList.add("active");
+    }));
+  }
+  window.professionalTeacherId=professionalTeacherId;
+  window.installTeacherSidebar=installTeacherSidebar;
+  window.showTeacherFeaturePage=showTeacherFeaturePage;
+  document.addEventListener("DOMContentLoaded",()=>setTimeout(installTeacherSidebar,500));
+})();
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -904,86 +1383,102 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
   PDF.safe=s=>String(s||'school_form').replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'').slice(0,80)||'school_form';
   PDF.text=v=>String(v??'').replace(/\s+/g,' ').trim();
   PDF.logo=()=>EMBED_LOGO;
-  PDF.fields=function(root){
-    const rows=[];
-    root.querySelectorAll('.field,.field-group').forEach(box=>{
-      const label=box.querySelector('label')?.textContent?.trim();
-      const input=box.querySelector('input,select,textarea');
-      if(!label||!input) return;
-      let value='';
-      if(input.tagName==='SELECT') value=input.options[input.selectedIndex]?.text||'';
-      else if(input.type==='checkbox'||input.type==='radio') value=input.checked?'Yes':'No';
-      else value=input.value||'';
-      if(PDF.text(value)) rows.push([label,PDF.text(value)]);
-    });
-    return rows;
+  PDF.header=function(doc,title,subtitle){
+    const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
+    doc.setFillColor(247,249,253);doc.roundedRect(10,8,W-20,30,3,3,'F');
+    try{doc.addImage(PDF.logo(),'JPEG',14,12,22,22);}catch(e){}
+    doc.setTextColor(18,61,115);doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text(SCHOOL.name,41,16);
+    doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(82,98,122);
+    doc.text(SCHOOL.under,41,21);doc.text(SCHOOL.address,41,25);
+    doc.setFont('helvetica','bold');doc.text(SCHOOL.mission,41,29);
+    doc.setFillColor(18,61,115);doc.roundedRect(10,43,W-20,10,2,2,'F');
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.text(title||'Official School Record',14,49.7);
+    doc.setTextColor(100,116,139);doc.setFont('helvetica','normal');doc.setFontSize(7);
+    if(subtitle) doc.text(String(subtitle),14,59); else doc.text('Official school record • Generated on demand • '+new Date().toLocaleString(),14,59);
+    return 66;
   };
-  PDF.tables=function(root){
-    return [...root.querySelectorAll('table')].map(t=>{
-      const rows=[...t.querySelectorAll('tr')].map(tr=>[...tr.children].map(c=>PDF.text(c.innerText))).filter(r=>r.some(Boolean));
-      return rows.length?rows:null;
-    }).filter(Boolean);
+  PDF.footer=function(doc){
+    const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight(),pages=doc.getNumberOfPages();
+    for(let p=1;p<=pages;p++){doc.setPage(p);doc.setDrawColor(218,225,235);doc.line(14,H-13,W-14,H-13);doc.setFontSize(6.5);doc.setTextColor(110,120,137);doc.text(SCHOOL.name+' • Official school record',14,H-8);doc.text('Page '+p+' of '+pages,W-14,H-8,{align:'right'});}
   };
-  PDF.bodyText=function(root){
-    const clone=root.cloneNode(true);
-    clone.querySelectorAll('button,.tpls-pdf-btn,input,select,textarea,table,label').forEach(e=>e.remove());
-    return PDF.text(clone.innerText||'');
-  };
-  PDF.download=async function(elementOrId,title){
-    const src=typeof elementOrId==='string'?document.getElementById(elementOrId):elementOrId;
-    if(!src) return alert('This form/report could not be found.');
-    if(!window.jspdf?.jsPDF) return alert('PDF engine is still loading. Please wait a moment and try again.');
+  PDF.value=function(v){return PDF.text(v)||'—'};
+  PDF.downloadForm=async function(root,title){
+    if(!root||!window.jspdf?.jsPDF||!window.jspdf.jsPDF) return alert('PDF engine is still loading. Please wait a moment and try again.');
     try{
       const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
-      const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
-      let y=12;
-      doc.setFillColor(244,248,253);doc.roundedRect(10,8,W-20,32,3,3,'F');
-      try{doc.addImage(PDF.logo(),'JPEG',14,12,22,22);}catch(e){console.warn('Logo could not be embedded',e);}
-      doc.setTextColor(18,61,115);doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text(SCHOOL.name,41,15);
-      doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(82,98,122);doc.text(SCHOOL.under,41,20);doc.text(SCHOOL.address,41,24);doc.setFont('helvetica','bold');doc.text(SCHOOL.mission,41,28);
-      y=47;doc.setFillColor(18,61,115);doc.roundedRect(10,y,W-20,9,2,2,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11);doc.text(title||'Official School Form',14,y+6);y+=15;
-      doc.setTextColor(100,116,139);doc.setFont('helvetica','normal');doc.setFontSize(7);doc.text('Official school record • Generated on demand • '+new Date().toLocaleString(),14,y);y+=6;
-      const tables=PDF.tables(src);
-      const fields=PDF.fields(src);
+      const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+      let y=PDF.header(doc,title,'Official school record • Generated on demand • '+new Date().toLocaleString());
+      const fields=[];
+      root.querySelectorAll('.field-group,.field').forEach(box=>{
+        const label=box.querySelector('label')?.textContent?.trim(); const input=box.querySelector('input,select,textarea');
+        if(!label||!input) return;
+        let value=input.tagName==='SELECT'?(input.options[input.selectedIndex]?.text||''):input.value||'';
+        if(PDF.text(value)) fields.push([label,PDF.text(value)]);
+      });
       if(fields.length){
-        const data=fields.map(r=>[r[0],r[1]]);
-        doc.autoTable({startY:y,head:[['Field','Information']],body:data,theme:'grid',styles:{font:'helvetica',fontSize:8,cellPadding:2.5,textColor:[23,32,51]},headStyles:{fillColor:[18,61,115],textColor:255,fontStyle:'bold'},columnStyles:{0:{cellWidth:48,fontStyle:'bold'},1:{cellWidth:132}},margin:{left:14,right:14}});
-        y=doc.lastAutoTable.finalY+8;
+        if(typeof doc.autoTable==='function'){
+          doc.autoTable({startY:y,head:[['Field','Information']],body:fields,theme:'grid',styles:{font:'helvetica',fontSize:8,cellPadding:3,overflow:'linebreak',textColor:[23,32,51]},headStyles:{fillColor:[18,61,115],textColor:255,fontStyle:'bold'},columnStyles:{0:{cellWidth:50,fontStyle:'bold'},1:{cellWidth:130}},margin:{left:14,right:14},didDrawPage:()=>{}});
+          y=doc.lastAutoTable.finalY+8;
+        }else{
+          doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('Submitted Information',14,y);y+=8;
+          fields.forEach(([label,value])=>{
+            const lines=doc.splitTextToSize(String(value),125);
+            if(y+Math.max(8,lines.length*4)+6>H-28){doc.addPage();y=20;}
+            doc.setFont('helvetica','bold');doc.setFontSize(8);doc.text(String(label),16,y);
+            doc.setFont('helvetica','normal');doc.text(lines,68,y);
+            y+=Math.max(8,lines.length*4)+4;
+          });
+        }
       }
-      for(const rows of tables){
-        if(y>H-35){doc.addPage();y=16;}
-        const head=rows.length>1? [rows[0]]:[]; const body=rows.length>1?rows.slice(1):rows;
-        doc.autoTable({startY:y,head,body,theme:'grid',styles:{font:'helvetica',fontSize:7.5,cellPadding:2.2,overflow:'linebreak',textColor:[23,32,51]},headStyles:{fillColor:[18,61,115],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[245,248,252]},margin:{left:14,right:14}});
-        y=doc.lastAutoTable.finalY+8;
-      }
-      const body=PDF.bodyText(src);
-      if(body){
-        const lines=doc.splitTextToSize(body,W-28);
-        if(y+lines.length*4>H-25){doc.addPage();y=16;}
-        doc.setTextColor(45,55,72);doc.setFontSize(8);doc.text(lines,14,y,{maxWidth:W-28});y+=lines.length*4+5;
-      }
+      const body=root.querySelector('.request-msg.show')?.innerText||'';
+      if(body&&y<H-28){doc.setFillColor(245,248,252);doc.roundedRect(14,y,W-28,10,2,2,'F');doc.setFontSize(8);doc.setTextColor(50,65,85);doc.text(PDF.text(body).slice(0,150),18,y+6);y+=16;}
       const low=String(title||'').toLowerCase();
-      const extras=[];
-      if(low.includes('lesson plan')) extras.push('Teaching Resources: ______________________________','Assessment / Evaluation: __________________________','Homework / Follow-up: ____________________________','Teacher Remarks: _________________________________','Teacher Signature: __________________  Date: __________','Coordinator / Principal Remarks: __________________________');
-      if(low.includes('leave application')) extras.push('Applicant Signature: __________________  Date: __________','Coordinator / Principal Recommendation:  ☐ Recommended   ☐ Not Recommended','Principal / Authorized Approval:  ☐ Approved   ☐ Not Approved','Approval Signature: __________________  Date: __________');
-      if(low.includes('suggestion')) extras.push('Problem / Need Identified: ______________________________','Proposed Solution: _____________________________________','Expected Benefit: ______________________________________','Management Review:  ☐ Accepted   ☐ Under Review   ☐ Not Approved','Management Remarks: __________________________________');
-      if(low.includes('expense')) extras.push('Receipts Attached:  ☐ Yes   ☐ No','Staff Signature / Date: ________________________________','Accounts / Principal Verification: _______________________');
-      if(extras.length){
-        if(y+extras.length*7>H-25){doc.addPage();y=16;}
-        doc.setDrawColor(185,199,216);doc.line(14,y,W-14,y);y+=6;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(45,55,72);
-        extras.forEach(line=>{const ls=doc.splitTextToSize(line,W-28);doc.text(ls,14,y);y+=Math.max(6,ls.length*4+2);});
+      const sign=[];
+      if(low.includes('lesson plan')) sign.push('Teacher Signature: __________________________   Date: __________','Coordinator / Principal Remarks: ______________________________________________');
+      else if(low.includes('leave application')) sign.push('Applicant Signature: _________________________   Date: __________','Coordinator / Principal Approval:  ☐ Approved   ☐ Not Approved','Approval Signature: ___________________________   Date: __________');
+      else if(low.includes('suggestion')) sign.push('Management Review:  ☐ Accepted   ☐ Under Review   ☐ Not Approved','Management Remarks: ______________________________________________');
+      if(sign.length){
+        if(y+sign.length*9>H-25){doc.addPage();y=18;}
+        doc.setDrawColor(195,205,218);doc.line(14,y,W-14,y);y+=7;doc.setFontSize(8);doc.setTextColor(45,55,72);
+        sign.forEach(s=>{doc.text(s,14,y);y+=8;});
       }
-      const pages=doc.getNumberOfPages();
-      for(let p=1;p<=pages;p++){doc.setPage(p);doc.setDrawColor(215,224,235);doc.line(14,H-12,W-14,H-12);doc.setFontSize(6.5);doc.setTextColor(102,112,133);doc.text(SCHOOL.name+' • Official school record',14,H-7);doc.text('Page '+p+' of '+pages,W-14,H-7,{align:'right'});}
-      doc.save(PDF.safe(title)+'.pdf');
-    }catch(err){console.error('TPLS PDF generation failed:',err);alert('PDF could not be generated: '+(err.message||err));}
+      PDF.footer(doc);doc.save(PDF.safe(title)+'.pdf');
+    }catch(err){console.error(err);alert('PDF could not be generated: '+(err.message||err));}
   };
-  PDF.button=function(label,title,id){const b=document.createElement('button');b.type='button';b.className='btn tpls-pdf-btn';b.textContent='⬇ '+(label||'Download PDF');b.onclick=()=>PDF.download(id,title);return b};
-  function addSection(id,title){const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const st=el.querySelector('.section-title');if(!st)return;st.classList.add('tpls-pdf-toolbar');st.appendChild(PDF.button(null,title,id));el.dataset.pdfAdded='1'}
-  function addAdmin(){[['students','Students Details'],['teachers','Teachers Details'],['fees','Fee Records'],['expenses','Expense Records'],['receipts','Fee Receipts'],['reports','Financial Report'],['leave-applications','Leave Applications'],['suggestions','Teacher Suggestions'],['lesson-plans','Lesson Plans'],['student-results','Student Results'],['teacher-notifications','Teacher Notifications']].forEach(x=>addSection(x[0],x[1]));[['studentModal','Student Details Form'],['teacherModal','Teacher Details Form'],['feeModal','Fee Payment Form'],['expenseModal','Expense Report Form'],['receiptModal','Fee Receipt'],['notificationModal','Teacher Notification'],['teacherDetailModal','Teacher Submission']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const target=id==='receiptModal'?(el.querySelector('#receiptPrintArea')||el.querySelector('.modal-body')):(el.querySelector('.modal-body')||el);const host=el.querySelector('.modal-head')||el.querySelector('.modal-body')||el;host.appendChild(PDF.button(null,title,target));el.dataset.pdfAdded='1'})}
-  function addTeacher(){[['notificationSection','Notifications'],['lessonPlanSection','Lesson Plan Submission Form'],['resultSection','Student Result Form'],['teacherRequestSection','Staff / Teacher Leave Application'],['suggestionSection','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const h=el.querySelector('h3');if(!h)return;const b=PDF.button(null,title,id);b.style.marginLeft='auto';const wrap=document.createElement('div');wrap.className='tpls-pdf-toolbar';wrap.style.justifyContent='space-between';h.parentNode.insertBefore(wrap,h);wrap.appendChild(h);wrap.appendChild(b);el.dataset.pdfAdded='1'});[['lessonPlanForm','Lesson Plan Submission Form'],['resultForm','Student Result Form'],['leaveForm','Staff / Teacher Leave Application'],['suggestionForm','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfFormAdded)return;const b=PDF.button(null,title,el);b.style.marginTop='10px';el.appendChild(b);el.dataset.pdfFormAdded='1'})}
-  function addAll(){const isAdmin=!!document.getElementById('studentModal')||!!document.getElementById('students');if(isAdmin)addAdmin();else addTeacher()}
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(addAll,700));else setTimeout(addAll,700);window.addEventListener('load',()=>setTimeout(addAll,500));
+  PDF.downloadLessonRecord=async function(p){
+    if(!window.jspdf?.jsPDF||!window.jspdf.jsPDF)return alert('PDF engine is still loading. Please try again.');
+    const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'}),W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+    let y=PDF.header(doc,'Lesson Plan','Teacher: '+PDF.value(teacherContext.teacher?.name)+' • Teacher ID: '+window.professionalTeacherId(teacherContext.teacher?.teacher_code,teacherContext.teacher?.id,teacherContext.teacher?.joining_date));
+    const rows=[
+      ['Class',p.class_name],['Subject',p.subject],['Lesson Date',p.lesson_date],['Topic / Chapter',p.topic],
+      ['Learning Objectives',p.objectives],['Activities / Teaching Method',p.activities],['Homework / Assessment',p.homework],['Teacher Notes',p.notes]
+    ].filter(r=>PDF.text(r[1]));
+    doc.autoTable({startY:y,body:rows,theme:'grid',styles:{font:'helvetica',fontSize:9,cellPadding:4,overflow:'linebreak',textColor:[23,32,51]},columnStyles:{0:{cellWidth:48,fontStyle:'bold',fillColor:[241,246,253]},1:{cellWidth:132}},margin:{left:14,right:14}});
+    y=doc.lastAutoTable.finalY+12;
+    doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(18,61,115);doc.text('Teacher Signature',14,y);doc.line(52,y+1,95,y+1);doc.text('Coordinator / Principal',110,y);doc.line(151,y+1,196,y+1);
+    y+=13;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(90,100,115);doc.text('This document was generated from the submitted lesson plan and is formatted for A4 printing.',14,y);
+    PDF.footer(doc);doc.save(PDF.safe('Lesson_Plan_'+(p.topic||'Record'))+'.pdf');
+  };
+  PDF.downloadResultRecord=async function(r){
+    if(!window.jspdf?.jsPDF||!window.jspdf.jsPDF)return alert('PDF engine is still loading. Please try again.');
+    const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+    let y=PDF.header(doc,'Student Result','Teacher: '+PDF.value(teacherContext.teacher?.name)+' • Teacher ID: '+window.professionalTeacherId(teacherContext.teacher?.teacher_code,teacherContext.teacher?.id,teacherContext.teacher?.joining_date));
+    const student=r.students?.name||'Student';
+    const rows=[['Student',student],['Student ID',r.students?.student_code],['Class',r.class_name],['Subject',r.subject],['Assessment',r.assessment_name],['Type',r.assessment_type],['Term',r.term],['Exam Date',r.exam_date],['Total Marks',r.total_marks],['Obtained Marks',r.obtained_marks],['Percentage',r.percentage+'%'],['Grade',r.grade],['Teacher Remarks',r.remarks]].filter(x=>PDF.text(x[1]));
+    doc.autoTable({startY:y,body:rows,theme:'grid',styles:{font:'helvetica',fontSize:9,cellPadding:4,overflow:'linebreak',textColor:[23,32,51]},columnStyles:{0:{cellWidth:48,fontStyle:'bold',fillColor:[241,246,253]},1:{cellWidth:132}},margin:{left:14,right:14}});
+    y=doc.lastAutoTable.finalY+13;doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(18,61,115);doc.text('Teacher Signature',14,y);doc.line(52,y+1,95,y+1);
+    PDF.footer(doc);doc.save(PDF.safe('Student_Result_'+student)+'.pdf');
+  };
+  PDF.button=function(label,title,id){const b=document.createElement('button');b.type='button';b.className='btn tpls-pdf-btn';b.textContent='⬇ '+(label||'Download PDF');b.onclick=()=>PDF.downloadForm(typeof id==='string'?document.getElementById(id):id,title);return b};
+  function addSection(id,title){const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const h=el.querySelector('h3,.section-title');if(!h)return;const b=PDF.button(null,title,el);b.className='tp-download-btn';const wrap=document.createElement('div');wrap.className='tpls-pdf-toolbar';wrap.style.justifyContent='space-between';h.parentNode.insertBefore(wrap,h);wrap.appendChild(h);wrap.appendChild(b);el.dataset.pdfAdded='1'}
+  function addAdmin(){[['students','Students Details'],['teachers','Teachers Details'],['fees','Fee Records'],['expenses','Expense Records'],['receipts','Fee Receipts'],['reports','Financial Report'],['leave-applications','Leave Applications'],['suggestions','Teacher Suggestions'],['lesson-plans','Lesson Plans'],['student-results','Student Results'],['teacher-notifications','Teacher Notifications']].forEach(x=>addSection(x[0],x[1]));}
+  function addTeacher(){[['notificationSection','Notifications'],['lessonPlanSection','Lesson Plan Submission Form'],['resultSection','Student Result Form'],['teacherRequestSection','Staff / Teacher Leave Application'],['suggestionSection','Staff / Teacher Suggestion Form']].forEach(([id,title])=>addSection(id,title));
+    [['lessonPlanForm','Lesson Plan Submission Form'],['resultForm','Student Result Form'],['leaveForm','Staff / Teacher Leave Application'],['suggestionForm','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfFormAdded)return;const b=PDF.button('Download PDF',title,el);b.className='tp-download-btn';const row=document.createElement('div');row.className='tp-download-row';row.appendChild(b);el.appendChild(row);el.dataset.pdfFormAdded='1'});
+  }
+  function addAll(){const isAdmin=!!document.getElementById('studentModal')||!!document.getElementById('students');if(isAdmin)addAdmin();else addTeacher();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(addAll,700));else setTimeout(addAll,700);
+  window.addEventListener('load',()=>setTimeout(addAll,500));
+
 })();
 </script>
 </body>
