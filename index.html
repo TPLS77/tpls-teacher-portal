@@ -244,6 +244,17 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 .tpls-salary-form{position:relative;display:grid;gap:16px}.tpls-salary-form .field-group{gap:7px}.tpls-salary-form label{font-size:12px;font-weight:800;color:#18345f;letter-spacing:.01em}.tpls-salary-form input,.tpls-salary-form select{height:54px;border:1px solid #d3dfef;border-radius:14px;background:#fff;padding:0 16px;font-size:15px;box-shadow:0 5px 14px rgba(30,64,175,.035);transition:border-color .18s,box-shadow .18s,transform .18s}.tpls-salary-form input:focus,.tpls-salary-form select:focus{border-color:#5572ed;box-shadow:0 0 0 4px rgba(53,87,245,.10);outline:none}.tpls-salary-form input::placeholder{color:#9aa8ba}.tpls-salary-actions{display:flex;justify-content:flex-end;margin-top:2px}.tpls-salary-actions .btn{min-width:205px;height:54px;border:0;border-radius:15px;background:linear-gradient(135deg,#2864e8,#5545e8);box-shadow:0 12px 24px rgba(53,87,245,.23);font-size:14px;font-weight:800;letter-spacing:.01em}.tpls-salary-actions .btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 15px 28px rgba(53,87,245,.28)}
 .tpls-salary-note{display:flex;align-items:center;gap:8px;margin-top:1px;color:#71819a;font-size:11px}.tpls-salary-note b{color:#3f5f95}.tpls-salary-box #salaryMsg{margin-top:4px;border-radius:13px;line-height:1.45}
 @media(max-width:800px){.tpls-salary-actions{justify-content:stretch}.tpls-salary-actions .btn{width:100%}}
+    .result-subjects-container{margin-top:18px;display:grid;gap:14px}
+    .result-subject-card{border:1px solid #dbe5f3;border-radius:16px;padding:16px;background:linear-gradient(145deg,#fff,#f8fbff);box-shadow:0 7px 22px rgba(15,23,42,.05)}
+    .result-subject-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+    .result-subject-name{font-size:15px;font-weight:800;color:#17345f}
+    .result-subject-number{font-size:10px;font-weight:800;color:#3154db;background:#edf4ff;padding:5px 9px;border-radius:999px}
+    .result-subject-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .result-subject-card input{height:48px}
+    .result-subject-card textarea{width:100%;min-height:72px;padding:12px;border:1px solid #d3dfef;border-radius:12px;resize:vertical;outline:none;font:inherit}
+    .result-subject-card textarea:focus{border-color:#5572ed;box-shadow:0 0 0 4px rgba(53,87,245,.10)}
+    .result-subject-card .subject-preview{grid-column:1/-1;padding:9px 11px;border-radius:10px;background:#f3f7fc;font-size:12px;font-weight:700;color:#3557f5}
+    @media(max-width:650px){.result-subject-fields{grid-template-columns:1fr}}
 .tpls-modal{position:fixed;inset:0;background:rgba(15,23,42,.58);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px}
 .tpls-modal.hidden{display:none!important}
 .tpls-modal-card{width:min(900px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(15,23,42,.25);padding:22px}
@@ -447,22 +458,21 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
       <section id="resultSection" class="section dashboard-extra">
         <h3>📝 Tests & Student Results</h3>
-        <div class="muted" style="margin-bottom:18px">Select your assigned class, subject and student, then record the student's result.</div>
+        <div class="muted" style="margin-bottom:18px">Select the class and student. All subjects assigned to that student's class will open automatically so you can enter the complete result in one submission.</div>
         <form id="resultForm">
           <div class="request-grid">
             <div class="field-group"><label for="resultClass">Class</label><select id="resultClass" required></select></div>
-            <div class="field-group"><label for="resultSubject">Subject</label><select id="resultSubject" required></select></div>
             <div class="field-group"><label for="resultStudent">Student</label><select id="resultStudent" required></select></div>
             <div class="field-group"><label for="assessmentType">Assessment</label><select id="assessmentType"><option>Test</option><option>Quiz</option><option>Monthly Test</option><option>Mid Term</option><option>Final Term</option><option>Assignment</option><option>Practical</option><option>Other</option></select></div>
             <div class="field-group"><label for="assessmentName">Test / Exam Name</label><input id="assessmentName" placeholder="e.g. Monthly Test 1" required></div>
             <div class="field-group"><label for="resultTerm">Term</label><input id="resultTerm" placeholder="e.g. 1st Term"></div>
-            <div class="field-group"><label for="totalMarks">Total Marks</label><input id="totalMarks" type="number" min="1" step="0.01" required></div>
-            <div class="field-group"><label for="obtainedMarks">Obtained Marks</label><input id="obtainedMarks" type="number" min="0" step="0.01" required></div>
             <div class="field-group"><label for="examDate">Date</label><input id="examDate" type="date" required></div>
           </div>
-          <div class="field-group" style="margin-top:16px"><label for="resultRemarks">Teacher Remarks</label><textarea id="resultRemarks" placeholder="Optional remarks about the student's performance…"></textarea></div>
-          <div class="notice" id="resultPreview">Percentage and grade will be calculated automatically.</div>
-          <div class="form-actions"><button class="btn small-btn" type="submit" id="resultBtn">Save Result</button></div>
+          <div id="resultSubjectsContainer" class="result-subjects-container">
+            <div class="notice">Select a class and student to open all assigned subjects.</div>
+          </div>
+          <div class="notice" id="resultPreview">Percentage and grade will be calculated automatically for each subject.</div>
+          <div class="form-actions"><button class="btn small-btn" type="submit" id="resultBtn">Save All Results</button></div>
           <div id="resultMsg" class="request-msg"></div>
         </form>
         <div id="resultHistory" style="margin-top:22px"></div>
@@ -927,15 +937,57 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const el=$(id); if(!el) return;
       el.innerHTML=`<option value="">${escapeHtml(placeholder)}</option>`+items.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
     }
-    function assignedSubjectsForClass(cls){return uniqueAssignments().filter(a=>a.class_name===cls).map(a=>a.subject)}
-    function assignedClasses(){return [...new Set(uniqueAssignments().map(a=>a.class_name))]}
+    function assignedSubjectsForClass(cls){return [...new Set(uniqueAssignments().filter(a=>a.class_name===cls).map(a=>a.subject).filter(Boolean))]}
+    function assignedClasses(){return [...new Set(uniqueAssignments().map(a=>a.class_name).filter(Boolean))]}
     function refreshLessonSubjects(){fillSelect("lessonSubject",assignedSubjectsForClass($("lessonClass").value),"Select subject")}
-    function refreshResultSubjects(){fillSelect("resultSubject",assignedSubjectsForClass($("resultClass").value),"Select subject"); fillSelect("resultStudent",[],"Select student")}
     function refreshResultStudents(){
       const cls=$("resultClass").value;
       const list=teacherContext.students.filter(s=>s.class_name===cls);
       const el=$("resultStudent");
       el.innerHTML='<option value="">Select student</option>'+list.map(s=>`<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}${s.student_code?` — ${escapeHtml(s.student_code)}`:""}</option>`).join("");
+      renderAllResultSubjects("");
+    }
+    function renderAllResultSubjects(studentId){
+      const container=$("resultSubjectsContainer"); if(!container)return;
+      const cls=$("resultClass").value;
+      if(!studentId || !cls){
+        container.innerHTML='<div class="notice">Select a class and student to open all assigned subjects.</div>';
+        return;
+      }
+      const subjects=assignedSubjectsForClass(cls);
+      if(!subjects.length){
+        container.innerHTML='<div class="notice error">No subjects are assigned to you for this class.</div>';
+        return;
+      }
+      container.innerHTML=subjects.map((subject,index)=>{
+        const key=`resultSubject_${index}`;
+        return `<article class="result-subject-card" data-subject="${escapeHtml(subject)}">
+          <div class="result-subject-head">
+            <div class="result-subject-name">${escapeHtml(subject)}</div>
+            <span class="result-subject-number">SUBJECT ${index+1}</span>
+          </div>
+          <div class="result-subject-fields">
+            <div class="field-group"><label for="${key}_total">Total Marks</label><input id="${key}_total" class="result-subject-total" type="number" min="1" step="0.01" placeholder="e.g. 100" required></div>
+            <div class="field-group"><label for="${key}_obtained">Obtained Marks</label><input id="${key}_obtained" class="result-subject-obtained" type="number" min="0" step="0.01" placeholder="e.g. 85" required></div>
+            <div class="subject-preview" id="${key}_preview">Percentage and grade will be calculated automatically.</div>
+            <div class="field-group" style="grid-column:1/-1"><label for="${key}_remarks">Teacher Remarks</label><textarea id="${key}_remarks" class="result-subject-remarks" placeholder="Optional remarks about this subject…"></textarea></div>
+          </div>
+        </article>`;
+      }).join("");
+      container.querySelectorAll(".result-subject-total,.result-subject-obtained").forEach(input=>input.addEventListener("input",updateAllResultPreviews));
+      updateAllResultPreviews();
+    }
+    function updateAllResultPreviews(){
+      document.querySelectorAll(".result-subject-card").forEach(card=>{
+        const total=Number(card.querySelector(".result-subject-total")?.value||0);
+        const obtained=Number(card.querySelector(".result-subject-obtained")?.value||0);
+        const preview=card.querySelector(".subject-preview");
+        if(!preview)return;
+        if(!total || obtained<0){preview.textContent="Percentage and grade will be calculated automatically.";return}
+        if(obtained>total){preview.textContent="Obtained marks cannot be greater than total marks.";return}
+        const pct=(obtained/total)*100;
+        preview.textContent=`Percentage: ${pct.toFixed(2)}% • Grade: ${gradeFromPercentage(pct)}`;
+      });
     }
     function gradeFromPercentage(p){
       if(p>=90) return "A+"; if(p>=80) return "A"; if(p>=70) return "B"; if(p>=60) return "C"; if(p>=50) return "D"; return "F";
@@ -1160,11 +1212,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const classes=assignedClasses();
       fillSelect("lessonClass",classes,"Select class");
       fillSelect("resultClass",classes,"Select class");
-      refreshLessonSubjects(); refreshResultSubjects();
+      refreshLessonSubjects();
+      refreshResultStudents();
       $("lessonClass").onchange=refreshLessonSubjects;
-      $("resultClass").onchange=()=>{refreshResultSubjects();refreshResultStudents()};
-      $("resultSubject").onchange=refreshResultStudents;
-      $("totalMarks").oninput=updateResultPreview; $("obtainedMarks").oninput=updateResultPreview;
+      $("resultClass").onchange=refreshResultStudents;
+      $("resultStudent").onchange=()=>renderAllResultSubjects($("resultStudent").value);
       $("lessonDate").value=new Date().toISOString().slice(0,10); $("examDate").value=new Date().toISOString().slice(0,10);
       $("lessonPlanForm").onsubmit=submitLessonPlan; $("resultForm").onsubmit=submitResult;
       $("markNotificationsReadBtn").onclick=markAllNotificationsRead;
@@ -1185,19 +1237,39 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
     function initLessonOnly(){fillSelect("lessonClass",assignedClasses(),"Select class");refreshLessonSubjects()}
     async function submitResult(e){
-      e.preventDefault(); setRequestMsg("resultMsg","",true); setButtonBusy("resultBtn",true,"Save Result","Saving…");
+      e.preventDefault(); setRequestMsg("resultMsg","",true); setButtonBusy("resultBtn",true,"Save All Results","Saving…");
       try{
-        const cls=$("resultClass").value, sub=$("resultSubject").value, studentId=$("resultStudent").value;
-        if(!uniqueAssignments().some(a=>a.class_name===cls&&a.subject===sub)) throw new Error("That class and subject are not assigned to you.");
+        const cls=$("resultClass").value, studentId=$("resultStudent").value;
+        if(!assignedClasses().includes(cls)) throw new Error("That class is not assigned to you.");
         const student=teacherContext.students.find(s=>s.id===studentId && s.class_name===cls); if(!student) throw new Error("Please select a valid assigned student.");
-        const total=Number($("totalMarks").value), obtained=Number($("obtainedMarks").value); if(total<=0) throw new Error("Total marks must be greater than zero."); if(obtained<0||obtained>total) throw new Error("Obtained marks must be between 0 and total marks.");
-        const percentage=Number(((obtained/total)*100).toFixed(2));
-        const payload={teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,assessment_type:$("assessmentType").value,assessment_name:$("assessmentName").value,term:$("resultTerm").value,total_marks:total,obtained_marks:obtained,percentage,grade:gradeFromPercentage(percentage),exam_date:$("examDate").value,remarks:$("resultRemarks").value};
-        const {error}=await client.from("teacher_student_results").insert(payload); if(error) throw error;
-        setRequestMsg("resultMsg","Student result saved successfully and is available to the school administration.",true); $("resultForm").reset(); $("examDate").value=new Date().toISOString().slice(0,10); initResultOnly(); updateResultPreview(); await loadResultHistory();
-      }catch(err){setRequestMsg("resultMsg",err.message||"Could not save result.",false)}finally{setButtonBusy("resultBtn",false,"Save Result","Saving…")}
+        const cards=[...document.querySelectorAll("#resultSubjectsContainer .result-subject-card")];
+        if(!cards.length) throw new Error("Please select a student so all assigned subjects can open.");
+        const subjects=assignedSubjectsForClass(cls);
+        const assessmentType=$("assessmentType").value;
+        const assessmentName=$("assessmentName").value.trim();
+        const term=$("resultTerm").value.trim();
+        const examDate=$("examDate").value;
+        if(!assessmentName) throw new Error("Please enter the test / exam name.");
+        if(!examDate) throw new Error("Please select the date.");
+        const payloads=[];
+        for(const card of cards){
+          const sub=card.dataset.subject;
+          if(!subjects.includes(sub)) throw new Error(`The subject "${sub}" is not assigned to you.`);
+          const total=Number(card.querySelector(".result-subject-total")?.value||0);
+          const obtained=Number(card.querySelector(".result-subject-obtained")?.value||0);
+          const remarks=card.querySelector(".result-subject-remarks")?.value?.trim()||"";
+          if(total<=0) throw new Error(`Total marks for ${sub} must be greater than zero.`);
+          if(obtained<0||obtained>total) throw new Error(`Obtained marks for ${sub} must be between 0 and total marks.`);
+          const percentage=Number(((obtained/total)*100).toFixed(2));
+          payloads.push({teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,assessment_type:assessmentType,assessment_name:assessmentName,term,total_marks:total,obtained_marks:obtained,percentage,grade:gradeFromPercentage(percentage),exam_date:examDate,remarks});
+        }
+        const {error}=await client.from("teacher_student_results").insert(payloads); if(error) throw error;
+        setRequestMsg("resultMsg",`Complete result saved successfully for ${student.name}: ${payloads.length} subject${payloads.length===1?"":"s"}.`,true);
+        $("resultForm").reset(); $("examDate").value=new Date().toISOString().slice(0,10); initResultOnly(); await loadResultHistory();
+      }catch(err){setRequestMsg("resultMsg",err.message||"Could not save results.",false)}
+      finally{setButtonBusy("resultBtn",false,"Save All Results","Saving…")}
     }
-    function initResultOnly(){fillSelect("resultClass",assignedClasses(),"Select class");refreshResultSubjects();fillSelect("resultStudent",[],"Select student")}
+    function initResultOnly(){fillSelect("resultClass",assignedClasses(),"Select class");refreshResultStudents();renderAllResultSubjects("")}
 
     async function sendTeacherReset(){
       const email=$("email").value.trim();
