@@ -463,9 +463,13 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           <div class="request-grid">
             <div class="field-group"><label for="resultClass">Class</label><select id="resultClass" required></select></div>
             <div class="field-group"><label for="resultStudent">Student</label><select id="resultStudent" required></select></div>
-            <div class="field-group"><label for="assessmentType">Assessment</label><select id="assessmentType"><option>Test</option><option>Quiz</option><option>Monthly Test</option><option>Mid Term</option><option>Final Term</option><option>Assignment</option><option>Practical</option><option>Other</option></select></div>
-            <div class="field-group"><label for="assessmentName">Test / Exam Name</label><input id="assessmentName" placeholder="e.g. Monthly Test 1" required></div>
-            <div class="field-group"><label for="resultTerm">Term</label><input id="resultTerm" placeholder="e.g. 1st Term"></div>
+            <div class="field-group"><label for="assessmentType">Assessment</label><select id="assessmentType" required>
+                <option value="">Select assessment</option>
+                <option>First Term</option><option>Second Term</option><option>Third Term</option>
+                <option>Mid Term</option><option>Final Term</option><option>Monthly Test</option>
+                <option>Class Test</option><option>Quiz</option><option>Assignment</option><option>Practical</option><option>Other</option>
+              </select></div>
+            <div class="field-group"><label for="examDate">Date</label><input id="examDate" type="date" required></div>
             <div class="field-group"><label for="examDate">Date</label><input id="examDate" type="date" required></div>
           </div>
           <div id="resultSubjectsContainer" class="result-subjects-container">
@@ -637,7 +641,48 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     function printTeacherFinancialReport(){
       const w=window.open("","_blank"); if(!w) return;
       const d=teacherContext.teacher||{};
-      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}</style></head><body><img src="${location.origin}${location.pathname.replace(/\/[^/]*$/,"")}/school-logo.jpg"><h1>The Progress of Life School</h1><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script></body></html>`);
+      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}</style></head><body><img src="${location.origin}${location.pathname.replace(/\/[^/]*$/,"")}/school-logo.jpg"><h1>The Progress of Life School</h1><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script>
+<style id="tpls-mobile-final">
+/* Mobile-only improvements — desktop layout remains unchanged */
+@media (max-width:820px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  #loginPage{display:flex;flex-direction:column;min-height:100svh}
+  #loginPage .login-side{padding:18px 14px;min-height:100svh;align-items:flex-start}
+  #loginPage .card{width:100%;max-width:520px;margin:0 auto;padding:26px 20px;border-radius:20px}
+  #loginPage h2{font-size:25px}
+  #loginPage .mini-logo{width:62px;height:62px}
+  #dashboardPage{width:100%;min-width:0}
+  #dashboardPage>.top .top-in{width:100%;min-width:0}
+  #dashboardPage>.top .brand{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  #dashboardPage>.top .brand small{font-size:9px}
+  #dashboardPage .teacher-mini{margin-left:auto;flex:0 0 auto}
+  #dashboardPage .teacher-mini #topName{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+  #dashboardPage .teacher-mobile-menu{display:grid!important}
+  #dashboardPage .tp-sidebar{top:0;bottom:0;height:100svh!important;overflow-y:auto!important}
+  #dashboardPage .tp-nav{display:grid!important;overflow:visible!important}
+  #dashboardPage .tp-nav a{width:100%;min-height:48px}
+  #dashboardPage .section,.tpls-modal-card{max-width:100%;overflow-x:hidden}
+  #dashboardPage .result-subject-card{padding:13px}
+  #dashboardPage .result-subject-fields{grid-template-columns:1fr!important}
+  #dashboardPage .tpls-modal{padding:10px}
+  #dashboardPage .tpls-modal-card{max-height:94svh;padding:16px;border-radius:18px}
+  #dashboardPage .tpls-student-photo{margin:auto}
+}
+@media (max-width:480px){
+  #dashboardPage>.top .top-in{padding:8px 9px!important}
+  #dashboardPage>.top .brand{font-size:12px!important}
+  #dashboardPage .teacher-mini .avatar{width:32px;height:32px}
+  #dashboardPage .teacher-mini .logout{font-size:11px;padding:8px 9px}
+  #dashboardPage>.wrap{padding:10px 9px 34px!important}
+  #dashboardPage .welcome{padding:16px!important}
+  #dashboardPage .welcome h2{font-size:21px!important}
+  #dashboardPage .section{padding:14px!important}
+  #dashboardPage .section h3{font-size:17px}
+  #dashboardPage .form-actions .btn{min-height:46px}
+}
+</style>
+
+</body></html>`);
       w.document.close();
     }
 
@@ -1246,10 +1291,10 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         if(!cards.length) throw new Error("Please select a student so all assigned subjects can open.");
         const subjects=assignedSubjectsForClass(cls);
         const assessmentType=$("assessmentType").value;
-        const assessmentName=$("assessmentName").value.trim();
-        const term=$("resultTerm").value.trim();
+        const assessmentName=assessmentType;
+        const term="";
         const examDate=$("examDate").value;
-        if(!assessmentName) throw new Error("Please enter the test / exam name.");
+        if(!assessmentType) throw new Error("Please select an assessment.");
         if(!examDate) throw new Error("Please select the date.");
         const payloads=[];
         for(const card of cards){
