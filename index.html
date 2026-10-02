@@ -1050,15 +1050,33 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     function refreshLessonSubjects(){fillSelect("lessonSubject",assignedSubjectsForClass($("lessonClass").value),"Select subject")}
     async function refreshResultStudents(){
       const cls=$("resultClass").value, assessment=$("assessmentType")?.value||"", el=$("resultStudent");
-      if(!el)return; let list=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
-      if(cls && assessment && currentTeacherId && client){try{const {data,error}=await client.from("teacher_student_results").select("student_id").eq("teacher_id",currentTeacherId).eq("class_name",cls).eq("assessment_type",assessment);if(error)throw error;const done=new Set((data||[]).map(r=>String(r.student_id)));list=list.filter(s=>!done.has(String(s.id)));}catch(err){console.warn("Completed result lookup failed:",err);}}
-      el.innerHTML='<option value="">Select student</option>'+list.map(s=>`<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}${s.student_code?` — ${escapeHtml(s.student_code)}`:""}</option>`).join(""); renderAllResultSubjects("");
+      if(!el)return;
+      const list=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
+      let done=new Set();
+      if(cls && assessment && currentTeacherId && client){
+        try{
+          const {data,error}=await client.from("teacher_student_results")
+            .select("student_id")
+            .eq("teacher_id",currentTeacherId)
+            .eq("class_name",cls)
+            .eq("assessment_type",assessment);
+          if(error)throw error;
+          done=new Set((data||[]).map(r=>String(r.student_id)));
+        }catch(err){console.warn("Completed result lookup failed:",err);}
+      }
+      el.innerHTML='<option value="">Select student</option>'+
+        list.map(st=>`<option value="${escapeHtml(st.id)}">${escapeHtml(st.name)}${st.student_code?` — ${escapeHtml(st.student_code)}`:""}${done.has(String(st.id))?" — ✏️ Edit saved result":""}</option>`).join("");
+      await renderAllResultSubjects(el.value);
     }
-    function renderAllResultSubjects(studentId){
+
+    async function renderAllResultSubjects(studentId){
       const container=$("resultSubjectsContainer"); if(!container)return;
       const cls=$("resultClass").value;
+      const assessment=$("assessmentType")?.value||"";
+      delete window.__editingResultRows;
       if(!studentId || !cls){
         container.innerHTML='<div class="notice">Select a class and student to open all subjects for this Class Incharge class.</div>';
+        if($("resultBtn"))$("resultBtn").textContent="Save All Results";
         return;
       }
       const subjects=resultSubjectsForClass(cls);
@@ -1066,24 +1084,47 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         container.innerHTML='<div class="notice error">No subjects have been configured for this Class Incharge class.</div>';
         return;
       }
-      container.innerHTML=subjects.map((subject,index)=>{
-        const key=`resultSubject_${index}`;
-        return `<article class="result-subject-card" data-subject="${escapeHtml(subject)}">
-          <div class="result-subject-head">
-            <div class="result-subject-name">${escapeHtml(subject)}</div>
-            <span class="result-subject-number">SUBJECT ${index+1}</span>
-          </div>
-          <div class="result-subject-fields">
-            <div class="field-group"><label for="${key}_total">Total Marks</label><input id="${key}_total" class="result-subject-total" type="number" min="1" step="0.01" placeholder="e.g. 100" required></div>
-            <div class="field-group"><label for="${key}_obtained">Obtained Marks</label><input id="${key}_obtained" class="result-subject-obtained" type="number" min="0" step="0.01" placeholder="e.g. 85" required></div>
-            <div class="subject-preview" id="${key}_preview">Percentage and grade will be calculated automatically.</div>
-            <div class="field-group" style="grid-column:1/-1"><label for="${key}_remarks">Teacher Remarks</label><textarea id="${key}_remarks" class="result-subject-remarks" placeholder="Optional remarks about this subject…"></textarea></div>
-          </div>
-        </article>`;
-      }).join("");
+
+      let existing=[];
+      if(currentTeacherId && client && assessment){
+        const {data,error}=await client.from("teacher_student_results")
+          .select("id,subject,total_marks,obtained_marks,percentage,grade,remarks,exam_date")
+          .eq("teacher_id",currentTeacherId)
+          .eq("student_id",studentId)
+          .eq("class_name",cls)
+          .eq("assessment_type",assessment);
+        if(error){console.warn("Existing result lookup failed:",error);}
+        else existing=data||[];
+      }
+      const existingBySubject=new Map(existing.map(r=>[String(r.subject),r]));
+      window.__editingResultRows=existingBySubject;
+
+      const student=teacherContext.students.find(st=>String(st.id)===String(studentId));
+      const isEditing=existing.length>0;
+      container.innerHTML=(isEditing
+        ? `<div class="notice success" style="margin-bottom:12px">✏️ Editing the saved <b>${escapeHtml(assessment)}</b> result for <b>${escapeHtml(student?.name||"this student")}</b>. Change the marks or remarks and click <b>Update Results</b>.</div>`
+        : "")+
+        subjects.map((subject,index)=>{
+          const key=`resultSubject_${index}`;
+          const r=existingBySubject.get(String(subject));
+          return `<article class="result-subject-card" data-subject="${escapeHtml(subject)}" data-result-id="${escapeHtml(r?.id||"")}">
+            <div class="result-subject-head">
+              <div class="result-subject-name">${escapeHtml(subject)}</div>
+              <span class="result-subject-number">SUBJECT ${index+1}</span>
+            </div>
+            <div class="result-subject-fields">
+              <div class="field-group"><label for="${key}_total">Total Marks</label><input id="${key}_total" class="result-subject-total" type="number" min="1" step="0.01" placeholder="e.g. 100" value="${r?.total_marks??""}" required></div>
+              <div class="field-group"><label for="${key}_obtained">Obtained Marks</label><input id="${key}_obtained" class="result-subject-obtained" type="number" min="0" step="0.01" placeholder="e.g. 85" value="${r?.obtained_marks??""}" required></div>
+              <div class="subject-preview" id="${key}_preview">Percentage and grade will be calculated automatically.</div>
+              <div class="field-group" style="grid-column:1/-1"><label for="${key}_remarks">Teacher Remarks</label><textarea id="${key}_remarks" class="result-subject-remarks" placeholder="Optional remarks about this subject…">${escapeHtml(r?.remarks||"")}</textarea></div>
+            </div>
+          </article>`;
+        }).join("");
       container.querySelectorAll(".result-subject-total,.result-subject-obtained").forEach(input=>input.addEventListener("input",updateAllResultPreviews));
       updateAllResultPreviews();
+      if($("resultBtn"))$("resultBtn").textContent=isEditing?"Update Results":"Save All Results";
     }
+
     function updateAllResultPreviews(){
       document.querySelectorAll(".result-subject-card").forEach(card=>{
         const total=Number(card.querySelector(".result-subject-total")?.value||0);
@@ -1175,13 +1216,26 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const rowsHtml=students.map((st,index)=>{
         const sm=byStudent.get(String(st.id))||new Map();
         const cells=subjects.map(sub=>{const r=sm.get(String(sub));if(r){uploaded++;return `<td class="overview-cell"><div class="overview-done">${escapeHtml(String(r.obtained_marks))} / ${escapeHtml(String(r.total_marks))}</div><div class="overview-pct">${Number(r.percentage||0).toFixed(1)}%</div><span class="overview-grade">${escapeHtml(r.grade||"—")}</span></td>`;}return `<td class="overview-cell"><div class="overview-status">Waiting</div><div class="overview-pct">Not uploaded</div></td>`}).join("");
-        return `<tr><td>${index+1}</td><td><div class="overview-student">${escapeHtml(st.name||"Student")}</div><div class="overview-code">${escapeHtml(st.student_code||"")}</div></td><td class="overview-class">${escapeHtml(cls)}</td>${cells}<td><div style="display:flex;gap:6px;flex-wrap:wrap"><button type="button" class="overview-action" onclick="showStudentResultDetail('${String(st.id).replace(/'/g,"\'")}')">View Result</button><button type="button" class="overview-action" onclick="downloadStudentResultPDF('${String(st.id).replace(/'/g,"\'")}')">PDF</button></div></td></tr>`;
+        return `<tr><td>${index+1}</td><td><div class="overview-student">${escapeHtml(st.name||"Student")}</div><div class="overview-code">${escapeHtml(st.student_code||"")}</div></td><td class="overview-class">${escapeHtml(cls)}</td>${cells}<td><div style="display:flex;gap:6px;flex-wrap:wrap"><button type="button" class="overview-action" onclick="editStudentResult('${String(st.id).replace(/'/g,"\'")}')">✏️ Edit</button><button type="button" class="overview-action" onclick="showStudentResultDetail('${String(st.id).replace(/'/g,"\'")}')">View Result</button><button type="button" class="overview-action" onclick="downloadStudentResultPDF('${String(st.id).replace(/'/g,"\'")}')">PDF</button></div></td></tr>`;
       }).join("");
       body.className="result-table-wrap";
       body.innerHTML=`<table class="result-overview-table"><thead><tr><th>Position</th><th>Student</th><th>Class</th>${subjects.map(s=>`<th>${escapeHtml(s)}</th>`).join("")}<th>Action</th></tr></thead><tbody>${rowsHtml}</tbody></table>`;
       summary.innerHTML=`<span>${students.length} Students</span><span>${assessment}</span><span>${uploaded} Uploaded Subject Records</span>`;
       window.__resultOverview={students,subjects,byStudent,className:cls,assessment}; const b=$("downloadClassResultPdfBtn");if(b)b.disabled=false;
     }
+    async function editStudentResult(studentId){
+      const state=window.__resultOverview;
+      if(!state)return;
+      const st=state.students.find(s=>String(s.id)===String(studentId));
+      if(!st)return;
+      $("resultClass").value=state.className;
+      $("assessmentType").value=state.assessment;
+      await refreshResultStudents();
+      $("resultStudent").value=String(studentId);
+      await renderAllResultSubjects(String(studentId));
+      document.getElementById("resultSection")?.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
     function showStudentResultDetail(studentId){
       const state=window.__resultOverview;if(!state)return;
       const st=state.students.find(s=>String(s.id)===String(studentId));if(!st)return;
@@ -1260,6 +1314,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       });
       doc.save(`${pdfSafe(state.className).replace(/[^a-z0-9]+/gi,"_")}_${pdfSafe(state.assessment).replace(/[^a-z0-9]+/gi,"_")}_Whole_Class_Result.pdf`);
     }
+
+    window.downloadStudentResultPDF=downloadStudentResultPDF;
+    window.downloadWholeClassResultPDF=downloadWholeClassResultPDF;
+    window.editStudentResult=editStudentResult;
+    window.showStudentResultDetail=showStudentResultDetail;
 
     async function loadResultHistory(){ return; }
     async function editLessonPlan(id){
@@ -1426,7 +1485,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       $("resultClass").onchange=refreshResultStudents;
       $("assessmentType").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
       $("resultClass").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
-      $("resultStudent").onchange=()=>renderAllResultSubjects($("resultStudent").value);
+      $("resultStudent").onchange=async()=>{await renderAllResultSubjects($("resultStudent").value);};
       $("lessonDate").value=pakistanDateISO();
       $("lessonPlanForm").onsubmit=submitLessonPlan; $("resultForm").onsubmit=submitResult;
       $("markNotificationsReadBtn").onclick=markAllNotificationsRead;
@@ -1447,9 +1506,68 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
     function initLessonOnly(){fillSelect("lessonClass",assignedClasses(),"Select class");refreshLessonSubjects()}
     async function submitResult(e){
-      e.preventDefault(); setRequestMsg("resultMsg","",true); setButtonBusy("resultBtn",true,"Save All Results","Saving…");
-      try{const cls=$("resultClass").value,studentId=$("resultStudent").value,assessmentType=$("assessmentType").value;if(!resultClasses().includes(cls))throw new Error("That class is not available for result upload.");if(!assessmentType)throw new Error("Please select the term/assessment first.");const student=teacherContext.students.find(s=>s.id===studentId&&classScopeMatchesStudent(cls,s));if(!student)throw new Error("Please select a valid Class Incharge student.");const {data:existing,error:ee}=await client.from("teacher_student_results").select("id").eq("teacher_id",currentTeacherId).eq("student_id",studentId).eq("class_name",cls).eq("assessment_type",assessmentType).limit(1);if(ee)throw ee;if((existing||[]).length)throw new Error(`${student.name} already has a result for ${assessmentType}.`);const cards=[...document.querySelectorAll("#resultSubjectsContainer .result-subject-card")];if(!cards.length)throw new Error("Please select a student so all class subjects can open.");const subjects=resultSubjectsForClass(cls),payloads=[];for(const card of cards){const sub=card.dataset.subject;if(!subjects.includes(sub))throw new Error(`The subject "${sub}" is not configured for this Class Incharge class.`);const total=Number(card.querySelector(".result-subject-total")?.value||0),obtained=Number(card.querySelector(".result-subject-obtained")?.value||0),remarks=card.querySelector(".result-subject-remarks")?.value?.trim()||"";if(total<=0)throw new Error(`Total marks for ${sub} must be greater than zero.`);if(obtained<0||obtained>total)throw new Error(`Obtained marks for ${sub} must be between 0 and total marks.`);const percentage=Number(((obtained/total)*100).toFixed(2));payloads.push({teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,assessment_type:assessmentType,assessment_name:assessmentType,term:"",total_marks:total,obtained_marks:obtained,percentage,grade:gradeFromPercentage(percentage),exam_date:pakistanDateISO(),remarks});}const {error}=await client.from("teacher_student_results").insert(payloads);if(error)throw error;setRequestMsg("resultMsg",`Result saved for ${student.name}. The student is now removed from ${assessmentType} for this teacher.`,true);$("resultStudent").value="";renderAllResultSubjects("");await refreshResultStudents();await loadResultHistory();await loadAllStudentResults();}catch(err){setRequestMsg("resultMsg",err.message||"Could not save results.",false)}finally{setButtonBusy("resultBtn",false,"Save All Results","Saving…")}
+      e.preventDefault();
+      setRequestMsg("resultMsg","",true);
+      const editing=!!(window.__editingResultRows && window.__editingResultRows.size);
+      setButtonBusy("resultBtn",true,editing?"Update Results":"Save All Results","Saving…");
+      try{
+        const cls=$("resultClass").value,studentId=$("resultStudent").value,assessmentType=$("assessmentType").value;
+        if(!resultClasses().includes(cls))throw new Error("That class is not available for result upload.");
+        if(!assessmentType)throw new Error("Please select the term/assessment first.");
+        const student=teacherContext.students.find(s=>String(s.id)===String(studentId)&&classScopeMatchesStudent(cls,s));
+        if(!student)throw new Error("Please select a valid Class Incharge student.");
+
+        const cards=[...document.querySelectorAll("#resultSubjectsContainer .result-subject-card")];
+        if(!cards.length)throw new Error("Please select a student so all class subjects can open.");
+        const subjects=resultSubjectsForClass(cls), payloads=[];
+        for(const card of cards){
+          const sub=card.dataset.subject;
+          if(!subjects.includes(sub))throw new Error(`The subject "${sub}" is not configured for this Class Incharge class.`);
+          const total=Number(card.querySelector(".result-subject-total")?.value||0);
+          const obtained=Number(card.querySelector(".result-subject-obtained")?.value||0);
+          const remarks=card.querySelector(".result-subject-remarks")?.value?.trim()||"";
+          if(total<=0)throw new Error(`Total marks for ${sub} must be greater than zero.`);
+          if(obtained<0||obtained>total)throw new Error(`Obtained marks for ${sub} must be between 0 and total marks.`);
+          const percentage=Number(((obtained/total)*100).toFixed(2));
+          payloads.push({
+            id:card.dataset.resultId||undefined,
+            teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,
+            assessment_type:assessmentType,assessment_name:assessmentType,term:"",
+            total_marks:total,obtained_marks:obtained,percentage,
+            grade:gradeFromPercentage(percentage),exam_date:pakistanDateISO(),remarks
+          });
+        }
+
+        const existingRows=window.__editingResultRows||new Map();
+        for(const row of payloads){
+          const existing=existingRows.get(String(row.subject));
+          if(existing?.id){
+            const {id,...updatePayload}=row;
+            const {error}=await client.from("teacher_student_results")
+              .update(updatePayload)
+              .eq("id",existing.id)
+              .eq("teacher_id",currentTeacherId);
+            if(error)throw error;
+          }else{
+            const {id,...insertPayload}=row;
+            const {error}=await client.from("teacher_student_results").insert(insertPayload);
+            if(error)throw error;
+          }
+        }
+
+        setRequestMsg("resultMsg",editing?`Result updated successfully for ${student.name}.`:`Result saved successfully for ${student.name}. You can edit it anytime by selecting the same student again.`,true);
+        await refreshResultStudents();
+        $("resultStudent").value=studentId;
+        await renderAllResultSubjects(studentId);
+        await loadAllStudentResults();
+      }catch(err){
+        setRequestMsg("resultMsg",err.message||"Could not save results.",false);
+      }finally{
+        const isStillEditing=!!(window.__editingResultRows && window.__editingResultRows.size);
+        setButtonBusy("resultBtn",false,isStillEditing?"Update Results":"Save All Results","Saving…");
+      }
     }
+
     async function initResultOnly(){fillSelect("resultClass",resultClasses(),"Select class");await refreshResultStudents();renderAllResultSubjects("")}
 
     async function sendTeacherReset(){
@@ -1634,6 +1752,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
   const SCHOOL={name:'THE PROGRESS OF LIFE SCHOOL',under:'Under Star Fish Pakistan',address:'Chak 8JB, Mehboob Town, Daewoo Road, Faisalabad',mission:'PROGRESS FOR CHRISTIAN CHILDREN'};
   const EMBED_LOGO='data:image/jpeg;base64,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';
   const PDF={};
+  window.TPLSPDF=PDF;
   PDF.safe=s=>String(s||'school_form').replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'').slice(0,80)||'school_form';
   PDF.text=v=>String(v??'').replace(/\s+/g,' ').trim();
   PDF.logo=()=>EMBED_LOGO;
@@ -1727,7 +1846,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
   function addSection(id,title){const el=document.getElementById(id);if(!el||el.dataset.pdfAdded)return;const h=el.querySelector('h3,.section-title');if(!h)return;const b=PDF.button(null,title,el);b.className='tp-download-btn';const wrap=document.createElement('div');wrap.className='tpls-pdf-toolbar';wrap.style.justifyContent='space-between';h.parentNode.insertBefore(wrap,h);wrap.appendChild(h);wrap.appendChild(b);el.dataset.pdfAdded='1'}
   function addAdmin(){[['students','Students Details'],['teachers','Teachers Details'],['fees','Fee Records'],['expenses','Expense Records'],['receipts','Fee Receipts'],['reports','Financial Report'],['leave-applications','Leave Applications'],['suggestions','Teacher Suggestions'],['lesson-plans','Lesson Plans'],['student-results','Student Results'],['teacher-notifications','Teacher Notifications']].forEach(x=>addSection(x[0],x[1]));}
   function addTeacher(){[['notificationSection','Notifications'],['lessonPlanSection','Lesson Plan Submission Form'],['resultSection','Student Result Form'],['teacherRequestSection','Staff / Teacher Leave Application'],['suggestionSection','Staff / Teacher Suggestion Form']].forEach(([id,title])=>addSection(id,title));
-    [['lessonPlanForm','Lesson Plan Submission Form'],['resultForm','Student Result Form'],['leaveForm','Staff / Teacher Leave Application'],['suggestionForm','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfFormAdded)return;const b=PDF.button('Download PDF',title,el);b.className='tp-download-btn';const row=document.createElement('div');row.className='tp-download-row';row.appendChild(b);el.appendChild(row);el.dataset.pdfFormAdded='1'});
+    [['lessonPlanForm','Lesson Plan Submission Form'],['resultForm','Tests & Results'],['leaveForm','Staff / Teacher Leave Application'],['suggestionForm','Staff / Teacher Suggestion Form']].forEach(([id,title])=>{const el=document.getElementById(id);if(!el||el.dataset.pdfFormAdded)return;const b=PDF.button('Download PDF',title,el);b.className='tp-download-btn';const row=document.createElement('div');row.className='tp-download-row';row.appendChild(b);el.appendChild(row);el.dataset.pdfFormAdded='1'});
   }
   function addAll(){const isAdmin=!!document.getElementById('studentModal')||!!document.getElementById('students');if(isAdmin)addAdmin();else addTeacher();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(addAll,700));else setTimeout(addAll,700);
