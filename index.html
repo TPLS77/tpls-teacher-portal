@@ -80,10 +80,17 @@
     .request-msg{margin-top:12px;padding:11px 13px;border-radius:12px;font-size:13px;display:none}
     .request-msg.show{display:block}.request-msg.ok{background:#eefbf3;color:var(--success)}.request-msg.err{background:#fff1f0;color:var(--danger)}
     .badge-status{font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px;background:#f1f5f9;color:#64748b}
-    .top-actions{display:flex;align-items:center;gap:9px}
+    .top-actions{display:flex;align-items:center;gap:9px}.pakistan-clock{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;margin-right:6px;min-width:145px}.pakistan-clock span{font-size:9px;font-weight:800;color:#3557f5}.pakistan-clock b{font-size:14px;color:#14284b}.pakistan-clock small{font-size:10px;color:#70809d;margin-top:2px}
 
     .section-head h3{margin-bottom:5px}.notification-list{display:grid;gap:11px}.notification{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fbfdff}.notification.unread{border-color:#b8d2f4;background:#f5f9ff}.notification-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.notification-title{font-weight:800}.notification-time{font-size:11px;color:var(--muted);white-space:nowrap}.notification-msg{margin-top:7px;color:#425466;line-height:1.6;font-size:13px;white-space:pre-wrap}.notification-actions{margin-top:10px;display:flex;justify-content:flex-end}.mini-action{border:1px solid var(--line);background:white;border-radius:10px;padding:8px 11px;font-weight:700;font-size:12px;cursor:pointer}.mini-action:hover{border-color:#a9c7eb}.form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.history-list{display:grid;gap:10px}.history-item{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfdff}.history-item-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.history-title{font-weight:800}.history-meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}.history-body{margin-top:10px;font-size:13px;line-height:1.6;white-space:pre-wrap}.grade-chip{display:inline-flex;padding:5px 9px;border-radius:999px;background:#eaf3ff;color:var(--blue2);font-size:11px;font-weight:800}.result-summary{display:flex;gap:10px;flex-wrap:wrap}.result-summary span{padding:7px 10px;border-radius:10px;background:#f3f7fc;font-size:12px;font-weight:700}
 
+
+    .result-overview{margin-top:24px;border:1px solid #dbe5f3;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,.05)}
+    .result-overview-head{padding:18px 20px;border-bottom:1px solid #e5edf7;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:linear-gradient(135deg,#f8fbff,#f6f3ff)}
+    .result-overview-head h4{margin:0;color:#17345f}.result-overview-head p{margin:4px 0 0;font-size:12px;color:#64748b}
+    .result-table-wrap{overflow:auto}.result-overview-table{width:100%;border-collapse:collapse;min-width:850px}.result-overview-table th{padding:13px 14px;text-align:left;background:#eef4fc;color:#29456e;font-size:12px;font-weight:800;white-space:nowrap}.result-overview-table td{padding:14px;border-bottom:1px solid #e5edf7;vertical-align:top;font-size:12px}.result-overview-table tr:last-child td{border-bottom:0}.result-overview-table tbody tr:hover{background:#fbfdff}
+    .overview-student{font-weight:800;color:#17345f;font-size:13px}.overview-code{font-size:10px;color:#7b8ba4;margin-top:3px}.overview-class{white-space:nowrap;color:#304968}.overview-cell{min-width:110px}.overview-status{font-weight:800;color:#a66d00}.overview-mark{font-weight:800;color:#17345f}.overview-pct{font-size:11px;color:#5d718d;margin-top:2px}.overview-grade{display:inline-flex;margin-top:4px;padding:3px 7px;border-radius:999px;background:#eaf3ff;color:#3154db;font-size:10px;font-weight:800}.overview-done{color:#16834f;font-weight:800}.overview-action{border:1px solid #cbd9ee;background:#fff;color:#3154db;border-radius:9px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}.overview-action:hover{background:#f2f6ff}.student-result-detail{margin:16px 20px 20px;border:1px solid #dbe5f3;border-radius:16px;padding:18px;background:linear-gradient(145deg,#fbfdff,#f7f5ff)}.student-result-detail h5{margin:0 0 4px;font-size:16px;color:#17345f}.student-result-meta{font-size:11px;color:#71819a;margin-bottom:14px}.student-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.student-result-subject{padding:12px;border:1px solid #e0e8f3;border-radius:12px;background:#fff}.student-result-subject b{display:block;color:#29456e;margin-bottom:5px}.student-result-subject .marks{font-weight:800;color:#17345f}.student-result-empty{padding:20px;color:#71819a;font-size:12px;text-align:center}
+    @media(max-width:650px){.student-result-grid{grid-template-columns:1fr}}
     @media(max-width:900px){.quick-grid,.request-grid{grid-template-columns:1fr}}
 
     @media(max-width:900px){.page{grid-template-columns:1fr}.hero{display:none}.login-side{min-height:100vh;padding:20px}.card{padding:30px 24px}.grid{grid-template-columns:1fr}.class-grid{grid-template-columns:1fr}.profile{grid-template-columns:1fr}.details{grid-template-columns:1fr}}
@@ -275,6 +282,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 .tpls-loading{text-align:center;padding:28px;color:#64748b}
 @media(max-width:800px){.tpls-feature-grid{grid-template-columns:1fr}.tpls-student-summary{grid-template-columns:1fr}.tpls-data-grid{grid-template-columns:1fr}}
 
+#examDate{display:none!important}
 </style>
 </head>
 <body>
@@ -325,7 +333,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           <div>The Progress of Life School<small>Teacher Portal</small></div>
         </div>
         <div class="teacher-mini">
-          <img id="topAvatar" class="avatar" src="school-logo.jpg" alt="">
+          <div id="pakistanClock" class="pakistan-clock"><span>🇵🇰 PKT</span><b id="pakistanTime">Loading…</b><small id="pakistanDate">Loading…</small></div>
+           <img id="topAvatar" class="avatar" src="school-logo.jpg" alt="">
           <div id="topName"></div>
           <button id="logoutBtn" class="logout">Sign Out</button>
         </div>
@@ -458,28 +467,36 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
       <section id="resultSection" class="section dashboard-extra">
         <h3>📝 Tests & Student Results</h3>
-        <div class="muted" style="margin-bottom:18px">Select the class and student. All subjects assigned to that student's class will open automatically so you can enter the complete result in one submission.</div>
+        <div class="muted" style="margin-bottom:18px">Select your Class Incharge class and student. All subjects belonging to that Class Incharge class will open for result upload, regardless of which subjects are personally assigned to you. All normally assigned students remain visible in My Students and Fee Status.</div>
         <form id="resultForm">
           <div class="request-grid">
             <div class="field-group"><label for="resultClass">Class</label><select id="resultClass" required></select></div>
             <div class="field-group"><label for="resultStudent">Student</label><select id="resultStudent" required></select></div>
-            <div class="field-group"><label for="assessmentType">Assessment</label><select id="assessmentType" required>
+            <div class="field-group"><label for="assessmentType">Assessment / Term</label><select id="assessmentType" required>
                 <option value="">Select assessment</option>
                 <option>First Term</option><option>Second Term</option><option>Third Term</option>
                 <option>Mid Term</option><option>Final Term</option><option>Monthly Test</option>
                 <option>Class Test</option><option>Quiz</option><option>Assignment</option><option>Practical</option><option>Other</option>
               </select></div>
-            <div class="field-group"><label for="examDate">Date</label><input id="examDate" type="date" required></div>
-            <div class="field-group"><label for="examDate">Date</label><input id="examDate" type="date" required></div>
           </div>
           <div id="resultSubjectsContainer" class="result-subjects-container">
-            <div class="notice">Select a class and student to open all assigned subjects.</div>
+            <div class="notice">Select a class and student to open all subjects for this Class Incharge class.</div>
           </div>
           <div class="notice" id="resultPreview">Percentage and grade will be calculated automatically for each subject.</div>
           <div class="form-actions"><button class="btn small-btn" type="submit" id="resultBtn">Save All Results</button></div>
           <div id="resultMsg" class="request-msg"></div>
         </form>
-        <div id="resultHistory" style="margin-top:22px"></div>
+        <div id="resultOverview" class="result-overview">
+          <div class="result-overview-head">
+            <div><h4>📊 All Students Result Overview</h4><p>Students of your Class Incharge class are shown separately. All subjects of the class are included, not only the subjects personally assigned to you.</p></div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+              <div class="result-summary" id="resultOverviewSummary"><span>Select class and assessment</span></div>
+              <button type="button" class="mini-action" id="downloadClassResultPdfBtn" onclick="downloadWholeClassResultPDF()">📄 Download Whole Class PDF</button>
+            </div>
+          </div>
+          <div id="resultOverviewBody" class="student-result-empty">Select a Class Incharge class and an assessment to view all students.</div>
+          <div id="studentResultDetail"></div>
+        </div>
       </section>
 
       <section id="teacherRequestSection" class="section dashboard-extra">
@@ -553,6 +570,14 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       supabasePublishableKey: "sb_publishable_H0crIBF0FeRnPiZQa6i43A_KrZEyxbZ"
     };
     let client;
+    // Fixed subject map for Class Incharge result entry.
+    // Results are based on the selected class/section, not the teacher's personal subject assignments.
+    window.TPLS_CLASS_SUBJECTS = {
+      "9th Arts": ["Ethic","General Science","Education","Economics","Math","Urdu","English"],
+      "10th Arts": ["P.S","General Science","Education","Economics","Math","Urdu","English"],
+      "9th Science": ["Ethic","Chemistry","Physics","Biology","Math","Urdu","English"],
+      "10th Science": ["P.S","Chemistry","Physics","Biology","Math","Urdu","English"]
+    };
     try {
       if(!window.supabase) throw new Error("Supabase library did not load. Check your internet connection.");
       client = window.supabase.createClient(cfg.supabaseUrl, cfg.supabasePublishableKey);
@@ -584,6 +609,10 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       return error ? null : data?.signedUrl;
     }
 
+    function pakistanNow(){return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Karachi"}));}
+    function pakistanDateISO(){const d=pakistanNow();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
+    function updatePakistanClock(){const el=$("pakistanTime"),dateEl=$("pakistanDate");if(!el||!dateEl)return;const now=new Date();el.textContent=new Intl.DateTimeFormat("en-PK",{timeZone:"Asia/Karachi",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:true}).format(now);dateEl.textContent=new Intl.DateTimeFormat("en-PK",{timeZone:"Asia/Karachi",weekday:"short",day:"2-digit",month:"short",year:"numeric"}).format(now);}
+    updatePakistanClock();setInterval(updatePakistanClock,1000);
     function currentMonth(){
       const d=new Date();
       return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
@@ -655,7 +684,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
   #dashboardPage>.top .top-in{width:100%;min-width:0}
   #dashboardPage>.top .brand{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
   #dashboardPage>.top .brand small{font-size:9px}
-  #dashboardPage .teacher-mini{margin-left:auto;flex:0 0 auto}
+  #dashboardPage .teacher-mini{margin-left:auto;flex:0 0 auto}.pakistan-clock{min-width:110px;margin-right:2px}.pakistan-clock b{font-size:11px}.pakistan-clock small{font-size:8px}
   #dashboardPage .teacher-mini #topName{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
   #dashboardPage .teacher-mobile-menu{display:grid!important}
   #dashboardPage .tp-sidebar{top:0;bottom:0;height:100svh!important;overflow-y:auto!important}
@@ -680,6 +709,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
   #dashboardPage .section h3{font-size:17px}
   #dashboardPage .form-actions .btn{min-height:46px}
 }
+.mini-action:disabled{opacity:.5;cursor:not-allowed}
 </style>
 
 </body></html>`);
@@ -708,12 +738,22 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const {data:assignments,error:aErr}=await client.from("teacher_assignments")
         .select("id,class_name,subject").eq("teacher_id",teacher.id).order("class_name").order("subject");
       if(aErr) throw aErr;
+      const rawAssignments=assignments||[];
+      const inchargeClasses=rawAssignments.filter(a=>a.subject==="__CLASS_INCHARGE__").map(a=>{
+        const raw=String(a.class_name||"").trim().replace(/\s+/g," ");
+        const m=raw.match(/^(9th|10th)\s*(?:\((Arts|Science)\)|(?:[-\/]?\s*)(Arts|Science))$/i);
+        return m?{className:m[1],section:String(m[2]||m[3]).replace(/^./,c=>c.toUpperCase())}:{className:raw,section:""};
+      });
+      const teachingAssignments=rawAssignments.filter(a=>a.subject!=="__CLASS_INCHARGE__");
 
-      const classes=[...new Set((assignments||[]).map(a=>a.class_name).filter(Boolean))];
+      // IMPORTANT: keep every normal teaching assignment in the student list.
+      // Class Incharge is used only to restrict the Results module.
+      const classes=[...new Set(teachingAssignments.map(a=>{const m=String(a.class_name||"").match(/^(9th|10th) \((Arts|Science)\)$/);return m?m[1]:a.class_name;}).filter(Boolean))];
+      inchargeClasses.forEach(a=>{if(a.className&&!classes.includes(a.className))classes.push(a.className);});
       let students=[];
       if(classes.length){
         const {data:s,error:sErr}=await client.from("students")
-          .select("id,student_code,name,gender,class_name,guardian_name,phone,monthly_fee,status,photo_path")
+          .select("id,student_code,name,gender,class_name,section,guardian_name,phone,monthly_fee,status,photo_path")
           .in("class_name",classes).order("class_name").order("name");
         if(sErr) throw sErr;
         students=s||[];
@@ -743,7 +783,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const studentPhotos=await Promise.all(students.map(s=>signedPhoto("student-photos",s.photo_path)));
       students.forEach((s,i)=>s._photo=studentPhotos[i]);
 
-      renderTeacher(teacher,assignments||[],students,teacherPhoto,feePayments,growthResults);
+      teacher._inchargeClasses=inchargeClasses;
+      renderTeacher(teacher,teachingAssignments,students,teacherPhoto,feePayments,growthResults);
       await loadFinancialDesk();
     }
 
@@ -777,7 +818,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
     function renderTeacher(t,assignments,students,teacherPhoto,feePayments,growthResults=[]){
       currentTeacherId=t.id;
-      teacherContext={teacher:t,assignments,students};
+      teacherContext={teacher:t,assignments,students,inchargeClasses:(t?._inchargeClasses||[])};
       renderCollectiveDuties(t,assignments,students);
       const dashboardPage=$("dashboardPage");
       if(dashboardPage){dashboardPage.classList.add("dashboard-only-mode");dashboardPage.classList.remove("feature-page-mode");}
@@ -797,7 +838,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
       const groups={};
       classNames.forEach(c=>groups[c]=[]);
-      students.forEach(s=>{if(!groups[s.class_name])groups[s.class_name]=[];groups[s.class_name].push(s)});
+      students.forEach(s=>{
+        if(groups[s.class_name]) groups[s.class_name].push(s);
+        const sectionAlias=(s.class_name==='9th'||s.class_name==='10th')&&s.section?`${s.class_name} (${String(s.section).trim()})`:'';
+        if(sectionAlias && groups[sectionAlias]) groups[sectionAlias].push(s);
+      });
 
       const financialAccess=isFinancialRole(t.designation);
       let html=`
@@ -826,6 +871,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
               <div class="detail"><small>Qualification</small><b>${escapeHtml(t.qualification||"—")}</b></div>
               <div class="detail"><small>Joining Date</small><b>${escapeHtml(t.joining_date||"—")}</b></div>
               <div class="detail"><small>Status</small><b>${escapeHtml(t.status||"—")}</b></div>
+              <div class="detail"><small>Class Incharge</small><b>${escapeHtml((teacherContext.inchargeClasses||[]).length?(teacherContext.inchargeClasses||[]).map(x=>x.section?`${x.className} (${x.section})`:x.className).join(', '):'Not assigned')}</b></div>
             </div>
           </div>
         </section>
@@ -967,7 +1013,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       $("feeStatusContent").innerHTML=out;
     }
 
-    let teacherContext={teacher:null,assignments:[],students:[]};
+    let teacherContext={teacher:null,assignments:[],students:[],inchargeClasses:[]};
     let notifications=[];
 
     function uniqueAssignments(){
@@ -984,24 +1030,40 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
     function assignedSubjectsForClass(cls){return [...new Set(uniqueAssignments().filter(a=>a.class_name===cls).map(a=>a.subject).filter(Boolean))]}
     function assignedClasses(){return [...new Set(uniqueAssignments().map(a=>a.class_name).filter(Boolean))]}
+    function classScopeMatchesStudent(scope,student){
+      const m=String(scope||"").match(/^(9th|10th) \((Arts|Science)\)$/);
+      if(!m)return String(student?.class_name||"")===String(scope||"");
+      return String(student?.class_name||"")===m[1] && String(student?.section||"").trim().toLowerCase()===m[2].toLowerCase();
+    }
+    function resultClasses(){return (teacherContext.inchargeClasses||[]).map(x=>x.section?`${x.className} (${x.section})`:x.className)}
+    function normalizeResultClass(value){
+      const raw=String(value||"").trim().replace(/\s+/g," ");
+      const m=raw.match(/^(9th|10th)\s*(?:\((Arts|Science)\)|(?:[-\/]?\s*)(Arts|Science))$/i);
+      if(m) return `${m[1]} ${String(m[2]||m[3]).replace(/^./,c=>c.toUpperCase())}`;
+      return raw;
+    }
+    function resultSubjectsForClass(scope){
+      const key=normalizeResultClass(scope);
+      const map=window.TPLS_CLASS_SUBJECTS||{};
+      return Array.isArray(map[key]) ? [...map[key]] : [];
+    }
     function refreshLessonSubjects(){fillSelect("lessonSubject",assignedSubjectsForClass($("lessonClass").value),"Select subject")}
-    function refreshResultStudents(){
-      const cls=$("resultClass").value;
-      const list=teacherContext.students.filter(s=>s.class_name===cls);
-      const el=$("resultStudent");
-      el.innerHTML='<option value="">Select student</option>'+list.map(s=>`<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}${s.student_code?` — ${escapeHtml(s.student_code)}`:""}</option>`).join("");
-      renderAllResultSubjects("");
+    async function refreshResultStudents(){
+      const cls=$("resultClass").value, assessment=$("assessmentType")?.value||"", el=$("resultStudent");
+      if(!el)return; let list=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
+      if(cls && assessment && currentTeacherId && client){try{const {data,error}=await client.from("teacher_student_results").select("student_id").eq("teacher_id",currentTeacherId).eq("class_name",cls).eq("assessment_type",assessment);if(error)throw error;const done=new Set((data||[]).map(r=>String(r.student_id)));list=list.filter(s=>!done.has(String(s.id)));}catch(err){console.warn("Completed result lookup failed:",err);}}
+      el.innerHTML='<option value="">Select student</option>'+list.map(s=>`<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}${s.student_code?` — ${escapeHtml(s.student_code)}`:""}</option>`).join(""); renderAllResultSubjects("");
     }
     function renderAllResultSubjects(studentId){
       const container=$("resultSubjectsContainer"); if(!container)return;
       const cls=$("resultClass").value;
       if(!studentId || !cls){
-        container.innerHTML='<div class="notice">Select a class and student to open all assigned subjects.</div>';
+        container.innerHTML='<div class="notice">Select a class and student to open all subjects for this Class Incharge class.</div>';
         return;
       }
-      const subjects=assignedSubjectsForClass(cls);
+      const subjects=resultSubjectsForClass(cls);
       if(!subjects.length){
-        container.innerHTML='<div class="notice error">No subjects are assigned to you for this class.</div>';
+        container.innerHTML='<div class="notice error">No subjects have been configured for this Class Incharge class.</div>';
         return;
       }
       container.innerHTML=subjects.map((subject,index)=>{
@@ -1093,12 +1155,113 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       if(!data?.length){$("lessonHistory").innerHTML='<div class="notice">No lesson plans saved yet.</div>';return;}
       $("lessonHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Lesson Plans</h4><div class="history-list">'+data.map(p=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(p.topic)}</div><span class="grade-chip">${escapeHtml(p.class_name)} • ${escapeHtml(p.subject)}</span></div><div class="history-meta">${escapeHtml(p.lesson_date||"")}</div><div class="history-body"><b>Objectives:</b> ${escapeHtml(p.objectives||"—")}\n<b>Activities:</b> ${escapeHtml(p.activities||"—")}\n<b>Homework:</b> ${escapeHtml(p.homework||"—")}${p.notes?`\n<b>Notes:</b> ${escapeHtml(p.notes)}`:""}</div><div class="history-actions"><button class="mini-action" type="button" onclick="editLessonPlan('${p.id}')">Edit</button><button class="mini-action danger" type="button" onclick="deleteLessonPlan('${p.id}')">Delete</button><button class="tp-download-btn" type="button" onclick='PDF.downloadLessonRecord(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Download PDF</button></div></article>`).join('')+'</div>';
     }
-    async function loadResultHistory(){
-      const {data,error}=await client.from("teacher_student_results").select("id,student_id,class_name,subject,assessment_type,assessment_name,term,total_marks,obtained_marks,percentage,grade,exam_date,remarks,created_at,students(name,student_code)").eq("teacher_id",currentTeacherId).order("exam_date",{ascending:false}).order("created_at",{ascending:false}).limit(30);
-      if(error){$("resultHistory").innerHTML=`<div class="notice error">Could not load results: ${escapeHtml(error.message)}</div>`;return;}
-      if(!data?.length){$("resultHistory").innerHTML='<div class="notice">No student results saved yet.</div>';return;}
-      $("resultHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Results</h4><div class="history-list">'+data.map(r=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(r.students?.name||"Student")} — ${escapeHtml(r.assessment_name)}</div><span class="grade-chip">${escapeHtml(r.grade||"")} • ${Number(r.percentage||0).toFixed(2)}%</span></div><div class="history-meta">${escapeHtml(r.class_name)} • ${escapeHtml(r.subject)} • ${escapeHtml(r.assessment_type)} • ${escapeHtml(r.exam_date||"")} • ${Number(r.obtained_marks||0)} / ${Number(r.total_marks||0)}</div>${r.remarks?`<div class="history-body">${escapeHtml(r.remarks)}</div>`:""}<div class="history-actions"><button class="tp-download-btn" type="button" onclick='PDF.downloadResultRecord(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Download PDF</button></div></article>`).join('')+'</div>';
+    async function loadAllStudentResults(){
+      const body=$("resultOverviewBody"), cls=$("resultClass")?.value||"", assessment=$("assessmentType")?.value||"", detail=$("studentResultDetail"), summary=$("resultOverviewSummary");
+      if(!body)return;
+      detail.innerHTML="";
+      if(!cls || !assessment){body.className="student-result-empty";body.textContent="Select a Class Incharge class and an assessment to view all students.";summary.innerHTML="<span>Select class and assessment</span>";window.__resultOverview=null;const b=$("downloadClassResultPdfBtn");if(b)b.disabled=true;return;}
+      const students=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
+      const subjects=resultSubjectsForClass(cls);
+      if(!students.length){body.className="student-result-empty";body.textContent="No students are assigned to this Class Incharge class.";summary.innerHTML="<span>0 Students</span>";return;}
+      let data=[];
+      if(currentTeacherId && client){
+        const {data:rows,error}=await client.from("teacher_student_results").select("student_id,student_id,class_name,subject,assessment_type,total_marks,obtained_marks,percentage,grade,remarks,exam_date,created_at").eq("teacher_id",currentTeacherId).eq("class_name",cls).eq("assessment_type",assessment);
+        if(error){body.className="student-result-empty";body.textContent="Could not load result overview: "+(error.message||"Database error");return;}
+        data=rows||[];
+      }
+      const byStudent=new Map();
+      data.forEach(r=>{const key=String(r.student_id);if(!byStudent.has(key))byStudent.set(key,new Map());byStudent.get(key).set(String(r.subject),r);});
+      let uploaded=0;
+      const rowsHtml=students.map((st,index)=>{
+        const sm=byStudent.get(String(st.id))||new Map();
+        const cells=subjects.map(sub=>{const r=sm.get(String(sub));if(r){uploaded++;return `<td class="overview-cell"><div class="overview-done">${escapeHtml(String(r.obtained_marks))} / ${escapeHtml(String(r.total_marks))}</div><div class="overview-pct">${Number(r.percentage||0).toFixed(1)}%</div><span class="overview-grade">${escapeHtml(r.grade||"—")}</span></td>`;}return `<td class="overview-cell"><div class="overview-status">Waiting</div><div class="overview-pct">Not uploaded</div></td>`}).join("");
+        return `<tr><td>${index+1}</td><td><div class="overview-student">${escapeHtml(st.name||"Student")}</div><div class="overview-code">${escapeHtml(st.student_code||"")}</div></td><td class="overview-class">${escapeHtml(cls)}</td>${cells}<td><div style="display:flex;gap:6px;flex-wrap:wrap"><button type="button" class="overview-action" onclick="showStudentResultDetail('${String(st.id).replace(/'/g,"\'")}')">View Result</button><button type="button" class="overview-action" onclick="downloadStudentResultPDF('${String(st.id).replace(/'/g,"\'")}')">PDF</button></div></td></tr>`;
+      }).join("");
+      body.className="result-table-wrap";
+      body.innerHTML=`<table class="result-overview-table"><thead><tr><th>Position</th><th>Student</th><th>Class</th>${subjects.map(s=>`<th>${escapeHtml(s)}</th>`).join("")}<th>Action</th></tr></thead><tbody>${rowsHtml}</tbody></table>`;
+      summary.innerHTML=`<span>${students.length} Students</span><span>${assessment}</span><span>${uploaded} Uploaded Subject Records</span>`;
+      window.__resultOverview={students,subjects,byStudent,className:cls,assessment}; const b=$("downloadClassResultPdfBtn");if(b)b.disabled=false;
     }
+    function showStudentResultDetail(studentId){
+      const state=window.__resultOverview;if(!state)return;
+      const st=state.students.find(s=>String(s.id)===String(studentId));if(!st)return;
+      const sm=state.byStudent.get(String(studentId))||new Map();
+      const cards=state.subjects.map(sub=>{const r=sm.get(String(sub));return `<div class="student-result-subject"><b>${escapeHtml(sub)}</b>${r?`<div class="marks">${escapeHtml(String(r.obtained_marks))} / ${escapeHtml(String(r.total_marks))}</div><div class="overview-pct">${Number(r.percentage||0).toFixed(2)}% • Grade ${escapeHtml(r.grade||"—")}</div>${r.remarks?`<div class="overview-pct">${escapeHtml(r.remarks)}</div>`:""}`:`<div class="overview-status">Waiting</div><div class="overview-pct">Not uploaded for ${escapeHtml(state.assessment)}</div>`}</div>`}).join("");
+      const detail=$("studentResultDetail");
+      detail.innerHTML=`<div class="student-result-detail"><h5>${escapeHtml(st.name||"Student")}</h5><div class="student-result-meta">${escapeHtml(st.student_code||"")} • ${escapeHtml(state.className)} • ${escapeHtml(state.assessment)}</div><div class="student-result-grid">${cards}</div></div>`;
+      detail.scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
+
+    function resultOverviewState(){
+      return window.__resultOverview||null;
+    }
+    function pdfSafe(v){return String(v??"—").replace(/\s+/g," ").trim()||"—";}
+    function pdfResultRowsForStudent(st,state){
+      const sm=state.byStudent.get(String(st.id))||new Map();
+      return state.subjects.map(sub=>{
+        const r=sm.get(String(sub));
+        return [pdfSafe(sub), r?pdfSafe(r.obtained_marks)+" / "+pdfSafe(r.total_marks):"Not uploaded", r?Number(r.percentage||0).toFixed(2)+"%":"—", r?pdfSafe(r.grade):"—", r?pdfSafe(r.remarks):"—"];
+      });
+    }
+    function createResultPDFHeader(doc,title,state){
+      const W=doc.internal.pageSize.getWidth();
+      doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(23,52,95);doc.text(SCHOOL.name,W/2,16,{align:"center"});
+      doc.setFontSize(11);doc.setTextColor(70,91,120);doc.text(title,W/2,23,{align:"center"});
+      doc.setFont("helvetica","normal");doc.setFontSize(9);doc.text("Class: "+pdfSafe(state.className),14,31);doc.text("Assessment: "+pdfSafe(state.assessment),14,37);doc.text("Generated: "+new Date().toLocaleString("en-PK",{timeZone:"Asia/Karachi"}),W-14,31,{align:"right"});
+      doc.setDrawColor(210,220,235);doc.line(14,41,W-14,41);
+      return 47;
+    }
+    async function downloadStudentResultPDF(studentId){
+      const state=resultOverviewState();
+      if(!state)return alert("Please select a class and assessment first.");
+      const st=state.students.find(s=>String(s.id)===String(studentId));
+      if(!st)return alert("Student not found.");
+      if(!window.jspdf?.jsPDF)return alert("PDF engine is still loading. Please try again.");
+      const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4",orientation:"portrait"});
+      let y=createResultPDFHeader(doc,"STUDENT RESULT",state);
+      doc.setFont("helvetica","bold");doc.setFontSize(12);doc.setTextColor(23,52,95);doc.text("Student Details",14,y);y+=7;
+      doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(45,62,82);
+      const details=[
+        ["Student Name",pdfSafe(st.name)], ["Student Code",pdfSafe(st.student_code)], ["Gender",pdfSafe(st.gender)],
+        ["Class",pdfSafe(state.className)], ["Guardian",pdfSafe(st.guardian_name)], ["Phone",pdfSafe(st.phone)]
+      ];
+      doc.autoTable({startY:y,body:details,theme:"grid",styles:{fontSize:9,cellPadding:3},columnStyles:{0:{fontStyle:"bold",cellWidth:38},1:{cellWidth:140}}});
+      y=doc.lastAutoTable.finalY+9;
+      doc.setFont("helvetica","bold");doc.setFontSize(12);doc.text("Subject-wise Result",14,y);y+=3;
+      doc.autoTable({startY:y,head:[["Subject","Marks","Percentage","Grade","Remarks"]],body:pdfResultRowsForStudent(st,state),theme:"grid",styles:{fontSize:8,cellPadding:3},headStyles:{fontStyle:"bold"},margin:{left:14,right:14}});
+      y=doc.lastAutoTable.finalY+9;
+      const sm=state.byStudent.get(String(st.id))||new Map();
+      const uploaded=state.subjects.map(s=>sm.get(String(s))).filter(Boolean);
+      const total=uploaded.reduce((n,r)=>n+Number(r.total_marks||0),0), obtained=uploaded.reduce((n,r)=>n+Number(r.obtained_marks||0),0);
+      const pct=total?obtained/total*100:0;
+      doc.setFont("helvetica","bold");doc.setFontSize(10);doc.text(`Overall Uploaded Marks: ${obtained.toFixed(2)} / ${total.toFixed(2)}   Percentage: ${pct.toFixed(2)}%   Grade: ${gradeFromPercentage(pct)}`,14,y);
+      doc.save(`${pdfSafe(st.name).replace(/[^a-z0-9]+/gi,"_")}_${pdfSafe(state.assessment).replace(/[^a-z0-9]+/gi,"_")}_Result.pdf`);
+    }
+    async function downloadWholeClassResultPDF(){
+      const state=resultOverviewState();
+      if(!state)return alert("Please select a class and assessment first.");
+      if(!window.jspdf?.jsPDF)return alert("PDF engine is still loading. Please try again.");
+      const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4",orientation:"landscape"});
+      let y=createResultPDFHeader(doc,"WHOLE CLASS RESULT",state);
+      const head=["#","Student","Code","Class",...state.subjects.map(s=>s)];
+      const body=state.students.map((st,i)=>{
+        const sm=state.byStudent.get(String(st.id))||new Map();
+        return [i+1,pdfSafe(st.name),pdfSafe(st.student_code),pdfSafe(state.className),...state.subjects.map(sub=>{const r=sm.get(String(sub));return r?`${pdfSafe(r.obtained_marks)}/${pdfSafe(r.total_marks)}\\n${Number(r.percentage||0).toFixed(1)}%\\n${pdfSafe(r.grade)}`:"Not uploaded";})];
+      });
+      doc.autoTable({startY:y,head:[head],body,theme:"grid",styles:{fontSize:7,cellPadding:2,valign:"middle"},headStyles:{fontSize:7,fontStyle:"bold"},margin:{left:10,right:10},didDrawPage:function(data){doc.setFontSize(7);doc.setTextColor(100);doc.text(`Page ${doc.internal.getNumberOfPages()}`,doc.internal.pageSize.getWidth()-10,doc.internal.pageSize.getHeight()-6,{align:"right"});}});
+      doc.addPage();
+      y=16;
+      doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(23,52,95);doc.text("Student-wise Detailed Results",14,y);y+=8;
+      state.students.forEach((st,index)=>{
+        if(y>180){doc.addPage();y=16;}
+        doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(23,52,95);doc.text(`${index+1}. ${pdfSafe(st.name)} (${pdfSafe(st.student_code)})`,14,y);y+=4;
+        doc.autoTable({startY:y,head:[["Subject","Marks","%","Grade","Remarks"]],body:pdfResultRowsForStudent(st,state),theme:"grid",styles:{fontSize:7,cellPadding:2},headStyles:{fontSize:7,fontStyle:"bold"},margin:{left:14,right:14},pageBreak:"auto"});
+        y=doc.lastAutoTable.finalY+7;
+      });
+      doc.save(`${pdfSafe(state.className).replace(/[^a-z0-9]+/gi,"_")}_${pdfSafe(state.assessment).replace(/[^a-z0-9]+/gi,"_")}_Whole_Class_Result.pdf`);
+    }
+
+    async function loadResultHistory(){ return; }
     async function editLessonPlan(id){
       try{
         const {data,error}=await client.from("teacher_lesson_plans").select("id,class_name,subject,lesson_date,topic,objectives,activities,homework,notes").eq("id",id).eq("teacher_id",currentTeacherId).single();
@@ -1254,19 +1417,21 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
 
     function initNewFeatureForms(){
-      const classes=assignedClasses();
-      fillSelect("lessonClass",classes,"Select class");
+      const classes=resultClasses();
+      fillSelect("lessonClass",assignedClasses(),"Select class");
       fillSelect("resultClass",classes,"Select class");
       refreshLessonSubjects();
       refreshResultStudents();
       $("lessonClass").onchange=refreshLessonSubjects;
       $("resultClass").onchange=refreshResultStudents;
+      $("assessmentType").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
+      $("resultClass").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
       $("resultStudent").onchange=()=>renderAllResultSubjects($("resultStudent").value);
-      $("lessonDate").value=new Date().toISOString().slice(0,10); $("examDate").value=new Date().toISOString().slice(0,10);
+      $("lessonDate").value=pakistanDateISO();
       $("lessonPlanForm").onsubmit=submitLessonPlan; $("resultForm").onsubmit=submitResult;
       $("markNotificationsReadBtn").onclick=markAllNotificationsRead;
       if($("salaryForm")){$("salaryForm").onsubmit=submitSalaryReceived;$("salaryDate").value=new Date().toISOString().slice(0,10);}
-      loadNotifications(); loadLessonHistory(); loadResultHistory(); loadEvents();
+      loadNotifications(); loadLessonHistory(); loadAllStudentResults(); loadEvents();
     }
     async function submitLessonPlan(e){
       e.preventDefault(); setRequestMsg("lessonMsg","",true); setButtonBusy("lessonBtn",true,$("lessonPlanForm").dataset.editId?"Update Lesson Plan":"Save Lesson Plan","Saving…");
@@ -1283,38 +1448,9 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     function initLessonOnly(){fillSelect("lessonClass",assignedClasses(),"Select class");refreshLessonSubjects()}
     async function submitResult(e){
       e.preventDefault(); setRequestMsg("resultMsg","",true); setButtonBusy("resultBtn",true,"Save All Results","Saving…");
-      try{
-        const cls=$("resultClass").value, studentId=$("resultStudent").value;
-        if(!assignedClasses().includes(cls)) throw new Error("That class is not assigned to you.");
-        const student=teacherContext.students.find(s=>s.id===studentId && s.class_name===cls); if(!student) throw new Error("Please select a valid assigned student.");
-        const cards=[...document.querySelectorAll("#resultSubjectsContainer .result-subject-card")];
-        if(!cards.length) throw new Error("Please select a student so all assigned subjects can open.");
-        const subjects=assignedSubjectsForClass(cls);
-        const assessmentType=$("assessmentType").value;
-        const assessmentName=assessmentType;
-        const term="";
-        const examDate=$("examDate").value;
-        if(!assessmentType) throw new Error("Please select an assessment.");
-        if(!examDate) throw new Error("Please select the date.");
-        const payloads=[];
-        for(const card of cards){
-          const sub=card.dataset.subject;
-          if(!subjects.includes(sub)) throw new Error(`The subject "${sub}" is not assigned to you.`);
-          const total=Number(card.querySelector(".result-subject-total")?.value||0);
-          const obtained=Number(card.querySelector(".result-subject-obtained")?.value||0);
-          const remarks=card.querySelector(".result-subject-remarks")?.value?.trim()||"";
-          if(total<=0) throw new Error(`Total marks for ${sub} must be greater than zero.`);
-          if(obtained<0||obtained>total) throw new Error(`Obtained marks for ${sub} must be between 0 and total marks.`);
-          const percentage=Number(((obtained/total)*100).toFixed(2));
-          payloads.push({teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,assessment_type:assessmentType,assessment_name:assessmentName,term,total_marks:total,obtained_marks:obtained,percentage,grade:gradeFromPercentage(percentage),exam_date:examDate,remarks});
-        }
-        const {error}=await client.from("teacher_student_results").insert(payloads); if(error) throw error;
-        setRequestMsg("resultMsg",`Complete result saved successfully for ${student.name}: ${payloads.length} subject${payloads.length===1?"":"s"}.`,true);
-        $("resultForm").reset(); $("examDate").value=new Date().toISOString().slice(0,10); initResultOnly(); await loadResultHistory();
-      }catch(err){setRequestMsg("resultMsg",err.message||"Could not save results.",false)}
-      finally{setButtonBusy("resultBtn",false,"Save All Results","Saving…")}
+      try{const cls=$("resultClass").value,studentId=$("resultStudent").value,assessmentType=$("assessmentType").value;if(!resultClasses().includes(cls))throw new Error("That class is not available for result upload.");if(!assessmentType)throw new Error("Please select the term/assessment first.");const student=teacherContext.students.find(s=>s.id===studentId&&classScopeMatchesStudent(cls,s));if(!student)throw new Error("Please select a valid Class Incharge student.");const {data:existing,error:ee}=await client.from("teacher_student_results").select("id").eq("teacher_id",currentTeacherId).eq("student_id",studentId).eq("class_name",cls).eq("assessment_type",assessmentType).limit(1);if(ee)throw ee;if((existing||[]).length)throw new Error(`${student.name} already has a result for ${assessmentType}.`);const cards=[...document.querySelectorAll("#resultSubjectsContainer .result-subject-card")];if(!cards.length)throw new Error("Please select a student so all class subjects can open.");const subjects=resultSubjectsForClass(cls),payloads=[];for(const card of cards){const sub=card.dataset.subject;if(!subjects.includes(sub))throw new Error(`The subject "${sub}" is not configured for this Class Incharge class.`);const total=Number(card.querySelector(".result-subject-total")?.value||0),obtained=Number(card.querySelector(".result-subject-obtained")?.value||0),remarks=card.querySelector(".result-subject-remarks")?.value?.trim()||"";if(total<=0)throw new Error(`Total marks for ${sub} must be greater than zero.`);if(obtained<0||obtained>total)throw new Error(`Obtained marks for ${sub} must be between 0 and total marks.`);const percentage=Number(((obtained/total)*100).toFixed(2));payloads.push({teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,assessment_type:assessmentType,assessment_name:assessmentType,term:"",total_marks:total,obtained_marks:obtained,percentage,grade:gradeFromPercentage(percentage),exam_date:pakistanDateISO(),remarks});}const {error}=await client.from("teacher_student_results").insert(payloads);if(error)throw error;setRequestMsg("resultMsg",`Result saved for ${student.name}. The student is now removed from ${assessmentType} for this teacher.`,true);$("resultStudent").value="";renderAllResultSubjects("");await refreshResultStudents();await loadResultHistory();await loadAllStudentResults();}catch(err){setRequestMsg("resultMsg",err.message||"Could not save results.",false)}finally{setButtonBusy("resultBtn",false,"Save All Results","Saving…")}
     }
-    function initResultOnly(){fillSelect("resultClass",assignedClasses(),"Select class");refreshResultStudents();renderAllResultSubjects("")}
+    async function initResultOnly(){fillSelect("resultClass",resultClasses(),"Select class");await refreshResultStudents();renderAllResultSubjects("")}
 
     async function sendTeacherReset(){
       const email=$("email").value.trim();
@@ -1348,6 +1484,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     $("loginForm").addEventListener("submit", async (e)=>{
       e.preventDefault(); setLoginBusy(true); showMessage("Checking your teacher account…");
       const email=$("email").value.trim(), password=$("password").value;
+      if(!client){showMessage("Login service could not start. Please check your internet connection and Supabase configuration.","error");setLoginBusy(false);return;}
       const {data,error}=await client.auth.signInWithPassword({email,password});
       if(error){showMessage(error.message,"error");setLoginBusy(false);return;}
       try{await loadTeacher(data.user);}catch(err){
@@ -1419,7 +1556,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     document.addEventListener("click",e=>{if(e.target.id==="studentDetailsModal")closeStudentDetails();});
     document.addEventListener("keydown",e=>{if(e.key==="Escape")closeStudentDetails();});
 
-    client.auth.getSession().then(async({data})=>{
+    if(client) client.auth.getSession().then(async({data})=>{
       if(data.session){
         try{await loadTeacher(data.session.user);}catch(err){await client.auth.signOut();showMessage(err.message||"Please sign in again.","error");}
       }
