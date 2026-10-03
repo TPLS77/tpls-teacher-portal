@@ -570,14 +570,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       supabasePublishableKey: "sb_publishable_H0crIBF0FeRnPiZQa6i43A_KrZEyxbZ"
     };
     let client;
-    // Fixed subject map for Class Incharge result entry.
-    // Results are based on the selected class/section, not the teacher's personal subject assignments.
-    window.TPLS_CLASS_SUBJECTS = {
-      "9th Arts": ["Ethic","General Science","Education","Economics","Math","Urdu","English"],
-      "10th Arts": ["P.S","General Science","Education","Economics","Math","Urdu","English"],
-      "9th Science": ["Ethic","Chemistry","Physics","Biology","Math","Urdu","English"],
-      "10th Science": ["P.S","Chemistry","Physics","Biology","Math","Urdu","English"]
-    };
     try {
       if(!window.supabase) throw new Error("Supabase library did not load. Check your internet connection.");
       client = window.supabase.createClient(cfg.supabaseUrl, cfg.supabasePublishableKey);
@@ -1028,7 +1020,64 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const el=$(id); if(!el) return;
       el.innerHTML=`<option value="">${escapeHtml(placeholder)}</option>`+items.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
     }
-    function assignedSubjectsForClass(cls){return [...new Set(uniqueAssignments().filter(a=>a.class_name===cls).map(a=>a.subject).filter(Boolean))]}
+    function normalizeAssignedClass(value){
+      return String(value||"").trim().replace(/\s+/g," ").toLowerCase();
+    }
+    // Official TPLS class curriculum supplied by the school.
+    // These subjects are the source of truth for Results; normal teaching
+    // assignments are still used for the teacher's Lesson Plan subject list.
+    const TPLS_CLASS_SUBJECTS={
+      "play group":["English","Urdu","Math","Art","Bible"],
+      "nursery":["English","Urdu","Math","Art","Bible"],
+      "prep":["English","Urdu","Math","Art"],
+      "1st":["General Knowledge","General Science","English","Urdu","Bible","Math","Drawing"],
+      "2nd":["Urdu","English","Math","General Science","Bible","Drawing","General Knowledge"],
+      "3rd":["General Knowledge","Math","English","Urdu","General Science","Drawing"],
+      "4th":["Bible","Urdu","English","Social Studies","Math","General Science","Drawing"],
+      "5th":["English","Urdu","Math","Social Studies","General Science","Bible","Art"],
+      "6th":["English","Urdu","Math","Bible","General Science","Computer Science","Geography","History"],
+      "7th":["English","Urdu","Bible","Math","General Science","Computer Science","Geography","History"],
+      "8th":["English","Urdu","Math","Bible","History","Geography","General Science","Computer Science"],
+      "9th (arts)":["Ethic","General Science","Education","Economics","Math","Urdu","English"],
+      "9th (science)":["Ethic","Chemistry","Physics","Biology","Math","Urdu","English"],
+      "10th (arts)":["P.S","General Science","Education","Economics","Math","Urdu","English"],
+      "10th (science)":["P.S","Chemistry","Physics","Biology","Math","Urdu","English"]
+    };
+    const TPLS_SUBJECT_ALIASES={
+      "eng":"English","english":"English","urdu":"Urdu","math":"Math","mathematics":"Math",
+      "art":"Art","drawing":"Drawing","bible":"Bible","general knowledge":"General Knowledge",
+      "general science":"General Science","general sci":"General Science","sst":"Social Studies","social studies":"Social Studies",
+      "com":"Computer Science","computer":"Computer Science","computer science":"Computer Science",
+      "geo":"Geography","geography":"Geography","his":"History","history":"History",
+      "ethic":"Ethic","ethics":"Ethic","p.s":"P.S","pakistan studies":"P.S"
+    };
+    function normalizeCurriculumClass(value){
+      let raw=String(value||"").trim().replace(/\s+/g," ");
+      const m=raw.match(/^(9th|10th)\s*(?:\((Arts|Science)\)|[-\/]?\s*(Arts|Science))$/i);
+      if(m) raw=`${m[1]} (${m[2]||m[3]})`;
+      if(/^5(?:th|\s*five)$/i.test(raw)||/^class\s+five$/i.test(raw)) raw="5th";
+      return raw.toLowerCase();
+    }
+    function curriculumSubjectsForClass(cls){
+      return TPLS_CLASS_SUBJECTS[normalizeCurriculumClass(cls)]||[];
+    }
+    function canonicalTeacherSubject(value){
+      const raw=String(value||"").trim();
+      return TPLS_SUBJECT_ALIASES[raw.toLowerCase()]||raw;
+    }
+    function assignedSubjectsForClass(cls){
+      const allowed=curriculumSubjectsForClass(cls);
+      const wanted=normalizeCurriculumClass(cls);
+      const assigned=[...new Set(uniqueAssignments()
+        .filter(a=>normalizeCurriculumClass(a.class_name)===wanted)
+        .map(a=>canonicalTeacherSubject(a.subject))
+        .filter(Boolean)
+        .filter(s=>s!=="__CLASS_INCHARGE__"))];
+      // If the school has supplied a curriculum, never show an unconfigured
+      // subject for that class. Keep the teacher's own assignments for Lesson Plans.
+      if(allowed.length)return assigned.filter(s=>allowed.includes(s));
+      return assigned;
+    }
     function assignedClasses(){return [...new Set(uniqueAssignments().map(a=>a.class_name).filter(Boolean))]}
     function classScopeMatchesStudent(scope,student){
       const m=String(scope||"").match(/^(9th|10th) \((Arts|Science)\)$/);
@@ -1042,10 +1091,12 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       if(m) return `${m[1]} ${String(m[2]||m[3]).replace(/^./,c=>c.toUpperCase())}`;
       return raw;
     }
-    function resultSubjectsForClass(scope){
-      const key=normalizeResultClass(scope);
-      const map=window.TPLS_CLASS_SUBJECTS||{};
-      return Array.isArray(map[key]) ? [...map[key]] : [];
+    async function resultSubjectsForClass(scope){
+      const subjects=curriculumSubjectsForClass(scope);
+      if(subjects.length)return subjects;
+      // No invented curriculum: for a class not yet configured, fall back to
+      // the teacher assignments already stored for that exact class.
+      return assignedSubjectsForClass(scope);
     }
     function refreshLessonSubjects(){fillSelect("lessonSubject",assignedSubjectsForClass($("lessonClass").value),"Select subject")}
     async function refreshResultStudents(){
@@ -1079,7 +1130,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         if($("resultBtn"))$("resultBtn").textContent="Save All Results";
         return;
       }
-      const subjects=resultSubjectsForClass(cls);
+      const subjects=await resultSubjectsForClass(cls);
       if(!subjects.length){
         container.innerHTML='<div class="notice error">No subjects have been configured for this Class Incharge class.</div>';
         return;
@@ -1202,7 +1253,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       detail.innerHTML="";
       if(!cls || !assessment){body.className="student-result-empty";body.textContent="Select a Class Incharge class and an assessment to view all students.";summary.innerHTML="<span>Select class and assessment</span>";window.__resultOverview=null;const b=$("downloadClassResultPdfBtn");if(b)b.disabled=true;return;}
       const students=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
-      const subjects=resultSubjectsForClass(cls);
+      const subjects=await resultSubjectsForClass(cls);
       if(!students.length){body.className="student-result-empty";body.textContent="No students are assigned to this Class Incharge class.";summary.innerHTML="<span>0 Students</span>";return;}
       let data=[];
       if(currentTeacherId && client){
@@ -1475,12 +1526,12 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       if(ok){$("salaryForm").reset();$("salaryDate").value=new Date().toISOString().slice(0,10);}
     }
 
-    function initNewFeatureForms(){
+    async function initNewFeatureForms(){
       const classes=resultClasses();
       fillSelect("lessonClass",assignedClasses(),"Select class");
       fillSelect("resultClass",classes,"Select class");
       refreshLessonSubjects();
-      refreshResultStudents();
+      await refreshResultStudents();
       $("lessonClass").onchange=refreshLessonSubjects;
       $("resultClass").onchange=refreshResultStudents;
       $("assessmentType").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
@@ -1519,7 +1570,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
         const cards=[...document.querySelectorAll("#resultSubjectsContainer .result-subject-card")];
         if(!cards.length)throw new Error("Please select a student so all class subjects can open.");
-        const subjects=resultSubjectsForClass(cls), payloads=[];
+        const subjects=await resultSubjectsForClass(cls), payloads=[];
         for(const card of cards){
           const sub=card.dataset.subject;
           if(!subjects.includes(sub))throw new Error(`The subject "${sub}" is not configured for this Class Incharge class.`);
@@ -1568,7 +1619,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       }
     }
 
-    async function initResultOnly(){fillSelect("resultClass",resultClasses(),"Select class");await refreshResultStudents();renderAllResultSubjects("")}
+    async function initResultOnly(){fillSelect("resultClass",resultClasses(),"Select class");await refreshResultStudents();await renderAllResultSubjects("")}
 
     async function sendTeacherReset(){
       const email=$("email").value.trim();
