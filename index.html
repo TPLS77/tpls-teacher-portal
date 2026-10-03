@@ -1185,17 +1185,22 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         if(!total || obtained<0){preview.textContent="Percentage and grade will be calculated automatically.";return}
         if(obtained>total){preview.textContent="Obtained marks cannot be greater than total marks.";return}
         const pct=(obtained/total)*100;
-        preview.textContent=`Percentage: ${pct.toFixed(2)}% • Grade: ${gradeFromPercentage(pct)}`;
+        preview.textContent=`Percentage: ${pct.toFixed(2)}% • Grade: ${gradeFromPercentage(pct)} • ${gradeRemarksFromPercentage(pct)}`;
       });
     }
     function gradeFromPercentage(p){
-      if(p>=90) return "A+"; if(p>=80) return "A"; if(p>=70) return "B"; if(p>=60) return "C"; if(p>=50) return "D"; return "F";
+      p=Number(p);
+      if(p>=90) return "A+"; if(p>=80) return "A"; if(p>=70) return "B+"; if(p>=60) return "B"; if(p>=50) return "C"; if(p>=40) return "D"; return "F";
+    }
+    function gradeRemarksFromPercentage(p){
+      p=Number(p);
+      if(p>=90) return "Outstanding"; if(p>=80) return "Excellent"; if(p>=70) return "Very Good"; if(p>=60) return "Good"; if(p>=50) return "Satisfactory"; if(p>=40) return "Pass"; return "Fail";
     }
     function updateResultPreview(){
       const total=Number($("totalMarks").value), obtained=Number($("obtainedMarks").value);
       if(!total || obtained<0){$("resultPreview").textContent="Percentage and grade will be calculated automatically.";return}
       const pct=(obtained/total)*100; const grade=gradeFromPercentage(pct);
-      $("resultPreview").innerHTML=`<div class="result-summary"><span>Percentage: ${pct.toFixed(2)}%</span><span>Grade: ${grade}</span></div>`;
+      $("resultPreview").innerHTML=`<div class="result-summary"><span>Percentage: ${pct.toFixed(2)}%</span><span>Grade: ${grade}</span><span>Remarks: ${gradeRemarksFromPercentage(pct)}</span></div>`;
     }
     function formatDateTime(v){try{return new Date(v).toLocaleString()}catch{return String(v||"")}}
 
