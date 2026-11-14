@@ -1082,6 +1082,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       "6th":["English","Urdu","Math","Bible","General Science","Computer Science","Geography","History"],
       "7th":["English","Urdu","Bible","Math","General Science","Computer Science","Geography","History"],
       "8th":["English","Urdu","Math","Bible","History","Geography","General Science","Computer Science"],
+      "pre-9th (arts)":["Ethic","General Science","Education","Economics","Math","Urdu","English"],
+      "pre-9th (science)":["Ethic","Chemistry","Physics","Biology","Math","Urdu","English"],
       "9th (arts)":["Ethic","General Science","Education","Economics","Math","Urdu","English"],
       "9th (science)":["Ethic","Chemistry","Physics","Biology","Math","Urdu","English"],
       "10th (arts)":["P.S","General Science","Education","Economics","Math","Urdu","English"],
@@ -1097,7 +1099,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     };
     function normalizeCurriculumClass(value){
       let raw=String(value||"").trim().replace(/\s+/g," ");
-      const m=raw.match(/^(9th|10th)\s*(?:\((Arts|Science)\)|[-\/]?\s*(Arts|Science))$/i);
+      const m=raw.match(/^(Pre-9th|9th|10th)\s*(?:\((Arts|Science)\)|[-\/]?\s*(Arts|Science))$/i);
       if(m) raw=`${m[1]} (${m[2]||m[3]})`;
       if(/^5(?:th|\s*five)$/i.test(raw)||/^class\s+five$/i.test(raw)) raw="5th";
       return raw.toLowerCase();
@@ -1131,7 +1133,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     function resultClasses(){return (teacherContext.inchargeClasses||[]).map(x=>x.section?`${x.className} (${x.section})`:x.className)}
     function normalizeResultClass(value){
       const raw=String(value||"").trim().replace(/\s+/g," ");
-      const m=raw.match(/^(9th|10th)\s*(?:\((Arts|Science)\)|(?:[-\/]?\s*)(Arts|Science))$/i);
+      const m=raw.match(/^(Pre-9th|9th|10th)\s*(?:\((Arts|Science)\)|(?:[-\/]?\s*)(Arts|Science))$/i);
       if(m) return `${m[1]} ${String(m[2]||m[3]).replace(/^./,c=>c.toUpperCase())}`;
       return raw;
     }
