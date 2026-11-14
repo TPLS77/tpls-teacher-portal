@@ -751,7 +751,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const rawAssignments=assignments||[];
       const inchargeClasses=rawAssignments.filter(a=>a.subject==="__CLASS_INCHARGE__").map(a=>{
         const raw=String(a.class_name||"").trim().replace(/\s+/g," ");
-        const m=raw.match(/^(9th|10th)\s*(?:\((Arts|Science)\)|(?:[-\/]?\s*)(Arts|Science))$/i);
+        const m=raw.match(/^(Pre-9th|9th|10th)\s*(?:\((Arts|Science)\)|(?:[-\/]?\s*)(Arts|Science))$/i);
         return m?{className:m[1],section:String(m[2]||m[3]).replace(/^./,c=>c.toUpperCase())}:{className:raw,section:""};
       });
       const teachingAssignments=rawAssignments.filter(a=>a.subject!=="__CLASS_INCHARGE__");
@@ -762,11 +762,33 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       inchargeClasses.forEach(a=>{if(a.className&&!classes.includes(a.className))classes.push(a.className);});
       let students=[];
       if(classes.length){
-        const {data:s,error:sErr}=await client.from("students")
-          .select("id,student_code,name,gender,class_name,section,guardian_name,phone,monthly_fee,status,photo_path")
-          .in("class_name",classes).order("class_name").order("name");
-        if(sErr) throw sErr;
-        students=s||[];
+        // Student class labels can differ only by capitalization or spacing
+        // (especially in the lower/pre-9th classes). Fetch only classes assigned
+        // to this teacher, using case-insensitive exact matches; never fetch the
+        // whole student table for a teacher account.
+        const classLookupNames=[...new Set(classes.flatMap(className=>{
+          const raw=String(className||"").trim().replace(/\s+/g," ");
+          const compact=raw.toLowerCase().replace(/[^a-z0-9]/g,"");
+          const aliases=[raw];
+          if(compact==="pre9th") aliases.push("Pre 9th","Pre9th","Pre Ninth");
+          return aliases.filter(Boolean);
+        }))];
+        const studentQueries=await Promise.all(classLookupNames.map(className=>
+          client.from("students")
+            .select("id,student_code,name,gender,class_name,section,guardian_name,phone,monthly_fee,status,photo_path")
+            .ilike("class_name",className)
+            .order("class_name").order("name")
+        ));
+        const failedQuery=studentQueries.find(result=>result.error);
+        if(failedQuery) throw failedQuery.error;
+        const uniqueStudents=new Map();
+        studentQueries.forEach(result=>(result.data||[]).forEach(student=>{
+          if(student?.id) uniqueStudents.set(student.id,student);
+        }));
+        students=[...uniqueStudents.values()].sort((a,b)=>
+          String(a.class_name||"").localeCompare(String(b.class_name||"")) ||
+          String(a.name||"").localeCompare(String(b.name||""))
+        );
       }
 
       let feePayments=[];
@@ -851,9 +873,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const groups={};
       classNames.forEach(c=>groups[c]=[]);
       students.forEach(s=>{
-        if(groups[s.class_name]) groups[s.class_name].push(s);
-        const sectionAlias=(s.class_name==='9th'||s.class_name==='10th')&&s.section?`${s.class_name} (${String(s.section).trim()})`:'';
-        if(sectionAlias && groups[sectionAlias]) groups[sectionAlias].push(s);
+        const studentClassKey=normalizeAssignedClass(s.class_name);
+        const assignedClass=classNames.find(c=>normalizeAssignedClass(c)===studentClassKey);
+        if(assignedClass && groups[assignedClass]) groups[assignedClass].push(s);
+        const sectionAlias=(s.class_name==='Pre-9th'||s.class_name==='9th'||s.class_name==='10th')&&s.section?`${s.class_name} (${String(s.section).trim()})`:'';
+        if(sectionAlias && groups[sectionAlias] && !groups[sectionAlias].some(existing=>existing.id===s.id)) groups[sectionAlias].push(s);
       });
 
       const financialAccess=isFinancialRole(t.designation);
@@ -987,7 +1011,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
     function renderFeeStatus(students,feePayments,month,classFilter=""){
       const monthKey=month || currentMonth();
-      const visibleStudents=classFilter ? students.filter(s=>s.class_name===classFilter) : students;
+      const visibleStudents=classFilter ? students.filter(s=>normalizeAssignedClass(s.class_name)===normalizeAssignedClass(classFilter)) : students;
       const rows=visibleStudents.map(s=>{
         const payments=feePayments.filter(p=>p.student_id===s.id && String(p.fee_month||"").slice(0,7)===monthKey);
         const paid=payments.reduce((sum,p)=>sum+Number(p.paid_amount||0),0);
@@ -1100,8 +1124,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     }
     function assignedClasses(){return [...new Set(uniqueAssignments().map(a=>a.class_name).filter(Boolean))]}
     function classScopeMatchesStudent(scope,student){
-      const m=String(scope||"").match(/^(9th|10th) \((Arts|Science)\)$/);
-      if(!m)return String(student?.class_name||"")===String(scope||"");
+      const m=String(scope||"").match(/^(Pre-9th|9th|10th) \((Arts|Science)\)$/);
+      if(!m)return normalizeAssignedClass(student?.class_name)===normalizeAssignedClass(scope);
       return String(student?.class_name||"")===m[1] && String(student?.section||"").trim().toLowerCase()===m[2].toLowerCase();
     }
     function resultClasses(){return (teacherContext.inchargeClasses||[]).map(x=>x.section?`${x.className} (${x.section})`:x.className)}
