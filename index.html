@@ -289,7 +289,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
   <div id="loginPage" class="page">
     <section class="hero">
       <div class="hero-inner">
-        <img class="logo" src="school-logo.jpg" alt="The Progress of Life School logo">
+        <img class="logo" src="school-logo.jpg" alt="The Progress of Life School logo" decoding="async">
         <h1>Teacher Portal</h1>
         <p>Secure access for teachers of The Progress of Life School. View your profile, assigned classes, subjects and the students connected to your teaching responsibilities.</p>
         <div class="pill">🔐 Secure teacher access &nbsp;•&nbsp; Faisalabad, Pakistan</div>
@@ -297,12 +297,12 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           <div class="quote">“Education is not preparation for life; education is life itself.”</div>
           <div class="source">— John Dewey</div>
         </div>
-        <div class="principal-card dashboard-extra"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">“Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.”</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
+        <div class="principal-card dashboard-extra"><img src="principal.jpg" alt="Principal" decoding="async" loading="lazy"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">“Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.”</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
       </div>
     </section>
     <section class="login-side">
       <div class="card">
-        <img class="mini-logo" src="school-logo.jpg" alt="School logo">
+        <img class="mini-logo" src="school-logo.jpg" alt="School logo" decoding="async">
         <h2>Teacher Sign In</h2>
         <p class="sub">Use the email address and password provided for your teacher account.</p>
         <form id="loginForm">
@@ -329,19 +329,19 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     <header class="top">
       <div class="top-in">
         <div class="brand">
-          <img src="school-logo.jpg" alt="School logo">
+          <img src="school-logo.jpg" alt="School logo" decoding="async" loading="lazy">
           <div>The Progress of Life School<small>Teacher Portal</small></div>
         </div>
         <div class="teacher-mini">
           <div id="pakistanClock" class="pakistan-clock"><span>🇵🇰 PKT</span><b id="pakistanTime">Loading…</b><small id="pakistanDate">Loading…</small></div>
-           <img id="topAvatar" class="avatar" src="school-logo.jpg" alt="">
+           <img id="topAvatar" class="avatar" src="school-logo.jpg" alt="" decoding="async" loading="lazy">
           <div id="topName"></div>
           <button id="logoutBtn" class="logout">Sign Out</button>
         </div>
       </div>
     </header>
     <main class="wrap">
-      <div class="principal-card dashboard-extra"><img src="principal.jpg" alt="Principal"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
+      <div class="principal-card dashboard-extra"><img src="principal.jpg" alt="Principal" decoding="async" loading="lazy"><div><div class="ptitle">A Message from the Principal</div><div class="pmsg">Every child entrusted to us is a precious life to guide, encourage and prepare for a meaningful future. Let us work together with patience, excellence and compassion so that every child can truly progress in life.</div><div class="psign">— Principal, The Progress of Life School</div></div></div>
       <div class="welcome dashboard-extra">
         <div><h2 id="welcomeName">Welcome</h2><div class="muted">Here is your teaching and collective-duty overview.</div></div>
       </div>
@@ -476,8 +476,13 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
                 <option value="">Select assessment</option>
                 <option>First Term</option><option>Second Term</option><option>Third Term</option>
                 <option>Mid Term</option><option>Final Term</option><option>Monthly Test</option>
-                <option>Class Test</option><option>Quiz</option><option>Assignment</option><option>Practical</option><option>Other</option>
+                <option>Weekly Test</option><option>Class Test</option><option>Quiz</option><option>Assignment</option><option>Practical</option><option>Other</option>
               </select></div>
+            <div class="field-group" id="assessmentNumberWrap" hidden>
+              <label for="assessmentNumber">Assessment Number</label>
+              <input id="assessmentNumber" type="number" min="1" max="99" step="1" inputmode="numeric" placeholder="e.g. 1">
+              <small class="muted">Enter the number separately (for example, Class Test 1 or Quiz 2).</small>
+            </div>
           </div>
           <div id="resultSubjectsContainer" class="result-subjects-container">
             <div class="notice">Select a class and student to open all subjects for this Class Incharge class.</div>
@@ -600,6 +605,19 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const {data,error}=await client.storage.from(bucket).createSignedUrl(path, 3600);
       return error ? null : data?.signedUrl;
     }
+    async function signedPhotos(bucket, paths){
+      const unique=[...new Set((paths||[]).filter(Boolean))];
+      if(!unique.length)return new Map();
+      try{
+        const {data,error}=await client.storage.from(bucket).createSignedUrls(unique,3600);
+        if(error)throw error;
+        return new Map((data||[]).map(item=>[item.path,item.signedUrl||null]));
+      }catch(err){
+        console.warn("Batch photo signing unavailable; using individual links.",err);
+        const entries=await Promise.all(unique.map(async path=>[path,await signedPhoto(bucket,path)]));
+        return new Map(entries);
+      }
+    }
 
     function pakistanNow(){return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Karachi"}));}
     function pakistanDateISO(){const d=pakistanNow();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
@@ -662,7 +680,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     function printTeacherFinancialReport(){
       const w=window.open("","_blank"); if(!w) return;
       const d=teacherContext.teacher||{};
-      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}</style></head><body><img src="${location.origin}${location.pathname.replace(/\/[^/]*$/,"")}/school-logo.jpg"><h1>The Progress of Life School</h1><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script>
+      w.document.write(`<html><head><title>Financial Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#17233c}h1{margin-bottom:4px}.meta{color:#667085;margin-bottom:20px}.note{padding:12px;background:#f5f8fc;border-radius:10px}img{width:90px;height:90px;object-fit:contain}</style></head><body><img src="${location.origin}${location.pathname.replace(/\/[^/]*$/,"")}/school-logo.jpg" decoding="async" loading="lazy"><h1>The Progress of Life School</h1><div class="meta">Financial Summary • ${escapeHtml(currentMonth())} • ${escapeHtml(d.name||"Staff")} • ${escapeHtml(d.designation||"Teaching Staff")}</div><div class="note">Generated on demand from current cloud data. No report file is stored.</div><script>window.onload=()=>window.print()<\/script>
 <style id="tpls-mobile-final">
 /* Mobile-only improvements — desktop layout remains unchanged */
 @media (max-width:820px){
@@ -771,9 +789,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         growthResults=r||[];
       }
 
-      const teacherPhoto=await signedPhoto("teacher-photos",teacher.photo_path);
-      const studentPhotos=await Promise.all(students.map(s=>signedPhoto("student-photos",s.photo_path)));
-      students.forEach((s,i)=>s._photo=studentPhotos[i]);
+      const [teacherPhoto,studentPhotoMap]=await Promise.all([
+        signedPhoto("teacher-photos",teacher.photo_path),
+        signedPhotos("student-photos",students.map(s=>s.photo_path))
+      ]);
+      students.forEach(s=>s._photo=studentPhotoMap.get(s.photo_path)||null);
 
       teacher._inchargeClasses=inchargeClasses;
       renderTeacher(teacher,teachingAssignments,students,teacherPhoto,feePayments,growthResults);
@@ -851,7 +871,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         <section id="teacherProfileSection" class="section">
           <h3>My Profile</h3>
           <div class="profile">
-            <img class="profile-photo" src="${teacherPhoto||"school-logo.jpg"}" alt="Teacher photo">
+            <img class="profile-photo" src="${teacherPhoto||"school-logo.jpg"}" alt="Teacher photo" decoding="async" loading="lazy">
             <div class="details">
               <div class="detail"><small>Name</small><b>${escapeHtml(t.name)}</b></div>
               <div class="detail"><small>Professional Teacher ID</small><div class="tp-id-badge"><span class="tp-id-dot"></span><b>${escapeHtml(professionalTeacherId(t.teacher_code,t.id,t.joining_date))}</b></div></div>
@@ -884,7 +904,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           if(!list.length) html+=`<div class="muted" style="padding:10px">No active students found in this class.</div>`;
           else list.forEach(s=>{
             html+=`<div class="student" role="button" tabindex="0" onclick="openStudentDetails('${escapeHtml(s.id)}')" onkeydown="if(event.key==='Enter'||event.key===' ')openStudentDetails('${escapeHtml(s.id)}')">
-              <img src="${s._photo||"school-logo.jpg"}" alt="">
+              <img src="${s._photo||"school-logo.jpg"}" alt="" decoding="async" loading="lazy">
               <div><b>${escapeHtml(s.name)}</b><span>ID: ${escapeHtml(s.student_code)} • ${escapeHtml(s.gender||"—")} • ${escapeHtml(s.status||"—")}</span></div>
               <span class="open-hint">View details →</span>
             </div>`;
@@ -995,7 +1015,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       }else rows.forEach(r=>{
         const statusClass=r.state.cls;
         out+=`<tr>
-          <td><div class="student-cell"><img src="${r._photo||"school-logo.jpg"}" alt=""><div><strong>${escapeHtml(r.name)}</strong><small>ID: ${escapeHtml(r.student_code)}</small></div></div></td>
+          <td><div class="student-cell"><img src="${r._photo||"school-logo.jpg"}" alt="" decoding="async" loading="lazy"><div><strong>${escapeHtml(r.name)}</strong><small>ID: ${escapeHtml(r.student_code)}</small></div></div></td>
           <td>${escapeHtml(r.class_name||"—")}</td>
           <td><span class="fee-badge ${statusClass}">${escapeHtml(r.state.label)}</span></td>
           <td><strong class="${r.pendingMonths?'tp-pending':''}">${r.pendingMonths} month${r.pendingMonths===1?'':'s'}</strong></td>
@@ -1099,18 +1119,42 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       return assignedSubjectsForClass(scope);
     }
     function refreshLessonSubjects(){fillSelect("lessonSubject",assignedSubjectsForClass($("lessonClass").value),"Select subject")}
+    function assessmentNeedsNumber(type){
+      return ["Class Test","Quiz","Weekly Test","Monthly Test"].includes(String(type||""));
+    }
+    function currentAssessmentNumber(){
+      if(!assessmentNeedsNumber($("assessmentType")?.value)) return null;
+      const raw=String($("assessmentNumber")?.value||"").trim();
+      return raw && Number.isInteger(Number(raw)) && Number(raw)>0 ? Number(raw) : null;
+    }
+    function updateAssessmentNumberField(){
+      const wrap=$("assessmentNumberWrap"), input=$("assessmentNumber");
+      if(!wrap||!input)return;
+      const required=assessmentNeedsNumber($("assessmentType")?.value);
+      wrap.hidden=!required;
+      input.required=required;
+      if(!required) input.value="";
+    }
     async function refreshResultStudents(){
-      const cls=$("resultClass").value, assessment=$("assessmentType")?.value||"", el=$("resultStudent");
+      updateAssessmentNumberField();
+      const cls=$("resultClass").value, assessment=$("assessmentType")?.value||"", assessmentNo=currentAssessmentNumber(), el=$("resultStudent");
       if(!el)return;
       const list=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
+      if(assessmentNeedsNumber(assessment) && assessmentNo===null){
+        el.innerHTML='<option value="">Enter assessment number first</option>';
+        await renderAllResultSubjects("");
+        return;
+      }
       let done=new Set();
       if(cls && assessment && currentTeacherId && client){
         try{
-          const {data,error}=await client.from("teacher_student_results")
+          let query=client.from("teacher_student_results")
             .select("student_id")
             .eq("teacher_id",currentTeacherId)
             .eq("class_name",cls)
             .eq("assessment_type",assessment);
+          if(assessmentNeedsNumber(assessment) && assessmentNo!==null) query=query.eq("assessment_number",assessmentNo);
+          const {data,error}=await query;
           if(error)throw error;
           done=new Set((data||[]).map(r=>String(r.student_id)));
         }catch(err){console.warn("Completed result lookup failed:",err);}
@@ -1124,6 +1168,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const container=$("resultSubjectsContainer"); if(!container)return;
       const cls=$("resultClass").value;
       const assessment=$("assessmentType")?.value||"";
+      const assessmentNo=currentAssessmentNumber();
       delete window.__editingResultRows;
       if(!studentId || !cls){
         container.innerHTML='<div class="notice">Select a class and student to open all subjects for this Class Incharge class.</div>';
@@ -1138,12 +1183,14 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
 
       let existing=[];
       if(currentTeacherId && client && assessment){
-        const {data,error}=await client.from("teacher_student_results")
-          .select("id,subject,total_marks,obtained_marks,percentage,grade,remarks,exam_date")
+        let query=client.from("teacher_student_results")
+          .select("id,subject,total_marks,obtained_marks,percentage,grade,remarks,exam_date,assessment_number")
           .eq("teacher_id",currentTeacherId)
           .eq("student_id",studentId)
           .eq("class_name",cls)
           .eq("assessment_type",assessment);
+        if(assessmentNeedsNumber(assessment) && assessmentNo!==null) query=query.eq("assessment_number",assessmentNo);
+        const {data,error}=await query;
         if(error){console.warn("Existing result lookup failed:",error);}
         else existing=data||[];
       }
@@ -1153,7 +1200,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       const student=teacherContext.students.find(st=>String(st.id)===String(studentId));
       const isEditing=existing.length>0;
       container.innerHTML=(isEditing
-        ? `<div class="notice success" style="margin-bottom:12px">✏️ Editing the saved <b>${escapeHtml(assessment)}</b> result for <b>${escapeHtml(student?.name||"this student")}</b>. Change the marks or remarks and click <b>Update Results</b>.</div>`
+        ? `<div class="notice success" style="margin-bottom:12px">✏️ Editing the saved <b>${escapeHtml(assessment)}${assessmentNo!==null?" #"+assessmentNo:""}</b> result for <b>${escapeHtml(student?.name||"this student")}</b>. Change the marks or remarks and click <b>Update Results</b>.</div>`
         : "")+
         subjects.map((subject,index)=>{
           const key=`resultSubject_${index}`;
@@ -1253,16 +1300,19 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       $("lessonHistory").innerHTML='<h4 style="margin:0 0 12px">Recent Lesson Plans</h4><div class="history-list">'+data.map(p=>`<article class="history-item"><div class="history-item-top"><div class="history-title">${escapeHtml(p.topic)}</div><span class="grade-chip">${escapeHtml(p.class_name)} • ${escapeHtml(p.subject)}</span></div><div class="history-meta">${escapeHtml(p.lesson_date||"")}</div><div class="history-body"><b>Objectives:</b> ${escapeHtml(p.objectives||"—")}\n<b>Activities:</b> ${escapeHtml(p.activities||"—")}\n<b>Homework:</b> ${escapeHtml(p.homework||"—")}${p.notes?`\n<b>Notes:</b> ${escapeHtml(p.notes)}`:""}</div><div class="history-actions"><button class="mini-action" type="button" onclick="editLessonPlan('${p.id}')">Edit</button><button class="mini-action danger" type="button" onclick="deleteLessonPlan('${p.id}')">Delete</button><button class="tp-download-btn" type="button" onclick='PDF.downloadLessonRecord(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Download PDF</button></div></article>`).join('')+'</div>';
     }
     async function loadAllStudentResults(){
-      const body=$("resultOverviewBody"), cls=$("resultClass")?.value||"", assessment=$("assessmentType")?.value||"", detail=$("studentResultDetail"), summary=$("resultOverviewSummary");
+      const body=$("resultOverviewBody"), cls=$("resultClass")?.value||"", assessment=$("assessmentType")?.value||"", assessmentNo=currentAssessmentNumber(), detail=$("studentResultDetail"), summary=$("resultOverviewSummary");
       if(!body)return;
       detail.innerHTML="";
       if(!cls || !assessment){body.className="student-result-empty";body.textContent="Select a Class Incharge class and an assessment to view all students.";summary.innerHTML="<span>Select class and assessment</span>";window.__resultOverview=null;const b=$("downloadClassResultPdfBtn");if(b)b.disabled=true;return;}
+      if(assessmentNeedsNumber(assessment) && assessmentNo===null){body.className="student-result-empty";body.textContent="Enter the assessment number to view results for that specific test.";summary.innerHTML=`<span>${escapeHtml(assessment)} number required</span>`;window.__resultOverview=null;const b=$("downloadClassResultPdfBtn");if(b)b.disabled=true;return;}
       const students=teacherContext.students.filter(s=>classScopeMatchesStudent(cls,s));
       const subjects=await resultSubjectsForClass(cls);
       if(!students.length){body.className="student-result-empty";body.textContent="No students are assigned to this Class Incharge class.";summary.innerHTML="<span>0 Students</span>";return;}
       let data=[];
       if(currentTeacherId && client){
-        const {data:rows,error}=await client.from("teacher_student_results").select("student_id,student_id,class_name,subject,assessment_type,total_marks,obtained_marks,percentage,grade,remarks,exam_date,created_at").eq("teacher_id",currentTeacherId).eq("class_name",cls).eq("assessment_type",assessment);
+        let query=client.from("teacher_student_results").select("student_id,class_name,subject,assessment_type,assessment_number,total_marks,obtained_marks,percentage,grade,remarks,exam_date,created_at").eq("teacher_id",currentTeacherId).eq("class_name",cls).eq("assessment_type",assessment);
+        if(assessmentNeedsNumber(assessment) && assessmentNo!==null) query=query.eq("assessment_number",assessmentNo);
+        const {data:rows,error}=await query;
         if(error){body.className="student-result-empty";body.textContent="Could not load result overview: "+(error.message||"Database error");return;}
         data=rows||[];
       }
@@ -1276,8 +1326,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       }).join("");
       body.className="result-table-wrap";
       body.innerHTML=`<table class="result-overview-table"><thead><tr><th>Position</th><th>Student</th><th>Class</th>${subjects.map(s=>`<th>${escapeHtml(s)}</th>`).join("")}<th>Action</th></tr></thead><tbody>${rowsHtml}</tbody></table>`;
-      summary.innerHTML=`<span>${students.length} Students</span><span>${assessment}</span><span>${uploaded} Uploaded Subject Records</span>`;
-      window.__resultOverview={students,subjects,byStudent,className:cls,assessment}; const b=$("downloadClassResultPdfBtn");if(b)b.disabled=false;
+      summary.innerHTML=`<span>${students.length} Students</span><span>${escapeHtml(assessment)}${assessmentNo!==null?" #"+assessmentNo:""}</span><span>${uploaded} Uploaded Subject Records</span>`;
+      window.__resultOverview={students,subjects,byStudent,className:cls,assessment,assessmentNumber:assessmentNo}; const b=$("downloadClassResultPdfBtn");if(b)b.disabled=false;
     }
     async function editStudentResult(studentId){
       const state=window.__resultOverview;
@@ -1286,6 +1336,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       if(!st)return;
       $("resultClass").value=state.className;
       $("assessmentType").value=state.assessment;
+      updateAssessmentNumberField();
+      if($("assessmentNumber")) $("assessmentNumber").value=state.assessmentNumber??"";
       await refreshResultStudents();
       $("resultStudent").value=String(studentId);
       await renderAllResultSubjects(String(studentId));
@@ -1452,7 +1504,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
         const entries=Object.entries(student||{}).filter(([k,v])=>!excluded.has(k)&&v!==null&&v!==undefined&&v!=="").map(([k,v])=>`<div class="tpls-data-item"><small>${escapeHtml(k.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()))}</small><b>${escapeHtml(String(v))}</b></div>`).join("");
         const feeRows=(fees||[]).map(f=>`<tr><td>${escapeHtml(String(f.fee_month||"").slice(0,10)||"—")}</td><td>${escapeHtml(f.payment_date||"—")}</td><td>${escapeHtml(String(f.paid_amount??f.amount_paid??"—"))}</td><td>${escapeHtml(String(f.discount??"0"))}</td><td>${escapeHtml(f.receipt_number||f.receipt_no||"—")}</td></tr>`).join("");
         const resultRows=(results||[]).map(r=>`<tr><td>${escapeHtml(r.exam_date||"—")}</td><td>${escapeHtml(r.subject||"—")}</td><td>${escapeHtml(r.assessment_name||r.assessment_type||"—")}</td><td>${escapeHtml(String(r.obtained_marks??"—"))} / ${escapeHtml(String(r.total_marks??"—"))}</td><td>${escapeHtml(String(r.percentage??"—"))}%</td><td>${escapeHtml(r.grade||"—")}</td></tr>`).join("");
-        content.innerHTML=`<div class="tpls-student-summary"><img class="tpls-student-photo" src="${photo||"school-logo.jpg"}" alt=""><div><div class="tpls-data-grid">${entries||'<div class="notice">No student data is available.</div>'}</div></div></div>
+        content.innerHTML=`<div class="tpls-student-summary"><img class="tpls-student-photo" src="${photo||"school-logo.jpg"}" alt="" decoding="async" loading="lazy"><div><div class="tpls-data-grid">${entries||'<div class="notice">No student data is available.</div>'}</div></div></div>
           <div class="tpls-modal-section"><h4>📈 Student Academic Growth</h4><div class="tpls-growth-card" style="padding:14px"><p style="margin-bottom:8px">This student's percentage trend across recorded assessments.</p><div class="tpls-chart-wrap"><canvas id="studentGrowthChart"></canvas></div></div></div>
           <div class="tpls-modal-section"><h4>💳 Previous Fee History</h4><div class="fee-table-wrap"><table class="tpls-modal-table"><thead><tr><th>Fee Month</th><th>Payment Date</th><th>Paid</th><th>Discount</th><th>Receipt</th></tr></thead><tbody>${feeRows||'<tr><td colspan="5">No fee payments recorded.</td></tr>'}</tbody></table></div></div>
           <div class="tpls-modal-section"><h4>📝 Results History</h4><div class="fee-table-wrap"><table class="tpls-modal-table"><thead><tr><th>Date</th><th>Subject</th><th>Assessment</th><th>Marks</th><th>%</th><th>Grade</th></tr></thead><tbody>${resultRows||'<tr><td colspan="6">No results recorded.</td></tr>'}</tbody></table></div></div>`;
@@ -1539,7 +1591,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       await refreshResultStudents();
       $("lessonClass").onchange=refreshLessonSubjects;
       $("resultClass").onchange=refreshResultStudents;
-      $("assessmentType").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
+      $("assessmentType").onchange=async()=>{updateAssessmentNumberField();await refreshResultStudents();await loadAllStudentResults();};
+      $("assessmentNumber").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
       $("resultClass").onchange=async()=>{await refreshResultStudents();await loadAllStudentResults();};
       $("resultStudent").onchange=async()=>{await renderAllResultSubjects($("resultStudent").value);};
       $("lessonDate").value=pakistanDateISO();
@@ -1568,8 +1621,10 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       setButtonBusy("resultBtn",true,editing?"Update Results":"Save All Results","Saving…");
       try{
         const cls=$("resultClass").value,studentId=$("resultStudent").value,assessmentType=$("assessmentType").value;
+        const assessmentNumber=currentAssessmentNumber();
         if(!resultClasses().includes(cls))throw new Error("That class is not available for result upload.");
         if(!assessmentType)throw new Error("Please select the term/assessment first.");
+        if(assessmentNeedsNumber(assessmentType) && assessmentNumber===null)throw new Error("Please enter a valid assessment number (1 or higher).");
         const student=teacherContext.students.find(s=>String(s.id)===String(studentId)&&classScopeMatchesStudent(cls,s));
         if(!student)throw new Error("Please select a valid Class Incharge student.");
 
@@ -1588,7 +1643,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
           payloads.push({
             id:card.dataset.resultId||undefined,
             teacher_id:currentTeacherId,student_id:studentId,class_name:cls,subject:sub,
-            assessment_type:assessmentType,assessment_name:assessmentType,term:"",
+            assessment_type:assessmentType,assessment_name:assessmentType,assessment_number:assessmentNumber,term:"",
             total_marks:total,obtained_marks:obtained,percentage,
             grade:gradeFromPercentage(percentage),exam_date:pakistanDateISO(),remarks
           });
@@ -1659,7 +1714,10 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
       e.preventDefault(); setLoginBusy(true); showMessage("Checking your teacher account…");
       const email=$("email").value.trim(), password=$("password").value;
       if(!client){showMessage("Login service could not start. Please check your internet connection and Supabase configuration.","error");setLoginBusy(false);return;}
-      const {data,error}=await client.auth.signInWithPassword({email,password});
+      let authResult;
+      try{authResult=await client.auth.signInWithPassword({email,password});}
+      catch(networkErr){showMessage(networkErr?.message||"Could not connect to the sign-in service. Please check your internet and try again.","error");setLoginBusy(false);return;}
+      const {data,error}=authResult;
       if(error){showMessage(error.message,"error");setLoginBusy(false);return;}
       try{await loadTeacher(data.user);}catch(err){
         console.error("TPLS Teacher Portal cloud load failed:",err);
@@ -1783,8 +1841,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.10),transparent
     ];
     const side=document.createElement("aside");
     side.className="tp-sidebar";
-    side.innerHTML=`<div class="tp-brand"><img src="school-logo.jpg" alt=""><div><strong>THE PROGRESS<br>OF LIFE SCHOOL</strong><span>Teacher Portal • Faisalabad</span></div></div>
-      <div class="tp-profile"><img id="tpSideAvatar" src="school-logo.jpg" alt=""><div id="tpSideName" class="tp-profile-name">Teacher</div><div class="tp-profile-role">Teacher</div><div id="tpSideId" class="tp-profile-id">TPLS-2026-001</div></div>
+    side.innerHTML=`<div class="tp-brand"><img src="school-logo.jpg" alt="" decoding="async" loading="lazy"><div><strong>THE PROGRESS<br>OF LIFE SCHOOL</strong><span>Teacher Portal • Faisalabad</span></div></div>
+      <div class="tp-profile"><img id="tpSideAvatar" src="school-logo.jpg" alt="" decoding="async" loading="lazy"><div id="tpSideName" class="tp-profile-name">Teacher</div><div class="tp-profile-role">Teacher</div><div id="tpSideId" class="tp-profile-id">TPLS-2026-001</div></div>
       <nav class="tp-nav">${nav.map((n,i)=>`<a href="#${n[0]}" data-tp-target="${n[0]}" class="${i===0?'active':''}"><span class="ico">${n[1]}</span><span>${n[2]}</span></a>`).join("")}</nav>
       <div class="tp-sidebar-bottom">Secure teacher access<br>© The Progress of Life School</div>`;
     dash.insertBefore(side,dash.firstElementChild);
